@@ -1,221 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
 
-
-
-
-
-
-
-<!doctype html>
-<html lang="zh-CN">
+<!-- Head tag -->
 <head>
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <meta name="author" content="Yan_1_20">
-  
-  
-  
-  
-    <meta name="description" content="">
-  
-  <title>雁渡寒潭 [ Yan_1_20 ]</title>
-  
-  
-    <link rel="shortcut icon" href="/favicon.ico">
-  
-  
-  <link rel="stylesheet" href="/css/random.css">
-<link rel="stylesheet" href="/css/vegas.min.css">
-<link rel="stylesheet" href="/css/highlight-railscasts.css">
-<link rel="stylesheet" href="/css/jquery.fancybox.css">
-<link rel="stylesheet" href="/css/iconfont/iconfont.css">
-<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
-<link rel="stylesheet" href="/css/plyr.css">
-  
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Yan_1_20">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Yan_1_20"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Yan_1_20"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="website" />
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>Yan_1_20</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
 </head>
 
-<div class="random-center hide-area">
-  <div id="random-index">
-    <div class="center-field">
-      <img class="avatar" src="https://avatars2.githubusercontent.com/u/19972411?v=3&s=460" width=120 height=120 onClick="openUserCard()">
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/index.html">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories/linux/index.html">
+                    Linux
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories/PWN/index.html">
+                    PWN
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories/安卓逆向/index.html">
+                    android
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories/日志/index.html">
+                    log
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about">
+                    about
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="https://github.com/Yan-1-20">
+                    Github
+                </a>
+            </li>
+            
+        </ul>
     </div>
-    <div class="center-field">
-      <div class="title" onClick="openUserCard()">Yan_1_20</div>
-      <div class="sub-title" onClick="openUserCard()">雁渡寒潭</div>
-    </div>
-    <hr >
-    <div class="center-field">
-      <ul class="index-nav-link">
-        
-        
-          
-            <li><a href="/index.html">Home</a></li>
-          
-        
-          
-            <li><a href="/categories/linux/index.html">Linux</a></li>
-          
-        
-          
-            <li><a href="/categories/PWN/index.html">PWN</a></li>
-          
-        
-          
-            <li><a href="/categories/安卓逆向/index.html">android</a></li>
-          
-        
-          
-            <li><a href="/categories/日志/index.html">log</a></li>
-          
-        
-          
-            <li><a href="/archives">archives</a></li>
-          
-        
-          
-            <li><a href="/tags">tags</a></li>
-          
-        
-          
-            <li><a href="/about">about</a></li>
-          
-        
-          
-            <li><a href="https://github.com/Yan-1-20">Github</a></li>
-          
-        
-      </ul>
-      <ul class="social-icon">
-  
-  
-    <li>
-      <a href="https://github.com/Yan-1-20">
-        
-          <i class="icon iconfont github">&#xe606;</i>
-        
-      </a>
-    </li>
-  
-</ul>
-    </div>
-  </div>
-</div>
-<div id="user-card">
-  <div class="center-field">
-    <img class="avatar" src="https://avatars2.githubusercontent.com/u/19972411?v=3&s=460">
-    <p id="description"></p>
-    <ul class="social-icon">
-  
-  
-    <li>
-      <a href="https://github.com/Yan-1-20">
-        
-          <i class="icon iconfont github">&#xe606;</i>
-        
-      </a>
-    </li>
-  
-</ul>
-  </div>
 </div>
 
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
 
-<div id="btn-view">Hide</div>
+<div class="container">
 
-<script>
-// is trigger analytics / tongji script
-var isIgnoreHost = false;
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
 
-if(window && window.location && window.location.host) {
-  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
-    return 0 === window.location.host.indexOf(address);
-  });
-}
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+            <h1 id="main-title" class="title">Yan_1_20</h1>
+        
+    </div>
+</header>
 
-var isTriggerAnalytics = !( true && isIgnoreHost );
+        <section class="main">
+            
+                
+<div class="post">
 
-</script>
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/07/14/2016/7/14/">
+                又是，梦
+            </a>
+        </h1>
+        <div class="post-info">
+            <span class="date">2016-07-14</span>
+            
+            
+                <span class="category">
+                    <a href="/categories/日志/">日志</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>　　昨晚看了《坏孩子的天空》，回忆又回到了那个高中，真是难受啊，夜里还做那样的梦。<br><br>　　我们会再见面，等你成了冠军，我成了老板。。。。<br><br>　<br>　　<img src="/image/2016-7-14.jpg" alt=""></p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/07/10/2016/7/2/">
+                ubantu 常见问题解决
+            </a>
+        </h1>
+        <div class="post-info">
+            <span class="date">2016-07-10</span>
+            
+            
+                <span class="category">
+                    <a href="/categories/linux/">linux</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>ubantu 备份 system<br><br><a href="http://www.cnblogs.com/samael/articles/2033568.html" target="_blank" rel="external">http://www.cnblogs.com/samael/articles/2033568.html</a><br><br></p>
+<p>install  notepadqq<br><br><a href="http://www.ubuntukylin.com/news/shownews.php?lang=cn&amp;id=356" target="_blank" rel="external">http://www.ubuntukylin.com/news/shownews.php?lang=cn&amp;id=356</a></p>
+<p>install vmware<br><br><a href="https://linux.cn/article-2449-1.html" target="_blank" rel="external">https://linux.cn/article-2449-1.html</a></p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/07/10/2016/7/1/">
+                Android 前人总结的研究学习方法
+            </a>
+        </h1>
+        <div class="post-info">
+            <span class="date">2016-07-10</span>
+            
+            
+                <span class="category">
+                    <a href="/categories/安卓逆向/">安卓逆向</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h1 id="Android-前人总结的研究学习方法"><a href="#Android-前人总结的研究学习方法" class="headerlink" title="Android 前人总结的研究学习方法"></a>Android 前人总结的研究学习方法</h1><p>　　找到了这个链接，方便自己以后看吧，这种链接总是会弄丢.<br><br>但是内容的确很实用哦。</p>
+<blockquote>
+<p><a href="http://m.csdn.net/article/2015-05-27/2824780" target="_blank" rel="external">http://m.csdn.net/article/2015-05-27/2824780</a></p>
+</blockquote>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/06/28/2016/6/28/">
+                PWN运动的工具准备
+            </a>
+        </h1>
+        <div class="post-info">
+            <span class="date">2016-06-28</span>
+            
+            
+                <span class="category">
+                    <a href="/categories/PWN/">PWN</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>pwn tools  install<br><br><a href="http://blog.csdn.net/koozxcv/article/details/51644476" target="_blank" rel="external">http://blog.csdn.net/koozxcv/article/details/51644476</a></p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/06/27/2016/6/27/">
+                新手学android安全的需要掌握的知识点
+            </a>
+        </h1>
+        <div class="post-info">
+            <span class="date">2016-06-27</span>
+            
+            
+                <span class="category">
+                    <a href="/categories/安卓逆向/">安卓逆向</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>#需要掌握的知识</p>
+<p>珠海要求</p>
+<ol>
+<li>熟练掌握Android SDK和NDK的使用，具有独立编写Android应用程序和Native原生程序的能力；</li>
+</ol>
+<ol>
+<li><p>了解Android Dalvik虚拟机原理，熟悉Dalvik指令集，能够对Android应用程序进行逆向分析；</p>
+</li>
+<li><p>了解ARM汇编语言和指令集，具备Android NDK程序的逆向反汇编能力者优先考虑；</p>
+</li>
+<li><p>熟悉python/perl/ruby等任意一类脚本语言，对移动平台开源安全框架及工具熟悉者优先考虑；</p>
+</li>
+<li><p>思路清晰，思维敏捷，快速的学习能力，良好的英文资料阅读能力；</p>
+</li>
+</ol>
+<p>启明星辰要求</p>
+<ol>
+<li><p>熟悉汇编语言、Java或C/C++语言，对逆向工程有浓厚兴趣；</p>
+</li>
+<li><p>熟悉Android安全机制，了解签名、打包、反编译等；</p>
+</li>
+<li><p>熟悉Android开发环境，较为熟练的开发Android程序；</p>
+</li>
+<li><p>熟悉Android系统底层原理者优先；</p>
+</li>
+<li><p>有Android漏洞挖掘、漏洞利用、漏洞分析经验者优先。</p>
+</li>
+</ol>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/06/17/2016-6-17-20-23/">
+                安卓安全目前知道的学习路线
+            </a>
+        </h1>
+        <div class="post-info">
+            <span class="date">2016-06-17</span>
+            
+            
+                <span class="category">
+                    <a href="/categories/安卓逆向/">安卓逆向</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h1 id="安卓安全目前知道的学习路线"><a href="#安卓安全目前知道的学习路线" class="headerlink" title="安卓安全目前知道的学习路线"></a>安卓安全目前知道的学习路线</h1><p><img src="/image/2016617.jpg" alt=""></p>
+<ol>
+<li>编程篇</li>
+</ol>
+<p>JAVA语言与加密算法.（从JAVA开始进入移动安全的学习，了解最基本的信息安全加密机制）<br> Android开发基础上.（进入Android开发的编程，从界面入手，快速入门Android）<br> Android开发基础下.（从四大组件入手，进一步了解Android应用框架机制，做好玩够酷的Android APP）<br> 手机安全管家项目..<br> Android核心编程….从Java层HOOK开始到DEX文件格式以及Smali汇编语言，都是移动安全中重要知识<br> Android NDK编程..打开Native HOOK的大门，最后深入Android Native层</p>
+<ol>
+<li><p>安全篇<br>从最基础的Linux下的ELF文件开始，了解Linux系统，并发散出Android的调试与反调试机制。<br>然后，学习目前最主流的三大指令集，随后就进入Android系统的APP逆向工程的领域。<br>具备逆向的基础后，展开包括APP加固、脱壳、病毒分析等一系列的高端技术学习<br>ELF文件格式…….从Linux系统的使用开始，通过ELF文件格式为主线介绍Android的调试与反调试</p>
+<p>x86/x64/ARM指令集..x86、x64、ARM三大主流汇编语言<br>逆向工程实战…….围绕smali语言与ARM汇编，<br>APP加固与脱壳….<br>APP加固壳/逆向项目<br>病毒分析原理与实战.<br>源码定制与漏洞探究.<br>跨平台逆向技术</p>
+</li>
+</ol>
+<p>要深入java，懂c++, 会linux， 精通dalvik，关键是熟练arm。andriod攻防的发展比pc快很多很多。必须沉淀，积累强悍基础！</p>
+<p>把hook注入，root啊，elf，dex，linker啊，art和dalvik虚拟机的运行过程啊这些基础知识弄扎实</p>
+<p>我想我也决定了我要走的路</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/06/16/2016-6-16-20-11/">
+                2016-6-16-20-11
+            </a>
+        </h1>
+        <div class="post-info">
+            <span class="date">2016-06-16</span>
+            
+            
+                <span class="category">
+                    <a href="/categories/日志/">日志</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h1 id="今天开始安卓安全，开发拜拜"><a href="#今天开始安卓安全，开发拜拜" class="headerlink" title="今天开始安卓安全，开发拜拜"></a>今天开始安卓安全，开发拜拜</h1><p><img src="/image/index.jpg" alt=""></p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/06/16/2016/6/22/">
+                ubantu和windows10 双系统下问题解决
+            </a>
+        </h1>
+        <div class="post-info">
+            <span class="date">2016-06-16</span>
+            
+            
+                <span class="category">
+                    <a href="/categories/linux/">linux</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>#ubantu和windows10 双系统下问题解决<br>最近装了ubantu，但是双系统的麻烦也来了<br>1.windows和ubantu的时区冲突两个系统时间差了8小时<br>2.unbantu下没有声音</p>
+<p>解决方法<br>1.<br>时区不对怎么办<br>下面的命令可以关闭UTC，<br>代码:<br>sudo timedatectl set-local-rtc 1</p>
+<p>2.<br>耳机没声音怎么办<br>2.运行<br>代码:<br>sudo mousepad /etc/modprobe.d/options<br>在其中加入<br>options snd-hda-intel model=z71v position_fix=1<br>保存，退出。</p>
+
+        </div>
+    
+
+</div>
+            
+        </section>
+    </div>
+</div>
 
 
 
 
-  
-  
-    <script src="/js/jquery-2.2.3.min.js"></script>
-  
-    <script src="/js/vegas.min.js"></script>
-  
-    <script src="/js/random.js"></script>
-  
-    <script src="/js/highlight.pack.js"></script>
-  
-    <script src="/js/jquery.mousewheel.pack.js"></script>
-  
-    <script src="/js/jquery.fancybox.pack.js"></script>
-  
-    <script src="/js/jquery.fancybox-thumbs.js"></script>
-  
-    <script src="/js/plyr.js"></script>
-  
 
-<script>
 
-  // fancybox
-  var backgroundImages = [];
-  
-  $('#post').each(function(i){
-    $(this).find('img').each(function(){
-      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
-      var alt = this.alt || this.title;
-      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
-      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
-    });
-    $(this).find('.fancybox').each(function(){
-      $(this).attr('rel', 'post' + i);
-    });
-  });
-  $(".fancybox").fancybox();
+</div>
 
-var vegasConfig = {"preload­Image":false,"transition":["slideLeft2","slideRight2","flash2"],"timer":false,"delay":6000000,"shuffle":false,"count":28};
-var unsplashConfig = {"gravity":"north"};
+<!-- Footer -->
+<div class="push"></div>
 
-$(".fancybox-thumb").fancybox({
-  prevEffect: 'none',
-  nextEffect: 'none',
-  helpers: {
-    title: {
-      type: 'outside'
-    },
-    thumbs: {
-      width: 50,
-      height: 50
-    }
-  }
-});
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    Yan_1_20   <br>我等的猪<br>你在.........<br>多远的以前
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2016/07/14/2016/7/14/">又是，梦</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2016/07/10/2016/7/2/">ubantu 常见问题解决</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2016/07/10/2016/7/1/">Android 前人总结的研究学习方法</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2016/06/28/2016/6/28/">PWN运动的工具准备</a>
+            </li>
+            
+        </ul>
+    </div>
 
-// show video with plyr
-$(".video-container iframe").each(function(i){
-  var url = $(this).attr('src');
-  var id = url.split('/').pop();
-  var plyrContainer = document.createElement('div');
-  plyrContainer.className = 'plyr';
-  var plyrElement = document.createElement('div');
-  plyrElement.dataset.videoId = id;
-  switch(true) {
-    case url.search('youtube.com') >= 0:
-      plyrElement.dataset.type = 'youtube';
-      break;
-    case url.search('vimeo.com') >= 0:
-      plyrElement.dataset.type = 'vimeo';
-      break;
-    default:
-      return;
-  };
-  plyrContainer.appendChild(plyrElement);
-  $(this).parent().html(plyrContainer);
-});
-plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
-</script>
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
+        
+        <li>
+            <a class="footer-post" href="/categories/PWN/">PWN</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/日志/">日志</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/linux/">linux</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/安卓逆向/">安卓逆向</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/Yan-1-20">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    Yan_1_20  ddd
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
 </body>
-</html>
 
+</html>
