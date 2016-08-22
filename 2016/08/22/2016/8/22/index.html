@@ -27,7 +27,7 @@
 
 
 
-  <meta name="keywords" content="心情," />
+  <meta name="keywords" content="windbg,二进制," />
 
 
 
@@ -36,18 +36,26 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="昨晚看了《坏孩子的天空》，回忆又回到了那个高中，真是难受啊，夜里还做那样的梦。　　我们会再见面，等你成了冠军，我成了老板。。。。">
+<meta name="description" content="Mona2是Corelan Team团队开发的一个非常有用的扩展(PS:读过Corelan Team的Exploit 编写系列教程应该不会陌生吧,看雪论坛里面有泉哥他们翻译的中文版),该扩展最初是为Immunity Debugger编写的,现在该扩展也有WinDbg的版本了.下面的安装以win7 64位系统为例演示:
+1.安装Python2.7Python2.7下载地址:https://www">
 <meta property="og:type" content="article">
-<meta property="og:title" content="又是，梦">
-<meta property="og:url" content="http://yan-1-20.github.io/2016/07/14/2016/7/14/index.html">
+<meta property="og:title" content="windbg 添加 mona">
+<meta property="og:url" content="http://yan-1-20.github.io/2016/08/22/2016/8/22/index.html">
 <meta property="og:site_name" content="Yan_1_20">
-<meta property="og:description" content="昨晚看了《坏孩子的天空》，回忆又回到了那个高中，真是难受啊，夜里还做那样的梦。　　我们会再见面，等你成了冠军，我成了老板。。。。">
-<meta property="og:image" content="http://yan-1-20.github.io/image/2016-7-14.jpg">
-<meta property="og:updated_time" content="2016-07-14T03:18:29.967Z">
+<meta property="og:description" content="Mona2是Corelan Team团队开发的一个非常有用的扩展(PS:读过Corelan Team的Exploit 编写系列教程应该不会陌生吧,看雪论坛里面有泉哥他们翻译的中文版),该扩展最初是为Immunity Debugger编写的,现在该扩展也有WinDbg的版本了.下面的安装以win7 64位系统为例演示:
+1.安装Python2.7Python2.7下载地址:https://www">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2016/08/22/2016-08-22-1.jpg">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2016/08/22/2016-08-22-2.jpg">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2016/08/22/2016-08-22-3.jpg">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2016/08/22/2016-08-22-4.jpg">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2016/08/22/2016-08-22-5.jpg">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2016/08/22/2016-08-22-6.jpg">
+<meta property="og:updated_time" content="2016-08-22T15:39:53.056Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="又是，梦">
-<meta name="twitter:description" content="昨晚看了《坏孩子的天空》，回忆又回到了那个高中，真是难受啊，夜里还做那样的梦。　　我们会再见面，等你成了冠军，我成了老板。。。。">
-<meta name="twitter:image" content="http://yan-1-20.github.io/image/2016-7-14.jpg">
+<meta name="twitter:title" content="windbg 添加 mona">
+<meta name="twitter:description" content="Mona2是Corelan Team团队开发的一个非常有用的扩展(PS:读过Corelan Team的Exploit 编写系列教程应该不会陌生吧,看雪论坛里面有泉哥他们翻译的中文版),该扩展最初是为Immunity Debugger编写的,现在该扩展也有WinDbg的版本了.下面的安装以win7 64位系统为例演示:
+1.安装Python2.7Python2.7下载地址:https://www">
+<meta name="twitter:image" content="http://yan-1-20.github.io/image/2016/08/22/2016-08-22-1.jpg">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -57,7 +65,7 @@
   };
 </script>
 
-  <title> 又是，梦 | Yan_1_20 </title>
+  <title> windbg 添加 mona | Yan_1_20 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -306,7 +314,7 @@
           
           
             
-              又是，梦
+              windbg 添加 mona
             
           
         </h1>
@@ -315,8 +323,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2016-07-14T11:11:44+08:00" content="2016-07-14">
-            2016-07-14
+          <time itemprop="dateCreated" datetime="2016-08-22T23:02:43+08:00" content="2016-08-22">
+            2016-08-22
           </time>
         </span>
 
@@ -325,8 +333,8 @@
             &nbsp; | &nbsp; 分类于
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/日志/" itemprop="url" rel="index">
-                  <span itemprop="name">日志</span>
+                <a href="/categories/Windows/" itemprop="url" rel="index">
+                  <span itemprop="name">Windows</span>
                 </a>
               </span>
 
@@ -349,7 +357,25 @@
       
 
       
-        <span itemprop="articleBody"><p>　　昨晚看了《坏孩子的天空》，回忆又回到了那个高中，真是难受啊，夜里还做那样的梦。<br><br>　　我们会再见面，等你成了冠军，我成了老板。。。。<br><br>　<br>　　<img src="/image/2016-7-14.jpg" alt=""></p>
+        <span itemprop="articleBody"><p>　　Mona2是Corelan Team团队开发的一个非常有用的扩展(PS:读过Corelan Team的Exploit 编写系列教程应该不会陌生吧,看雪论坛里面有泉哥他们翻译的中文版),该扩展最初是为Immunity Debugger编写的,现在该扩展也有WinDbg的版本了.<br><br>下面的安装以win7 64位系统为例演示:<br><br></p>
+<p>1.安装Python2.7<br><br>Python2.7下载地址:<br><br><a href="https://www.python.org/downloads/" target="_blank" rel="external">https://www.python.org/downloads/</a>)<br><br><br>2.安装vcredist_x64.exe (VC++运行库).<br></p>
+<p>vcredist_x86.exe下载地址:<br> <a href="https://www.microsoft.com/en-us/download/details.aspx?id=29" target="_blank" rel="external">https://www.microsoft.com/en-us/download/details.aspx?id=29</a></p>
+<p>vcredist_x64.exe下载地址:<br><br><a href="https://www.microsoft.com/en-us/download/details.aspx?id=15336" target="_blank" rel="external">https://www.microsoft.com/en-us/download/details.aspx?id=15336</a><br><br><br><br>3.下载并安装让WinDbg支持python脚本的插件(按照自己的需要安装x86和x64版本的).<br></p>
+<p>下载地址: <a href="http://pykd.codeplex.com/releases" target="_blank" rel="external">http://pykd.codeplex.com/releases</a><br><img src="/image/2016/08/22/2016-08-22-1.jpg" alt=""><br><br><br><br><br><img src="/image/2016/08/22/2016-08-22-2.jpg" alt=""><br><br><br><br><br><img src="/image/2016/08/22/2016-08-22-3.jpg" alt=""><br><br><br>zip解压之后得到几个dll 和一个pykd.pyd文件<br><img src="/image/2016/08/22/2016-08-22-4.jpg" alt=""><br><br><br>把pykd.pyd文件放入 windb的安装目录下的 winext文件下<br><br>然后 进入cmd  cd /d  xxxx（pykd的zip解压文件路径）<br><br>接着输入 regsvr32 msdia120.dll    （注意msdia120.dll是pykd 解压文件内的一个dll它的名字随pykd版本改变而改变 如上面的版本为msdia120.dll）</p>
+<p><br><br>注册成功后如图<br><img src="/image/2016/08/22/2016-08-22-5.jpg" alt=""></p>
+<p>4．下载windbglib.py和mona.py,将其放到windbg.exe所在目录下.</p>
+<p>下载地址: <a href="https://github.com/corelan" target="_blank" rel="external">https://github.com/corelan</a></p>
+<p>5.配置符号文件路径如下:</p>
+<p>①  选择菜单项File-&gt;Symbol File Path</p>
+<p>②  输入:SRV<em>D:\symbols</em><a href="http://msdl.microsoft.com/download/symbols" target="_blank" rel="external">http://msdl.microsoft.com/download/symbols</a></p>
+<p>③  保存工作空间(选择菜单项File-&gt;Save Workspace)</p>
+<p>#在WinDbg下使用mona.py</p>
+<p>在WinDbg中运行mona.py非常简单:<br>先用windbg打开一个可执行文件打开 command 窗口 输入命令</p>
+<p>.load pykd.pyd        ///（加载pykd扩展命令）<br><br>!py mona              </p>
+<p><img src="/image/2016/08/22/2016-08-22-6.jpg" alt=""></p>
+<p><br><br><br></p>
+<p>再输入一句 更新语句<br><br><br>!py mona update</p>
+<p><br><br>到此mnoa的安装完成</p>
 </span>
       
     </div>
@@ -358,7 +384,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/心情/" rel="tag">#心情</a>
+            <a href="/tags/windbg/" rel="tag">#windbg</a>
+          
+            <a href="/tags/二进制/" rel="tag">#二进制</a>
           
         </div>
       
@@ -367,13 +395,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/08/18/2016/8/18/" rel="prev">windbg kb 命令解释</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/10/2016/7/2/" rel="next">ubantu 常见问题解决</a>
+              <a href="/2016/08/18/2016/8/18/" rel="next">windbg kb 命令解释</a>
             
           </div>
         </div>
