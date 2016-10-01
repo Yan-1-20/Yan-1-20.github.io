@@ -4,13 +4,6 @@
   
     
     <entry>
-      <title><![CDATA[vdas]]></title>
-      <url>http://yan-1-20.github.io/2016/10/01/2016/10/1/</url>
-      <content type="html"><![CDATA[<p><img src="/image/about.jpg" alt=""></p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[全国网安高校联赛2016两道linux逆向的writeup]]></title>
       <url>http://yan-1-20.github.io/2016/09/19/2016/8/29/</url>
       <content type="html"><![CDATA[<h1 id="全国网安高校联赛2016两道linux逆向的writeup"><a href="#全国网安高校联赛2016两道linux逆向的writeup" class="headerlink" title="全国网安高校联赛2016两道linux逆向的writeup"></a>全国网安高校联赛2016两道linux逆向的writeup</h1><p>　　忏愧一下午就憋出了两道题<br><br>　　一道320分的　babyfuscator<br><br>　　一道192分的　indirect<br><br>　　这两道题indirect好像题目有问题最后加减i的时候位置反了，然后都没什么问题，babyfuscator是道体力活，indirect是道底层大题。<br><br>　　链接如下：<br><br>　　babyfuscator 　链接：<a href="http://pan.baidu.com/s/1i48aQ37" target="_blank" rel="external">http://pan.baidu.com/s/1i48aQ37</a> 密码：xiht<br><br>　　indirect　　　　链接：<a href="http://pan.baidu.com/s/1c131qKw" target="_blank" rel="external">http://pan.baidu.com/s/1c131qKw</a> 密码：q3br</p>
