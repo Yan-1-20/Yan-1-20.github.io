@@ -27,7 +27,7 @@
 
 
 
-  <meta name="keywords" content="linux,xubantu," />
+  <meta name="keywords" content="windbg," />
 
 
 
@@ -36,22 +36,22 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="#ubantu和windows10 双系统下问题解决最近装了ubantu，但是双系统的麻烦也来了1.windows和ubantu的时区冲突两个系统时间差了8小时2.unbantu下没有声音
-解决方法1.时区不对怎么办下面的命令可以关闭UTC，代码:sudo timedatectl set-local-rtc 1
-2.耳机没声音怎么办2.运行代码:sudo mousepad /etc/modprob">
+<meta name="description" content="windbg的kb命令执行后会得到如下的数据　　　　同时源代码的函数调用如下图　　　　可以看出
+0012fe7c 0040109d 0012ff28 00edf7ae 7ffda000 111!d0040109d是函数 111!d 执行后最后ret的地址">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubantu和windows10 双系统下问题解决">
-<meta property="og:url" content="http://yan-1-20.github.io/2016/06/16/2016/6/22/index.html">
+<meta property="og:title" content="windbg kb 命令解释">
+<meta property="og:url" content="http://yan-1-20.github.io/2016/09/19/2016/8/18/index.html">
 <meta property="og:site_name" content="Yan_1_20">
-<meta property="og:description" content="#ubantu和windows10 双系统下问题解决最近装了ubantu，但是双系统的麻烦也来了1.windows和ubantu的时区冲突两个系统时间差了8小时2.unbantu下没有声音
-解决方法1.时区不对怎么办下面的命令可以关闭UTC，代码:sudo timedatectl set-local-rtc 1
-2.耳机没声音怎么办2.运行代码:sudo mousepad /etc/modprob">
-<meta property="og:updated_time" content="2016-06-28T10:33:05.054Z">
+<meta property="og:description" content="windbg的kb命令执行后会得到如下的数据　　　　同时源代码的函数调用如下图　　　　可以看出
+0012fe7c 0040109d 0012ff28 00edf7ae 7ffda000 111!d0040109d是函数 111!d 执行后最后ret的地址">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2016/08/18/kb.jpg">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2016/08/18/c_code.jpg">
+<meta property="og:updated_time" content="2016-08-18T05:55:53.702Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ubantu和windows10 双系统下问题解决">
-<meta name="twitter:description" content="#ubantu和windows10 双系统下问题解决最近装了ubantu，但是双系统的麻烦也来了1.windows和ubantu的时区冲突两个系统时间差了8小时2.unbantu下没有声音
-解决方法1.时区不对怎么办下面的命令可以关闭UTC，代码:sudo timedatectl set-local-rtc 1
-2.耳机没声音怎么办2.运行代码:sudo mousepad /etc/modprob">
+<meta name="twitter:title" content="windbg kb 命令解释">
+<meta name="twitter:description" content="windbg的kb命令执行后会得到如下的数据　　　　同时源代码的函数调用如下图　　　　可以看出
+0012fe7c 0040109d 0012ff28 00edf7ae 7ffda000 111!d0040109d是函数 111!d 执行后最后ret的地址">
+<meta name="twitter:image" content="http://yan-1-20.github.io/image/2016/08/18/kb.jpg">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -61,7 +61,7 @@
   };
 </script>
 
-  <title> ubantu和windows10 双系统下问题解决 | Yan_1_20 </title>
+  <title> windbg kb 命令解释 | Yan_1_20 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -310,7 +310,7 @@
           
           
             
-              ubantu和windows10 双系统下问题解决
+              windbg kb 命令解释
             
           
         </h1>
@@ -319,8 +319,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2016-06-16T20:11:08+08:00" content="2016-06-16">
-            2016-06-16
+          <time itemprop="dateCreated" datetime="2016-09-19T19:07:59+08:00" content="2016-09-19">
+            2016-09-19
           </time>
         </span>
 
@@ -329,8 +329,8 @@
             &nbsp; | &nbsp; 分类于
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/linux/" itemprop="url" rel="index">
-                  <span itemprop="name">linux</span>
+                <a href="/categories/Windows/" itemprop="url" rel="index">
+                  <span itemprop="name">Windows</span>
                 </a>
               </span>
 
@@ -353,9 +353,8 @@
       
 
       
-        <span itemprop="articleBody"><p>#ubantu和windows10 双系统下问题解决<br>最近装了ubantu，但是双系统的麻烦也来了<br>1.windows和ubantu的时区冲突两个系统时间差了8小时<br>2.unbantu下没有声音</p>
-<p>解决方法<br>1.<br>时区不对怎么办<br>下面的命令可以关闭UTC，<br>代码:<br>sudo timedatectl set-local-rtc 1</p>
-<p>2.<br>耳机没声音怎么办<br>2.运行<br>代码:<br>sudo mousepad /etc/modprobe.d/options<br>在其中加入<br>options snd-hda-intel model=z71v position_fix=1<br>保存，退出。</p>
+        <span itemprop="articleBody"><p>　　windbg的kb命令执行后会得到如下的数据<br><br>　　<img src="/image/2016/08/18/kb.jpg" alt=""><br><br>　　同时源代码的函数调用如下图<br><br>　　<img src="/image/2016/08/18/c_code.jpg" alt=""><br><br>　　可以看出<br></p>
+<p>0012fe7c 0040109d 0012ff28 00edf7ae 7ffda000 111!d<br><br>0040109d是函数 111!d 执行后最后ret的地址</p>
 </span>
       
     </div>
@@ -364,9 +363,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/linux/" rel="tag">#linux</a>
-          
-            <a href="/tags/xubantu/" rel="tag">#xubantu</a>
+            <a href="/tags/windbg/" rel="tag">#windbg</a>
           
         </div>
       
@@ -375,11 +372,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/06/28/2016/6/28/" rel="prev">PWN运动的工具准备</a>
+              <a href="/2016/09/19/2016/8/22/" rel="prev">windbg 添加 mona</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/19/2016/7/2/" rel="next">ubantu 常见问题解决</a>
             
           </div>
         </div>
