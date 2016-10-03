@@ -1,538 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
 
-<!doctype html>
-<html class="theme-next use-motion theme-next-mala">
+<!-- Head tag -->
 <head>
-  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="61616161616">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="//img.juimg.com/tuku/yulantu/130520/267836-13052023423177.jpg">
+    <link rel="alternate" type="application/atom+xml" title="Yan_1_20" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Yan_1_20 blog
+        
+    </title>
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link rel="canonical" href="http://yan-1-20.github.io/categories/PWN/">
 
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
 
-
-
-
-
-
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
-
-
-
-  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-
-
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
-
-
-
-
-  <meta name="keywords" content="Hexo,next" />
-
-
-
-
-
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
-
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yan_1_20">
-<meta property="og:url" content="http://yan-1-20.github.io/categories/PWN/index.html">
-<meta property="og:site_name" content="Yan_1_20">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Yan_1_20">
-
-
-<script type="text/javascript" id="hexo.configuration">
-  var CONFIG = {
-    scheme: 'Mala',
-    sidebar: 'post'
-  };
-</script>
-
-  <title> Category: PWN | Yan_1_20 </title>
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+<style>
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
-  
-
-
-
-  <div class="container one-column ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/" class="brand" rel="start">
-      <span class="logo">
-        <i class="icon-next-logo"></i>
-      </span>
-      <span class="site-title">雁渡寒潭</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
-
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu ">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            <i class="menu-item-icon icon-next-home"></i> <br />
-            Home
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            <i class="menu-item-icon icon-next-categories"></i> <br />
-            Categories
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            <i class="menu-item-icon icon-next-archives"></i> <br />
-            Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            <i class="menu-item-icon icon-next-tags"></i> <br />
-            Tags
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            <i class="menu-item-icon icon-next-about"></i> <br />
-            About
-          </a>
-        </li>
-      
-
-      
-      
-    </ul>
-  
-
-  
-</nav>
-
- </div>
-    </header>
-
-    
-      
-
-      
-        <style type="text/css">
-
-    .circle {
-        width: 40px;
-        height: 40px;
-        background: #555 no-repeat;
-        cursor: move;
+    header.intro-header {
+        background-image: url('//img0.imgtn.bdimg.com/it/u=4116728863,3430230981&amp;fm=21&amp;gp=0.jpg')
     }
-
-    .assist-btn {
-        position: fixed;
-        top: 50％;
-        left: 10px;
-        -moz-border-radius: 50px;
-        -webkit-border-radius: 50px;
-        border-radius: 50px;
-        outline: none;
-        border: none;
-        color: #87daff;
-    }
-
 </style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Yan_1_20
+                </span>
+                's Blog
+            </a>
+        </div>
 
-<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-<script type="text/javascript">
-    // 浮动圆点展开与收缩
-    /*
-    $(function () {
-        var assist_box = $('.assist-box');
-        $('#assist_btn').hover(function () {
-            assist_box.stop().show(300);
-        }, function () {
-            assist_box.stop().hide(150);
-        })
-    });
-    */  
-    //浮动圆点拖动
-    $(function () {
-        var box = document.getElementById('assist_btn');
-        box.onmousedown = function (event) {
-            var e = event || window.event,
-                t = e.target || e.srcElement,
-                // 鼠标按下时的坐标x1,y1
-                x1 = e.clientX,
-                y1 = e.clientY,
-                //鼠标按下时的左右偏移量
-                dragLeft = this.offsetLeft,
-                dragTop = this.offsetTop;
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
 
-            document.onmousemove = function (event) {
-                var e = event || window.event,
-                    t = e.target || e.srcElement,
-                    // 鼠标移动时的动态坐标
-                    x2 = e.clientX,
-                    y2 = e.clientY,
-                    // 鼠标移动时的坐标的变化量
-                    x = x2 - x1,
-                    y = y2 - y1;
-                box.style.left = (dragLeft + x) + 'px';
-                box.style.top = (dragTop + y) + 'px';
-            }
+                    
+                        
+                        <li>
+                            <a href="/about/">about</a>
+                        </li>
+                        
+                    
+                        
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+                        
+                    
 
-            document.onmouseup = function () {
-                this.onmousemove = null;
-            }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
         }
-    });
-
-/*
-    $whitesmoke   = #f5f5f5
-    $gainsboro    = #eee
-    $gray-lighter = #ddd
-    $grey-light   = #ccc
-    $grey         = #bbb
-    $grey-dark    = #999
-    $grey-dim     = #666
-    $black-light  = #555
-    $black-deep   = #222
-    $red          = #ff2a2a
-    $blue-bright  = #87daff
-    $blue         = #0684bd
-    $blue-deep    = #262a30
-*/
-    // white theme
-    var body = {color: "#555", background: "white"};
-    var a_tag = {color: "#222"};
-    var header = { background: "#f5f5f5"};
-    var logo_line_i = {background: "#222"};
-    var post_code = {background: "#eee", color: "#222"};
-
-    function switch_theme() {
-        $("body").css(body);
-        $("a:not('.links-of-author-item a, .site-state-item a, .site-state-posts a, .feed-link a, .motion-element a, .post-tags a')").css(a_tag);
-        $(".header, .footer").css(header);
-        $(".logo-line-before i, .logo-line-after i").css(logo_line_i);
-        $(".post code").css(post_code);
-        $("#idhyt-surprise-ball #idhyt-surprise-ball-animation .drag").css(a_tag);
-        $(".post-title-link, .posts-expand .post-meta, .post-comments-count, .disqus-comment-count, .post-category a, .post-nav-next a, .post-nav-item a").css(a_tag);
-        
-        $("#assist_btn").hide();
     }
-
-    $(function () {
-        $("#assist_btn").dblclick(function() {
-            switch_theme();
-        });
-    });
-
 </script>
 
-<div>
+<!-- Main Content -->
 
-    <button class="assist-btn circle" id="assist_btn">
-        亮
-    </button>
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
 
-</div>
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/6016118396">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
 
+                
 
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/yan-1-20">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
 
+                
 
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Yan_1_20 2016
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
 
-
-
-
-
-      
-
-    
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div id="content" class="content"> 
-
-  <section id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        PWN
-        <small>Category</small>
-      </h2>
-    </div>
-
-    
-      
-
-  <article class="post post-type-normal"itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/06/28/2016/6/28/" itemprop="url">
-              <span itemprop="name">PWN运动的工具准备</span>
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" datetime="2016-06-28T10:28:28.000Z" itemprop="dateCreated" content="2016-06-28"> 06-28 </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </section>
-
-  
-
- </div>
-
-        
-
-        
-      </div>
-
-      
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      <section class="site-overview">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Yan_1_20" itemprop="image"/>
-          <p class="site-author-name" itemprop="name">Yan_1_20</p>
+            </div>
         </div>
-        <p class="site-description motion-element" itemprop="description"></p>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">6</span>
-              <span class="site-state-item-name">posts</span>
-            </a>
-          </div>
-
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">4</span>
-              <span class="site-state-item-name">categories</span>
-              </a>
-          </div>
-
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">5</span>
-              <span class="site-state-item-name">tags</span>
-              </a>
-          </div>
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/Yan-1-20" target="_blank">Github</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/6016118396/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank">Weibo</a>
-              </span>
-            
-          
-        </div>
-
-        <div class="links-of-friendly motion-element">
-          
-            <p class="site-author-name">友链</p>
-            
-              <span class="links-of-author-item">
-              <a href="http://over-rainbow.cn" target="_blank">Gay_hxs</a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-      </section>
-
-      
-
     </div>
-  </aside>
+</footer>
 
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
 
-    </main>
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
 
-    <footer id="footer" class="footer">
-      <div class="footer-inner"> <div class="copyright" >
-  
-  &copy; &nbsp; 
-  <span itemprop="copyrightYear">2016</span>
-  <span class="with-love">
-    <i class="icon-next-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Yan_1_20</span>
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
 
-  <div class="powered-by"></div>
-  <div class="powered-by">
-    Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
-  </div>
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
 
-  <div class="theme-info">
-    Theme by <a class="theme-link" href="http://blog.idhyt.com">idhyt</a>.<a class="theme-link" href="https://github.com/idhyt/hexo-theme-next/tree/magiclamp">Mala</a>
-  </div>
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yan-1-20.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
 
-  <!-- busuanzi -->
-  
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
 
-</div>
-
-<!--
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mala
-  </a>
-</div>
--->
-
-<!--
-<div class="powered-by"></div>
-<div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
-</div>
--->
-
-<!-- busuanzi -->
-<!--
-
--->
-
-
- </div>
-    </footer>
-
-    <div class="back-to-top"></div>
-  </div>
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  
-  
-    <script type="text/javascript">
-      postMotionOptions = {stagger: 100, drag: true};
-    </script>
-  
-
-  
-    
-    
-
-  
-
-
-  
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
-  
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+<!-- Google Analytics -->
 
 
 
+<!-- Baidu Tongji -->
 
-  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
-  
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
 
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
-      }
-      if (isMobile()) {
-        FastClick.attach(document.body);
-      }
-    });
-  </script>
+  _st('install','null','2.0.0');
+</script>
 
-  
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-  
-  
-
-  
-  <script type="text/javascript" src="/js/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "/images/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
+<!--wechat title img-->
+<img class="wechat-title-img" src="//avatars3.githubusercontent.com/u/19972411?v=3&amp;s=466">
 </body>
+
 </html>

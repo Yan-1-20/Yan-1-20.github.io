@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        ubantu和windows10 双系统下问题解决｜Yan_1_20 blog
+        windbg kb 命令解释｜Yan_1_20 blog
         
     </title>
 
-    <link rel="canonical" href="http://yan-1-20.github.io/2016/06/16/2016/6/22/">
+    <link rel="canonical" href="http://yan-1-20.github.io/2016/10/03/2016/8/18/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -148,18 +148,18 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>ubantu和windows10 双系统下问题解决</h1>
+                    <h1>windbg kb 命令解释</h1>
                     
                     <span class="meta">
                          作者 Yan_1_20
                         <span>
-                          日期 2016-06-16
+                          日期 2016-10-03
                          </span>
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#linux"
-                           title="linux">linux</a>
+                        <a class="tag" href="/tags/#windbg"
+                           title="windbg">windbg</a>
                         
                     </div>
                 </div>
@@ -168,7 +168,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            ubantu和windows10 双系统下问题解决
+            windbg kb 命令解释
         </span>
     </div>
 </header>
@@ -179,9 +179,8 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>#ubantu和windows10 双系统下问题解决<br>最近装了ubantu，但是双系统的麻烦也来了<br>1.windows和ubantu的时区冲突两个系统时间差了8小时<br>2.unbantu下没有声音</p>
-<p>解决方法<br>1.<br>时区不对怎么办<br>下面的命令可以关闭UTC，<br>代码:<br>sudo timedatectl set-local-rtc 1</p>
-<p>2.<br>耳机没声音怎么办<br>2.运行<br>代码:<br>sudo mousepad /etc/modprobe.d/options<br>在其中加入<br>options snd-hda-intel model=z71v position_fix=1<br>保存，退出。</p>
+                <p>　　windbg的kb命令执行后会得到如下的数据<br><br>　　<img src="/image/2016/08/18/kb.jpg" alt=""><br><br>　　同时源代码的函数调用如下图<br><br>　　<img src="/image/2016/08/18/c_code.jpg" alt=""><br><br>　　可以看出<br></p>
+<p>0012fe7c 0040109d 0012ff28 00edf7ae 7ffda000 111!d<br><br>0040109d是函数 111!d 执行后最后ret的地址</p>
 
                 <hr>
                 
@@ -189,10 +188,15 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2016/06/28/2016/6/28/" data-toggle="tooltip" data-placement="top"
-                           title="PWN运动的工具准备">&larr; Previous Post</a>
+                        <a href="/2016/10/03/2016/8/22/" data-toggle="tooltip" data-placement="top"
+                           title="windbg 添加 mona">&larr; Previous Post</a>
                     </li>
                     
+                    
+                    <li class="next">
+                        <a href="/2016/10/03/2016/7/2/" data-toggle="tooltip" data-placement="top"
+                           title="ubantu 常见问题解决">Next Post &rarr;</a>
+                    </li>
                     
                 </ul>
 
@@ -226,8 +230,8 @@
                     </h5>
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#linux"
-                           title="linux">linux</a>
+                        <a class="tag" href="/tags/#windbg"
+                           title="windbg">windbg</a>
                         
                     </div>
                 </section>
