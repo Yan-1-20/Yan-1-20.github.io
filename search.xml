@@ -4,6 +4,15 @@
   
     
     <entry>
+      <title><![CDATA[windbg 中使用kb和ub命令查看函数调用层次关系]]></title>
+      <url>http://yan-1-20.github.io/2016/10/07/2016/10/7/</url>
+      <content type="html"><![CDATA[<h1 id="kb-ub命令的作用"><a href="#kb-ub命令的作用" class="headerlink" title="kb,ub命令的作用"></a>kb,ub命令的作用</h1><p>  　　　　kb 显示传递给堆栈回溯中的每个函数的前三个参数<br><br>  　　　　ub 向前反汇编<br></p>
+<h1 id="列子"><a href="#列子" class="headerlink" title="列子"></a>列子</h1><p><img src="/image/2016/10/07/2016-10-07-01.png" alt=""><br>　　　　　如图异常在30ed442c 这个地址，重新加载windbg，在这个地址下断<br><br>　　　　　断下来后，我们执行kb命令<br></p>
+<p><img src="/image/2016/10/07/2016-10-07-02.png" alt=""><br>　　　　　mso!Ordinal1246+0x16b0表示当前指令所在的函数，则下面的表示调用当前函数的函数<br>　　　　　对mso!Ordinal1273+0x2581执行我们的ub命令得到如下图<br><img src="/image/2016/10/07/2016-10-07-03.png" alt=""><br>　　　　　为什么是ub，相信你看了?  30f0b566 +5就明白了，所以这个<br><br>　　　　　mso!Ordinal1273+0x25d8(30f0b5c2)就是我们的调用当前函数的函数<br><br>　　　　　在这个30f0b5c2 下断点在次重新加载windbg</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[全国网安高校联赛2016两道linux逆向的writeup]]></title>
       <url>http://yan-1-20.github.io/2016/10/03/2016/8/29/</url>
       <content type="html"><![CDATA[<h1 id="全国网安高校联赛2016两道linux逆向的writeup"><a href="#全国网安高校联赛2016两道linux逆向的writeup" class="headerlink" title="全国网安高校联赛2016两道linux逆向的writeup"></a>全国网安高校联赛2016两道linux逆向的writeup</h1><p>　　忏愧一下午就憋出了两道题<br><br>　　一道320分的　babyfuscator<br><br>　　一道192分的　indirect<br><br>　　这两道题indirect好像题目有问题最后加减i的时候位置反了，然后都没什么问题，babyfuscator是道体力活，indirect是道底层大题。<br><br>　　链接如下：<br><br>　　babyfuscator 　链接：<a href="http://pan.baidu.com/s/1i48aQ37" target="_blank" rel="external">http://pan.baidu.com/s/1i48aQ37</a> 密码：xiht<br><br>　　indirect　　　　链接：<a href="http://pan.baidu.com/s/1c131qKw" target="_blank" rel="external">http://pan.baidu.com/s/1c131qKw</a> 密码：q3br</p>
