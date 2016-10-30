@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title><![CDATA[10月->月末总结]]></title>
+      <url>http://yan-1-20.github.io/2016/10/30/2016/10/31/</url>
+      <content type="html"><![CDATA[<h1 id="10月-gt-月末总结"><a href="#10月-gt-月末总结" class="headerlink" title="10月-&gt;月末总结"></a>10月-&gt;月末总结</h1><h2 id="0x01-gt-感悟"><a href="#0x01-gt-感悟" class="headerlink" title="　0x01-&gt;感悟"></a>　0x01-&gt;感悟</h2><p>　　　　　这个月是复现cve的第一个月，跟着看了学习了不少知识，不得不说看着大牛的文章学到了很多，分为几个方面，一是调试器的使用，学到了很多新的用法，这是一起没有接触到的，二是这些新鲜的实战利用手法，这是只看二进制基础不可及的，三是对汇编编写、python、js（IE）这些感觉到欠缺,比如在改写虚表和改对象的结构使之rop化的运行等等。</p>
+<h2 id="0x02-gt-windbg"><a href="#0x02-gt-windbg" class="headerlink" title="　0x02-&gt;windbg"></a>　0x02-&gt;windbg</h2><p>　　　　　windbg,我是这个月才开始学用，之前一直使用OD（ps:感觉做RE,OD的字符串插件比windbg的用户体验好多了），windbg 的符号功能的确很牛逼，命令行用多了也就记住了，然后就是mona插件，做二进制很强大的插件。</p>
+<h3 id="0x02-01-gt-windbg-遇到的问题"><a href="#0x02-01-gt-windbg-遇到的问题" class="headerlink" title="　　0x02-01-&gt;windbg 遇到的问题"></a>　　0x02-01-&gt;windbg 遇到的问题</h3><p>　　　　　1.很多次符号路径莫名的被改变（至今也不知道为什么），导致一直在Busy <br><br><br>　　　　　2.如何快速定位到程序入口, bp $exentry 即可<br><br><br>　　　　　3.为何我的新打开或者附加一个程序会Busy* 很久，这是因为windbg在下载符号<br><br><br>　　　　　4.bp 符号,bm 符号，都不能断下来断点的话，可以先试试x 符号，得到地址，对地址进行断点<br><br><br>　　　　　5.自己编写的程序用windbg调试的时候，在进入main调试源代码的时候，我们的汇编单步会自动变成源码单步，使用 l-t 可以变成汇编单步 ，使用 l+t 变成源码单步<br><br>
+　　　　　</p>
+<h2 id="0x03-gt-IDA"><a href="#0x03-gt-IDA" class="headerlink" title="　0x03-&gt;IDA"></a>　0x03-&gt;IDA</h2><p>　　　　　IDA这个不用多说，用了很久了比较熟悉，</p>
+<h3 id="0x03-01-gt-IDA6-8不能自动加载符号表的问题"><a href="#0x03-01-gt-IDA6-8不能自动加载符号表的问题" class="headerlink" title="　　0x03-01-&gt;IDA6.8不能自动加载符号表的问题"></a>　　0x03-01-&gt;IDA6.8不能自动加载符号表的问题</h3><p>　　　　　我百度到如下解决方法<br><br><br>　　　　　　　　　　原帖地址</p>
+<blockquote>
+<p><a href="http://www.cnblogs.com/Lnju/articles/5115370.html" target="_blank" rel="external">http://www.cnblogs.com/Lnju/articles/5115370.html</a></p>
+</blockquote>
+<p>修改ida安装目录下的pdb.cfg文件。<br><br><figure class="highlight"><table><tr><td class="code"><pre><div class="line">// PDB plugin</div><div class="line"></div><div class="line">#ifdef __PC__                           // INTEL 80x86 PROCESSORS</div><div class="line">//</div><div class="line">// The downloaded symbols are stored in the specified directory.</div><div class="line">// Microsoft's public symbol store is used for downloading the symbols.</div><div class="line">//</div><div class="line">// If this option is omitted or empty  - use _NT_SYMBOL_PATH if set, otherwise use %TEMP%\ida directory</div><div class="line">// If the value is not empty           - use it</div><div class="line"></div><div class="line">//PDBSYM_DOWNLOAD_PATH    = "c:\\symbols";</div><div class="line"></div><div class="line">// Full symbol path (in _NT_SYMBOL_PATH format)</div><div class="line">// If set, PDBSYM_DOWNLOAD_PATH and _NT_SYMBOL_PATH are ignored</div><div class="line">PDBSYM_SYMPATH =</div><div class="line">//把下面这行的注释去掉，改成自己的本地符号路径就好了</div><div class="line">"SRV*e:\\sym*http://symbols.mozilla.org/firefox;SRV*c:\\symbols*http://msdl.microsoft.com/download/symbols";</div><div class="line"></div><div class="line">// remote server where win32_remote.exe is running</div><div class="line">// used when loading PDB symbols on non-Windows platforms</div><div class="line">// NB: it will be used only if there is not already an existing debugging session started</div><div class="line">PDB_REMOTE_SERVER = "localhost";</div><div class="line">PDB_REMOTE_PORT   = 23946</div><div class="line">// password for the remote server</div><div class="line">PDB_REMOTE_PASSWD = "";</div><div class="line"></div><div class="line">#endif</div></pre></td></tr></table></figure><br></p>
+<h3 id="0x03-02-gt-IDA-遇上ASLR-怎么动静结合问题"><a href="#0x03-02-gt-IDA-遇上ASLR-怎么动静结合问题" class="headerlink" title="　　0x03-02-&gt;IDA 遇上ASLR 怎么动静结合问题"></a>　　0x03-02-&gt;IDA 遇上ASLR 怎么动静结合问题</h3><p>　　　　　IDA加载文件的时候选Manualload打勾.然后手动指定imagebase你可以看下你动态载入后的IMAGEBASE是多少先.然后把IDA的手工指定基址到中动态的那个基址。</p>
+<h2 id="0x04-gt-Exploit"><a href="#0x04-gt-Exploit" class="headerlink" title="　0x04-&gt;Exploit"></a>　0x04-&gt;Exploit</h2><p>　　　　　这个还需经历，下一个月的总结吧</p>
+<p>(╭￣3￣)╭♡<br><br>(╭￣3￣)╭♡<br><br>(╭￣3￣)╭♡<br></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[全国网安高校联赛2016两道linux逆向的writeup]]></title>
       <url>http://yan-1-20.github.io/2016/10/03/2016/8/29/</url>
       <content type="html"><![CDATA[<h1 id="全国网安高校联赛2016两道linux逆向的writeup"><a href="#全国网安高校联赛2016两道linux逆向的writeup" class="headerlink" title="全国网安高校联赛2016两道linux逆向的writeup"></a>全国网安高校联赛2016两道linux逆向的writeup</h1><p>　　忏愧一下午就憋出了两道题<br><br>　　一道320分的　babyfuscator<br><br>　　一道192分的　indirect<br><br>　　这两道题indirect好像题目有问题最后加减i的时候位置反了，然后都没什么问题，babyfuscator是道体力活，indirect是道底层大题。<br><br>　　链接如下：<br><br>　　babyfuscator 　链接：<a href="http://pan.baidu.com/s/1i48aQ37" target="_blank" rel="external">http://pan.baidu.com/s/1i48aQ37</a> 密码：xiht<br><br>　　indirect　　　　链接：<a href="http://pan.baidu.com/s/1c131qKw" target="_blank" rel="external">http://pan.baidu.com/s/1c131qKw</a> 密码：q3br</p>
