@@ -17,8 +17,17 @@
 </blockquote>
 <p>修改ida安装目录下的pdb.cfg文件。<br><br><figure class="highlight"><table><tr><td class="code"><pre><div class="line">// PDB plugin</div><div class="line"></div><div class="line">#ifdef __PC__                           // INTEL 80x86 PROCESSORS</div><div class="line">//</div><div class="line">// The downloaded symbols are stored in the specified directory.</div><div class="line">// Microsoft's public symbol store is used for downloading the symbols.</div><div class="line">//</div><div class="line">// If this option is omitted or empty  - use _NT_SYMBOL_PATH if set, otherwise use %TEMP%\ida directory</div><div class="line">// If the value is not empty           - use it</div><div class="line"></div><div class="line">//PDBSYM_DOWNLOAD_PATH    = "c:\\symbols";</div><div class="line"></div><div class="line">// Full symbol path (in _NT_SYMBOL_PATH format)</div><div class="line">// If set, PDBSYM_DOWNLOAD_PATH and _NT_SYMBOL_PATH are ignored</div><div class="line">PDBSYM_SYMPATH =</div><div class="line">//把下面这行的注释去掉，改成自己的本地符号路径就好了</div><div class="line">"SRV*e:\\sym*http://symbols.mozilla.org/firefox;SRV*c:\\symbols*http://msdl.microsoft.com/download/symbols";</div><div class="line"></div><div class="line">// remote server where win32_remote.exe is running</div><div class="line">// used when loading PDB symbols on non-Windows platforms</div><div class="line">// NB: it will be used only if there is not already an existing debugging session started</div><div class="line">PDB_REMOTE_SERVER = "localhost";</div><div class="line">PDB_REMOTE_PORT   = 23946</div><div class="line">// password for the remote server</div><div class="line">PDB_REMOTE_PASSWD = "";</div><div class="line"></div><div class="line">#endif</div></pre></td></tr></table></figure><br></p>
 <h3 id="0x03-02-gt-IDA-遇上ASLR-怎么动静结合问题"><a href="#0x03-02-gt-IDA-遇上ASLR-怎么动静结合问题" class="headerlink" title="　　0x03-02-&gt;IDA 遇上ASLR 怎么动静结合问题"></a>　　0x03-02-&gt;IDA 遇上ASLR 怎么动静结合问题</h3><p>　　　　　IDA加载文件的时候选Manualload打勾.然后手动指定imagebase你可以看下你动态载入后的IMAGEBASE是多少先.然后把IDA的手工指定基址到中动态的那个基址。</p>
-<h2 id="0x04-gt-Exploit"><a href="#0x04-gt-Exploit" class="headerlink" title="　0x04-&gt;Exploit"></a>　0x04-&gt;Exploit</h2><p>　　　　　这个还需经历，下一个月的总结吧</p>
+<h2 id="0x04-gt-Exploit"><a href="#0x04-gt-Exploit" class="headerlink" title="　0x04-&gt;Exploit"></a>　0x04-&gt;Exploit</h2><p>　　　　　这个月复现的cve,只有buffoverflow，Heap，都是溢出覆盖型基本利用手法就是<br><br>　　　　　1.找到溢出点，（heap，用gflag开堆页）<br><br>　　　　　2.查看模块的保护，找未开保护的模块，跳到其中去执行想要的gadget(确实不一定绕过DEP才用这种手法，很多情况都可以使用rop,比如自己构造对象,修改其虚函数，)<br>　　　　　3.由审计反汇编代码，查看是否有检查（输入数据）的地方，绕过其检查，保证程序正确执行<br>　　　　　4.由上面三步收集的信息,构造exploit</p>
 <p>(╭￣3￣)╭♡<br><br>(╭￣3￣)╭♡<br><br>(╭￣3￣)╭♡<br></p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[windbg 中使用kb和ub命令查看函数调用层次关系]]></title>
+      <url>http://yan-1-20.github.io/2016/10/07/2016/10/7/</url>
+      <content type="html"><![CDATA[<h1 id="kb-ub命令的作用"><a href="#kb-ub命令的作用" class="headerlink" title="kb,ub命令的作用"></a>kb,ub命令的作用</h1><p>  　　　　kb 显示传递给堆栈回溯中的每个函数的前三个参数<br><br>  　　　　ub 向前反汇编<br></p>
+<h1 id="列子"><a href="#列子" class="headerlink" title="列子"></a>列子</h1><p><img src="/image/2016/10/07/2016-10-07-01.png" alt=""><br>　　　　　如图异常在30ed442c 这个地址，重新加载windbg，在这个地址下断<br><br>　　　　　断下来后，我们执行kb命令<br></p>
+<p><img src="/image/2016/10/07/2016-10-07-02.png" alt=""><br>　　　　　mso!Ordinal1246+0x16b0表示当前指令的地址，则下面的表示调用当前指令<br><br>　　　　　的所在函数的<br>　　　　　对mso!Ordinal1273+0x2581执行我们的ub命令得到如下图<br><img src="/image/2016/10/07/2016-10-07-03.png" alt=""><br>　　　　　为什么是ub，相信你看了?  30f0b566 +5就明白了，所以这个<br><br>　　　　　mso!Ordinal1273+0x25d8(30f0b5c2)就是我们的调用当前函数的函数<br><br>　　　　　在这个30f0b5c2 下断点在次重新加载windbg<br><br><img src="/image/2016/10/07/2016-10-07-03.png" alt=""><br>　　　　　单步跟进，我们会看见这个call，这个call的地址，</p>
 ]]></content>
     </entry>
     
