@@ -4,9 +4,11 @@
   
     
     <entry>
-      <title></title>
+      <title><![CDATA[CVE-2012-003]]></title>
       <url>http://yan-1-20.github.io/2016/11/13/2016/11/13/</url>
-      <content type="html"></content>
+      <content type="html"><![CDATA[<h1 id="CVE-2012-003-Microsoft-Winodws-Media-Player-Wimm-dll-Heap-Overflow"><a href="#CVE-2012-003-Microsoft-Winodws-Media-Player-Wimm-dll-Heap-Overflow" class="headerlink" title="CVE-2012-003 Microsoft Winodws Media Player Wimm.dll Heap Overflow"></a>CVE-2012-003 Microsoft Winodws Media Player Wimm.dll Heap Overflow</h1><h2 id="0x1-序"><a href="#0x1-序" class="headerlink" title="0x1 序"></a>0x1 序</h2><p>　　　　因为这个CVE是跟着泉哥的书复现学习的，所以具体的细节我就不多说，本来就按这泉哥的思路走的，也没必要把他的操作模仿一次。我只想记录我自己对这个CVE的体会。肯定有错的理解，希望以后能改正。</p>
+<h2 id="0x2-Exploit"><a href="#0x2-Exploit" class="headerlink" title="0x2 Exploit"></a>0x2 Exploit</h2><p>　　　　这个CVE相信看了泉哥的那份分析，都清楚溢出点（其实这个Exploit也不能说是靠溢出）的原因，就是对事件0x90的控制没对，导致了后面代码没有跳转继续向下执行，而跳转之下的代码，是对内存有一个操作。<br><figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">INC AL</div><div class="line">MOV BYTE PTR <span class="symbol">DS:</span>[ESI],AL</div></pre></td></tr></table></figure><br>太厉害了，仅仅靠这一个操作，就能构造出一个Exploit，一开始的poc会导致崩溃，崩溃的原因是对分配较小的堆空间，进行了越界操作，开了页堆后触发异常导致崩溃。而这个利用却是这样的，直接堆喷射，然后释放，堆有一个机制，分配出去的空间，在被释放后，再次请求alloc，得到地址没有特殊情况很可能，就是上面说的释放的地址。里面的数据并没有清除。之后进行poc越界操作（包括请求alloc,这时候就可能得到我们上面说那种情况，得到了一个我们故意释放的地址），但是由于堆喷射，这个地址变的可以访问，就可以对我们故意放在这个地址的数据进行一个自增操作。而我们构造的堆喷射在这个个地址的数据，就是jscript的类型定义值，我们这里让其属性值（8对应的string，这个对象在poc是被赋值了的，这个值在对象为string时对应着字符串数据，在对象为object时，为虚表指针）加1，变成objec类型，在poc里有一个循环检查这个对象是否变成了Object类型，如果是就调用它的一个方法，这个方法正是虚方法，是的我们已经控制了虚表指针，这个虚方法也就是我们说是哪里就是哪里了。</p>
+]]></content>
     </entry>
     
     <entry>
