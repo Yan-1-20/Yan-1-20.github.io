@@ -4,6 +4,14 @@
   
     
     <entry>
+      <title><![CDATA[旧年辞，新年逢]]></title>
+      <url>http://yan-1-20.github.io/2016/12/31/2016/12/31/</url>
+      <content type="html"><![CDATA[<h1 id="旧年辞，新年逢"><a href="#旧年辞，新年逢" class="headerlink" title="旧年辞，新年逢"></a>旧年辞，新年逢</h1><h2 id="0x01-gt-2016的总结"><a href="#0x01-gt-2016的总结" class="headerlink" title="0x01-&gt;2016的总结"></a>0x01-&gt;2016的总结</h2><p>　　　对于2016年，对我自己来说是变化的一年，无论是思想上的提升，还是有关二进制逆向的提升（-…#）以前的迷茫疑惑彻底没有了，只有脚下这片该走的路。上半年学了半年安卓开发和逆向，下半年开始学windows的CVE复现，刚好泉哥的书又在暑假的时候出版了，可谓下半年是顺风顺水，这种学习的状态一直持续到11月左右，11月到12月这段时间我给自己放了1个月的假，这个一个月我不在是埋头苦干，而是在玩，是的，在玩，我因为自己个人的原因，在初中时期有巨大的网瘾，导致了高中的时候（我一生中最重要的阶段）我失去了很多了，我高中毕业后我开始讨厌游戏，因为它我失去了很多。<br><br>　　　那为什么我又要开始玩游戏，首先我不是主动为了游戏去玩游戏，因为我发现，这个时代的年轻已经不像老一辈大多数都有烟瘾，习惯用烟来搭讪用上根烟来拉近关系，他们用的是游戏，虽然游戏害人不假，但是现在是大势所趋，需要用游戏来拉近下和人的关系。<br>　　　同时在这个1个月我也在思考，自己的方式到底正不正确，是不是走在了我自己想走的路上，我惊讶的发现我其实已经越走越远。</p>
+<h2 id="0x02-gt-2017的展望"><a href="#0x02-gt-2017的展望" class="headerlink" title="0x02-&gt;2017的展望"></a>0x02-&gt;2017的展望</h2><p>　　　辛亏有了16年年末这放松的一个月，我可以独立的思考，而不是全身心的投入学习，让我对现状有了一个更加清晰的认识。我想我该走的路，越来越清晰了，新年真好啊。<br>　　　转眼已经是第四个年头了，离大学毕业的第5个年头只剩下一年了，只能无力的说句加油！<br>                <br>　　　　　　　　　　　　　　　(+…#)<br><br>　　　<img src="/image/2016-12-31-1.jpg" alt=""><br>      <br></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[CVE-2012-003]]></title>
       <url>http://yan-1-20.github.io/2016/11/13/2016/11/13/</url>
       <content type="html"><![CDATA[<h1 id="CVE-2012-003-Microsoft-Winodws-Media-Player-Wimm-dll-Heap-Overflow"><a href="#CVE-2012-003-Microsoft-Winodws-Media-Player-Wimm-dll-Heap-Overflow" class="headerlink" title="CVE-2012-003 Microsoft Winodws Media Player Wimm.dll Heap Overflow"></a>CVE-2012-003 Microsoft Winodws Media Player Wimm.dll Heap Overflow</h1><h2 id="0x1-序"><a href="#0x1-序" class="headerlink" title="0x1 序"></a>0x1 序</h2><p>　　　　因为这个CVE是跟着泉哥的书复现学习的，所以具体的细节我就不多说，本来就按这泉哥的思路走的，也没必要把他的操作模仿一次。我只想记录我自己对这个CVE的体会。肯定有错的理解，希望以后能改正。</p>
