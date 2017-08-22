@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="61616161616">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="//raw.githubusercontent.com/Yan-1-20/blogimage/52b4712ca778cb89f14783abdb64f6403c45dfce/2.jpg">
+    <link rel="alternate" type="application/atom+xml" title="Yan_1_20" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        CVE-2017-7269：IIS6.0远程代码执行漏洞逆向分析记录｜Yan_1_20 blog
+        
+    </title>
+
+    <link rel="canonical" href="http://yan-1-20.github.io/2017/03/30/2017/03/30/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//github.com/Yan-1-20/blogimage/blob/master/18.jpg?raw=true')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Yan_1_20
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+                        
+                        <li>
+                            <a href="/about/">about</a>
+                        </li>
+                        
+                    
+                        
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+                        
+                    
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="//raw.githubusercontent.com/Yan-1-20/blogimage/52b4712ca778cb89f14783abdb64f6403c45dfce/4.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('//raw.githubusercontent.com/Yan-1-20/blogimage/52b4712ca778cb89f14783abdb64f6403c45dfce/4.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>CVE-2017-7269：IIS6.0远程代码执行漏洞逆向分析记录</h1>
+                    
+                    <span class="meta">
+                         作者 Yan_1_20
+                        <span>
+                          日期 2017/03/30
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#Binary"
+                           title="Binary">Binary</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            CVE-2017-7269：IIS6.0远程代码执行漏洞逆向分析记录
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="前言以及准备工作"><a href="#前言以及准备工作" class="headerlink" title="前言以及准备工作"></a>前言以及准备工作</h2><p>　　关于CVE-2017-7269,网上的大神们的分析的都很有高度，我做为一个小白，拿着这种给了exp的漏洞，我没有想太多，直接windbg和IDA动静结合，调试进行分析，不过，这样可能造成分析有些片面，毕竟是纯逆向进行分析。<br>好了，首先说说。<br>环境Windows Server 2003R2 上开启WebDAV服务的IIS6.0。<br>工具 Windbg,IDA<br>接着修改网上的EXP代码我们现在不需要完美执行这个EXP,我们需要它崩溃，所以去掉作者添加的shellcode,只保留EXP部分，如下图。<br><img src="/image/2017/03/30/2017-03-30-1.png" alt=""></p>
+<p>现在进行调试，Windbg直接附加进程，上网查了查IIS的进程名称为W3WP.EXE,好的附加，然后g跑起来。接着把修改后的EXP运行。好了，如下图所示，它崩溃了。<br><img src="/image/2017/03/30/2017-03-30-2.png" alt=""><br>退出Windbg，再次附加W3WP.EXE的时候，发现已经找不到这个进程了，这是IIS应用池机制的问题，解决办法有两个<br>[1]备份虚拟机镜像<br>[2]在IIS信息服务管理器里面把网站下的任意网站右键浏览一下，W3WP.EXE就会重新启动</p>
+<p>接着进行调试,这个漏洞作者是给了漏洞函数的ScStoragePathFromUrl。使用IDA静态分析吧，那么dll是那个呢，作者并没写明dll名称，但是在IIS信息服务管理器开启WebDAV服务的时候可以知道，如下图。Dll名称为httpext.dll<br><img src="/image/2017/03/30/2017-03-30-3.png" alt=""></p>
+<p>我们直接把这个dll,放入IDA,加载其符号表。然后CTRL+P 查找函数，输入函数名ScStoragePathFromUrl。双击进行进行分析。<br><img src="/image/2017/03/30/2017-03-30-4.png" alt=""></p>
+<p>其中很有趣地方里面有明显的内存拷贝，而且有if判断，那么是简单的栈溢出吗？<br><img src="/image/2017/03/30/2017-03-30-5.png" alt=""></p>
+<p>If判断地址<br><img src="/image/2017/03/30/2017-03-30-6.png" alt=""></p>
+<h2 id="漏洞原理攻击分析"><a href="#漏洞原理攻击分析" class="headerlink" title="漏洞原理攻击分析"></a>漏洞原理攻击分析</h2><p>我们继续进行动态调试，知道了dll的名称，我们先用sxe ld:httpext下加载dll时的断点。<br>通过IDA知道了ScStoragePathFromUrl这个函数的retn地址为0x673F702C,那我们直接在这个地址下断点，看看每次执行完这个函数时候栈返回地址是否被覆盖，但是不幸的是我尝试几次，返回地址没有被明显的直接覆盖，最后都会以崩溃掉。<br><img src="/image/2017/03/30/2017-03-30-7.png" alt=""><br>好像直接观察堆栈并不能看出什么来，换个思路，完全从逆向的角度分析，先不断下断点定位崩溃函数，看函数崩溃的原因是什么。进过几次的断点后，定位到了ScStoragePathFromUrl内部的一个函数ScStripAndCheckHttpPrefix，这个函数代码如下。<br><img src="/image/2017/03/30/2017-03-30-8.png" alt=""><br>没有错，这个函数调用了虚函数，那么这个洞是简单的堆溢出吗？<br>再次进行调试，这次进行大量的逆向数据记录，希望从数据的变化中分析出这个洞的成因到底是什么。<br>首先我们要确定一下我们的要关注的数据什么？(地址通过IDA得到)<br>[1]内存拷贝 代码地址 0x673F6F99<br>[2] 判断是否进行数据拷贝的代码地址 代码地址 0x673F6F55<br>于是windbg下断点，执行情况如下<br><img src="/image/2017/03/30/2017-03-30-9.png" alt=""><br>可以发现这个数据拷贝并不会每次进入ScStoragePathFromUrl函数都会进行拷贝，而且拷贝次数只有3次，分别是第二调用ScStoragePathFromUrl函数，第三调用ScStoragePathFromUrl函数，第五调用ScStoragePathFromUrl函数（其实没进行拷贝的调用也很重要），好吧，既然拷贝了三次数据，那么就下断点进行查看到底拷贝了什么数据，对堆栈进行了什么的影响吧。</p>
+<p>　　再进入windbg,只对内存拷贝进行下断点，并且每次跟完全部的拷贝，<br>第一次拷贝的结果如下（代码太多，不全部展示）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">.text:673F6F99                 mov     edi, [ebp-450]</div><div class="line">//ebp=0130f798  ebp-450h=0130f348 [ebp-450h]=0130f804  edi=0130f804</div><div class="line">.text:673F6F9F                 lea     eax, [esi+esi]</div><div class="line">// esi=00000012 eax=00000024</div><div class="line">.text:673F6FA2                 mov     ecx, eax       //ecx=00000024</div><div class="line">.text:673F6FA4                 mov     edx, ecx       //edx=00000024</div><div class="line">.text:673F6FA6                 shr     ecx, 2         //ecx=00000009</div><div class="line">.text:673F6FA9                 lea     esi, [ebp-43C]  </div><div class="line">//ebp-43Ch=0130f35c  esi=0130f35ch</div><div class="line">.text:673F6FAF                 rep movsd             </div><div class="line">.text:673F6FAF     ; *                                  </div><div class="line">.text:673F6FAF     ; * rep mov [edi],[esi] edi=0130f804  esi=0130f35c    ebp=0130f798</div><div class="line">.text:673F6FAF     ; * ecx 的次数为9</div><div class="line">.text:673F6FAF     ;   结束时edi=0130f828  esi=0130f380  </div><div class="line">.text:673F6FAF                                         ; /</div><div class="line">.text:673F6FB1                 mov     ecx, edx    		</div><div class="line">//edx=24h ecx=24h</div><div class="line">.text:673F6FB3                 mov     edx, [ebp-22Ch]</div><div class="line">//ebp= 0130f798    ebp-22Ch=0130f56c  edx=[0130f56c]=0</div><div class="line">.text:673F6FB9                 and     ecx, 3 			//ecx=0</div><div class="line">.text:673F6FBC                 rep movsb               ; /</div><div class="line">.text:673F6FBC                                         ; *</div><div class="line">.text:673F6FBC                                         ; *ecx=0 没有拷贝</div><div class="line">.text:673F6FBC                                         ; *</div><div class="line">.text:673F6FBC                                         ; /</div><div class="line">.text:673F6FBE                 mov     esi, [ebp-444h]</div><div class="line">// ebp-444h=0130f354    [ebp-444h]=0067cd38 esi=0067cd38</div><div class="line">.text:673F6FC4                 sub     ebx, edx        </div><div class="line"> //ebx=00000097h  edx=00000000h  ebx=00000097h</div><div class="line">.text:673F6FC6                 lea     esi, [esi+edx*2] //esi=0067cd38</div><div class="line">.text:673F6FC9                 mov     edx, [ebp-450h]  </div><div class="line">//ebp-450h=0130f34</div><div class="line">//edx=0130f804</div><div class="line">//[ebp-450h]=0130f804</div><div class="line">.text:673F6FCF                 lea     edi, [eax+edx]   </div><div class="line">//eax=24h  edx=0130f804  eax+edx=0130f828</div><div class="line">/</div><div class="line">*</div><div class="line">*注意这个eax+edx地址就是我们上面拷贝的edi结束数据地址</div><div class="line">*所以edi=edi原来的结束地址</div><div class="line">/</div><div class="line">.text:673F6FD2                 lea     ecx, [ebx+ebx+2] //ecx=00000130h</div><div class="line">.text:673F6FD6                 mov     eax, ecx   //eax=00000130h</div><div class="line">.text:673F6FD8                 shr     ecx, 2     //ecx=0000004ch</div><div class="line">.text:673F6FDB                 rep movsd               </div><div class="line">; /esi=0067cd38h edi=0130f828</div><div class="line">.text:673F6FDB             ; *</div><div class="line">.text:673F6FDB             ; *</div><div class="line">.text:673F6FDB             ; *</div><div class="line">.text:673F6FDB             ; *拷贝前ecx=4c edi=0130f828 esi=0067cd38</div><div class="line">.text:673F6FDB             ; *拷贝后edi=0130f958=ebp+1C0h</div><div class="line">.text:673F6FDB                                         ; *esi=0067ce68</div><div class="line">.text:673F6FDB                                         ; /</div><div class="line">.text:673F6FDD                 mov     ecx, eax</div><div class="line">.text:673F6FDF                 and     ecx, 3</div><div class="line">.text:673F6FE2                 rep movsb               ; /</div><div class="line">.text:673F6FE2                                         ; *</div><div class="line">.text:673F6FE2                                         ; *ecx=0 拷贝没有执行</div><div class="line">.text:673F6FE2    </div><div class="line">                                     ; /</div></pre></td></tr></table></figure>
+<p>第一次拷贝的数据范围<br><code>edi 0130f804~0130f958</code></p>
+<p>（第二次和第三次执行的时候edi的地址会大改，但是篇幅的原因，不能全部展示）<br>现在讲讲通过上面的代码再结合IDA，Windbg，我自己找到数据关系。<br>一共三次大内存拷贝，每次进行一次大内存拷贝时，有4次小拷贝，其中有两次不会拷贝，而另外进行拷贝的两次的地址edi是连续的，而esi是不连续的。<br>Edi的地址如果在某次大拷贝的时候变成一个对象的地址，然后进行拷贝，是不是就可以利用了呢？原作者也确实这么做了。<br>三次大内存拷贝的edi的地址变化范围如下：</p>
+<blockquote>
+<p><code>第一次拷贝的数据edi：0x0130f804~0x0130f958</code><br><code>第二次拷贝的数据edi：0x680312c0~0x68031464</code><br><code>第三次拷贝的数据edi：0x0130fab4~0x0130fc08</code></p>
+</blockquote>
+<p>通过数据好像看起来第一次和第三次好像是栈溢出。第二次是堆溢出<br>但是edi,esi的值是怎么被修改的，edi的值来自哪里？Esi的值来自哪里，这个问题需要弄明白。<br>通过IDA，和windbg,我找到了这些代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">edi 值来源[ebp-450]     .text:673F6F99                 mov     edi, [ebp-450]</div><div class="line">[ebp-450] 来源eax      .text:673F6C9B                 mov     [ebp-450], eax</div><div class="line">eax 来源 [ebp+8]        .text:673F6C93               mov   eax,dword ptr [ebp+8]</div><div class="line">/</div><div class="line">*</div><div class="line">*前两次的ebp没有变化都是0130f798</div><div class="line">*所以ebp+8地址不变0130f7a0</div><div class="line">/</div></pre></td></tr></table></figure>
+<p>通过看上面的第一次拷贝的范围可以知道，第二次开始的edi(堆地址)的来源地址0130f7a0，它并没有在第一次拷贝的范围内，但是这个地址就不能通过别的方法修改吗？<br>通过继续跟踪函数我找到了这条指令<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">eax=0130f800 ebx=0067b508 ecx=00675740 edx=0067ce78 esi=00000000 edi=77ba8ef2</div><div class="line">eip=673e9461 esp=0130f7a4 ebp=0130f7ac iopl=0         nv up ei pl nz na po nc</div><div class="line">cs=001b  ss=0023  ds=0023  es=0023  fs=003b  gs=0000             efl=00000202</div><div class="line">httpext!CMethUtil::ScStoragePathFromUrl+0x10:</div><div class="line">673e9461 ff750c          push    dword ptr [ebp+0Ch]  ss:0023:0130f7b8=680312c0</div></pre></td></tr></table></figure></p>
+<p>当前的esp=0130f7a4,push也就是在给0130f7a0赋值</p>
+<p>而ebp+0Ch =0x0130f7b8来自于<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">eax=0067003c ebx=0067b508 ecx=00000000 edx=00000026 esi=0067cb38 edi=680312c0</div><div class="line">eip=673f54df esp=0130f7bc ebp=0130fc34 iopl=0         nv up ei pl zr na pe nc</div><div class="line">cs=001b  ss=0023  ds=0023  es=0023  fs=003b  gs=0000             efl=00000246</div><div class="line">httpext!HrCheckIfHeader+0x1b9:</div><div class="line">673f54df 57              push    edi</div></pre></td></tr></table></figure></p>
+<p>Edi来自于<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">0:007&gt;</div><div class="line">eax=680312be ebx=0067b508 ecx=680312c0 edx=0130f804 esi=00000000 edi=77ba8ef2</div><div class="line">eip=673f54b1 esp=0130f7c0 ebp=0130fc34 iopl=0         nv up ei pl nz ac po nc</div><div class="line">cs=001b  ss=0023  ds=0023  es=0023  fs=003b  gs=0000             efl=00000212</div><div class="line">httpext!HrCheckIfHeader+0x18b:</div><div class="line">673f54b1 8bbdd8fcffff    mov     edi,dword ptr [ebp-328h] ss:0023:0130f90c=680312c0</div></pre></td></tr></table></figure></p>
+<p>跟到了这里原来数据来源是0130f90c，结合第一次拷贝的数据范围edi：0x0130f804~0x0130f958可以知道，这个地址就是拷贝进去的数据。（这里由于篇幅有限只分析，怎么通过第一次拷贝的数据，修改第二次将进行拷贝的edi的值，第二次的拷贝怎么修改第三次的edi值类推）</p>
+<p>那么ESI是什么呢<br>通过几次再内存中的查看<br>[1]第一次拷贝前的esi指向的内存内容<br><img src="/image/2017/03/30/2017-03-30-10.png" alt=""><br>[2]第二次拷贝前的esi指向的内存内容<br><img src="/image/2017/03/30/2017-03-30-11.png" alt=""><br>[3]第三次拷贝前的esi指向的内存内容<br><img src="/image/2017/03/30/2017-03-30-12.png" alt=""><br>可以知道esi的内容就只想我们发送数据的地址。<br>好了，我们现在能知道原作者通过第一次的溢出，使第二次的edi,变成自构造的对象堆地址，进行了第二次堆溢出，那么第三次溢出的作用是什么？<br>第三次拷贝的数据范围edi：0x0130fab4~0x0130fc08<br>下面这条指令是给ecx(this指针)赋值的，此时的ebp-14h=0130fbbc在第三次的溢出范围。而且结合第二次拷贝的数范围据edi：0x680312c0~0x68031464可以知道现在赋值的ecx就是第二次拷贝的起始地址。</p>
+<p>//ecx值来源栈地址 0130f960内容 -&gt;变成680312c0<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">673f578f ff75ec          push    dword ptr [ebp-14h]  ss:0023:0130fbbc=680312c0</div></pre></td></tr></table></figure></p>
+<p>接下来在执行虚函数时ecx已经是构造的exp的地址<br><img src="/image/2017/03/30/2017-03-30-13.png" alt=""><br>进入之后发现虚函数的内容如下<br><img src="/image/2017/03/30/2017-03-30-14.png" alt=""><br>把ecx赋值给esp，retn后，就从对象开始执行，并进行ROP，绕过DEP<br><img src="/image/2017/03/30/2017-03-30-15.png" alt=""></p>
+<h1 id="漏洞成因"><a href="#漏洞成因" class="headerlink" title="漏洞成因"></a>漏洞成因</h1><p>最后拷贝数据的大小从哪里来的？<br>进行每次大拷贝的第二次拷贝的ecx作为循环的次数<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">.text:673F6FD2 ? ? ? ? ? ? ? ? lea ? ? ecx, [ebx+ebx+2]</div><div class="line">.text:673F6FD6 ? ? ? ? ? ? ? ? mov ? ? eax, ecx ? //eax=00000130h</div><div class="line">.text:673F6FD8 ? ? ? ? ? ? ? ? shr ? ? ecx, 2 ? ? //ecx=0000004ch</div><div class="line">.text:673F6FDB ? ? ? ? ? ? ? ? rep movsd ? ? ? ? ? ? ? ; /esi=0067cd38h edi=0130f828</div></pre></td></tr></table></figure></p>
+<p>而ecx的值的来自于ebx（edx总为0）<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">.text:673F6FC4 ? ? ? ? ? ? ? ? sub ? ? ebx, edx</div></pre></td></tr></table></figure></p>
+<p>ebx来自eax<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">.text:673F6CF0 ? ? ? ? ? ? ? ? mov ? ? ebx, eax</div></pre></td></tr></table></figure></p>
+<p>eax来自 <code>ds:__imp__wcslen</code>返回值<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">;str 也就是我们每次大拷贝的第二次拷贝的esi的数据源</div><div class="line">.text:673F6CE8 ? ? ? ? ? ? ? ? push ? ?eax ? ? ? ? ? ? ; Str</div><div class="line">.text:673F6CE9 ? ? ? ? ? ? ? ? call ? ?ds:__imp__wcsle</div></pre></td></tr></table></figure></p>
+<p>所以可以看出它是以数据的大小作为我们拷贝数据的大小，并没有拷贝大小限制，导致溢出。</p>
+<p>ps:分析了半天，如果说，它为什么了去了shellcode就会崩，其实崩的地址就是第二次拷贝的数据末尾+0x4,崩的原因是当执行到的第二次拷贝的数据末尾+0x4地址时，它的内容为0x0000，这个硬编码对应汇编代码</p>
+<p><code>add byte ptr [eax],al</code><br>因为eax的值指向地址无效，所以崩溃。<br>其实这个位置本来该是shellcode的起始地址(执行到这里已经关闭DEP可以顺利执行数据代码了)，，因为我们去掉了shellcode,并没有任何数据，以地址访问异常导致崩溃。</p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/12/31/2016/12/31/" data-toggle="tooltip" data-placement="top"
+                           title="旧年辞，新年逢">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言以及准备工作"><span class="toc-text">前言以及准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞原理攻击分析"><span class="toc-text">漏洞原理攻击分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#漏洞成因"><span class="toc-text">漏洞成因</span></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Binary"
+                           title="Binary">Binary</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="http://over-rainbow.cn">Gay_hxs</a></li>
+                        
+                        <li><a href="http://a2ir.github.io/">A2ir</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/6016118396">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/yan-1-20">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Yan_1_20 2017
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">当前访问量: <span id="busuanzi_value_site_pv"></span> 次</span>
+                    <br>
+                    Theme by <a href="https://yan-1-20.github.io/">Yan_1_20</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yan-1-20.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '931bf86e308ff2ebfdee39ebcc954723';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="//avatars3.githubusercontent.com/u/19972411?v=3&amp;s=466">
+</body>
+
+</html>
