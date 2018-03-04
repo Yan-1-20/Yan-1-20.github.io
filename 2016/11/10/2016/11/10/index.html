@@ -1,389 +1,258 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
+<html lang="z">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="61616161616">
-    <meta name="keyword" content="null">
-    <meta name="theme-color" content="#600090">
-    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>C#实现SHA-256--光棍节前的代码 | Yan_1_20</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
-    <link rel="shortcut icon" href="//raw.githubusercontent.com/Yan-1-20/blogimage/52b4712ca778cb89f14783abdb64f6403c45dfce/2.jpg">
-    <link rel="alternate" type="application/atom+xml" title="Yan_1_20" href="/atom.xml">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
-    <title>
-        
-        C#实现SHA-256--光棍节前的代码｜Yan_1_20 blog
-        
-    </title>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <link rel="canonical" href="http://yan-1-20.github.io/2016/11/10/2016/11/10/">
+    <meta name="description" content="0x01莫名其妙的学校作业　　　　这个代码，并不是本人想写的，是的，莫名其妙的作业，类似于小毕业设计的东西。。。。代码写完还有3000字的报告。。。。。。莫名奇妙。
+0x02代码实现　　　　这个加密算法，我当时想的简单，不就是SHA-256嘛，网上代码肯定一大堆，我随便一搜一份就行，悲伤那么大，网上的全身调用库函数实现的，唯一一篇可以参考的c语言实现的，莫名的他下标访问越界的不是一点半点，直接用负">
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="C#实现SHA-256--光棍节前的代码 | Yan_1_20">
+    <meta name="twitter:description" content="0x01莫名其妙的学校作业　　　　这个代码，并不是本人想写的，是的，莫名其妙的作业，类似于小毕业设计的东西。。。。代码写完还有3000字的报告。。。。。。莫名奇妙。
+0x02代码实现　　　　这个加密算法，我当时想的简单，不就是SHA-256嘛，网上代码肯定一大堆，我随便一搜一份就行，悲伤那么大，网上的全身调用库函数实现的，唯一一篇可以参考的c语言实现的，莫名的他下标访问越界的不是一点半点，直接用负">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="C#实现SHA-256--光棍节前的代码 | Yan_1_20">
+    <meta property="og:description" content="0x01莫名其妙的学校作业　　　　这个代码，并不是本人想写的，是的，莫名其妙的作业，类似于小毕业设计的东西。。。。代码写完还有3000字的报告。。。。。。莫名奇妙。
+0x02代码实现　　　　这个加密算法，我当时想的简单，不就是SHA-256嘛，网上代码肯定一大堆，我随便一搜一份就行，悲伤那么大，网上的全身调用库函数实现的，唯一一篇可以参考的c语言实现的，莫名的他下标访问越界的不是一点半点，直接用负">
 
-    <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
+    
+    <meta name="author" content="Yan_1_20">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+    <link rel="icon" href="source/images/avatar-small.png">
+    
+
+    <meta name="generator" content="hexo"/>
+    
+
+    <link rel="canonical" href="http://yan-1-20.github.io/2016/11/10/2016/11/10/"/>
+
+                 
 </head>
 
-<style>
+<body class="home-template no-js">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
 
-    header.intro-header {
-        background-image: url('//img0.imgtn.bdimg.com/it/u=4116728863,3430230981&amp;fm=21&amp;gp=0.jpg')
-    }
-</style>
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="" class="animated fadeIn">
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
-" data-ishome = "false" >
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand animated pulse" href="/">
-                <span class="brand-logo">
-                    Yan_1_20
-                </span>
-                's Blog
-            </a>
-        </div>
+    
+<header class="panel-cover panel-cover--collapsed">
+  
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <!-- /.navbar-collapse -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
 
-                    
-                        
-                        <li>
-                            <a href="/tags/">tags</a>
-                        </li>
-                        
-                    
-                        
-                        <li>
-                            <a href="/about/">about</a>
-                        </li>
-                        
-                    
 
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- /.container -->
+        <a href="/" title="前往 Yan_1_20 的主页"><img src="/image/avatar.jpg" width="80" alt="Yan_1_20 logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for Yan_1_20">Yan_1_20</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">雁渡寒潭</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description"></p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="访问博客" class="blog-button">文章</a></li>
+            
+              <li class="navigation__item"><a href="/about">关于我</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/monniya" title="查看我的GitHub主页" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  <li class="navigation__item">
+    <a href="https://twitter.com/onlymonniya" title="上Twitter找我" target="_blank">
+      <i class='social fa fa-twitter'></i>
+      <span class="label">Twitter</span>
+    </a>
+  </li>
+
+  
+
+
+
+  </ul>
 </nav>
-<script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-//    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-</script>
-
-<!-- Main Content -->
-
-<!--only post-->
-
-
-<img class="wechat-title-img"
-     src="//raw.githubusercontent.com/Yan-1-20/blogimage/52b4712ca778cb89f14783abdb64f6403c45dfce/4.jpg">
-
-
-<style>
-    
-    header.intro-header {
-        background-image: url('//raw.githubusercontent.com/Yan-1-20/blogimage/52b4712ca778cb89f14783abdb64f6403c45dfce/4.jpg')
-    }
-
-    
-</style>
-
-<header class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <div class="post-heading">
-                    <h1>C#实现SHA-256--光棍节前的代码</h1>
-                    
-                    <span class="meta">
-                         作者 Yan_1_20
-                        <span>
-                          日期 2016-11-10
-                         </span>
-                    </span>
-                    <div class="tags text-center">
-                        
-                        <a class="tag" href="/tags/#Program"
-                           title="Program">Program</a>
-                        
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+
+      </div>
+
     </div>
-    <div class="post-title-haojen">
-        <span>
-            C#实现SHA-256--光棍节前的代码
-        </span>
-    </div>
+
+    <div class="panel-cover--overlay cover-purple"></div>
+  </div>
 </header>
 
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-            <!-- Post Container -->
-            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h1 id="0x01莫名其妙的学校作业"><a href="#0x01莫名其妙的学校作业" class="headerlink" title="0x01莫名其妙的学校作业"></a>0x01莫名其妙的学校作业</h1><p>　　　　这个代码，并不是本人想写的，是的，莫名其妙的作业，类似于小毕业设计的东西。。。。代码写完还有3000字的报告。。。。。。莫名奇妙。</p>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2016-11-09T16:00:00.000Z" class="post-list__meta--date date">2016-11-10</time> &#8226; <span class="post-meta__tags tags">于 
+  <a class="tag-link" href="/tags/Program/">Program</a>
+ </span>
+      <span class="page-pv">
+       阅读 <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span> 
+   
+    </div>
+    <h1 class="post-title">C#实现SHA-256--光棍节前的代码</h1>
+  </header>
+
+  <section class="post">
+    <h1 id="0x01莫名其妙的学校作业"><a href="#0x01莫名其妙的学校作业" class="headerlink" title="0x01莫名其妙的学校作业"></a>0x01莫名其妙的学校作业</h1><p>　　　　这个代码，并不是本人想写的，是的，莫名其妙的作业，类似于小毕业设计的东西。。。。代码写完还有3000字的报告。。。。。。莫名奇妙。</p>
 <h1 id="0x02代码实现"><a href="#0x02代码实现" class="headerlink" title="0x02代码实现"></a>0x02代码实现</h1><p>　　　　这个加密算法，我当时想的简单，不就是SHA-256嘛，网上代码肯定一大堆，我随便一搜一份就行，悲伤那么大，网上的全身调用库函数实现的，唯一一篇可以参考的c语言实现的，莫名的他下标访问越界的不是一点半点，直接用负数索引元素。但是除去访问越界。他的代码是炒鸡牛逼的，50行就实现了整个SHA-256，代码风格及其牛逼（很难读懂）。</p>
 <h1 id="0x03自食其力"><a href="#0x03自食其力" class="headerlink" title="0x03自食其力"></a>0x03自食其力</h1><p>　　　　没办法，找不到代码参考就只能自己写咯，参考密码学标准FIPS180-2</p>
 <blockquote>
 <p><a href="http://wenku.baidu.com/link?url=1VofDnehD0jIFObdvK3wWHklkUVg_hOsOjAurVQjUViee8uHRYknwu70gqD0zQ7I8umfZ6B-4Z5rj-0BTw89CpIo5tB9_fq3Xe6aUmk7bVm" target="_blank" rel="external">http://wenku.baidu.com/link?url=1VofDnehD0jIFObdvK3wWHklkUVg_hOsOjAurVQjUViee8uHRYknwu70gqD0zQ7I8umfZ6B-4Z5rj-0BTw89CpIo5tB9_fq3Xe6aUmk7bVm</a></p>
 </blockquote>
 <p>　　　　下面上代码,一个main,一个类，代码并不简洁，并不规范，（可读性比较高）以后想参考的学弟学妹们有福。大牛就不要嫌弃了</p>
-<p>　　　加密类的实现<br><figure class="highlight java"><table><tr><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">using System;</div><div class="line">using System.Collections.Generic;</div><div class="line">using System.Linq;</div><div class="line">using System.Text;</div><div class="line">using System.Threading.Tasks;</div><div class="line"></div><div class="line">namespace SHA_256</div><div class="line">&#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">encode</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">private</span> uint A, B, C, D, E, F, G, H,T1, T2;</div><div class="line">        <span class="keyword">private</span> uint[] K = <span class="keyword">new</span> uint[<span class="number">64</span>] &#123;</div><div class="line">        <span class="number">0x428a2f98</span>, <span class="number">0x71374491</span>, <span class="number">0xb5c0fbcf</span>, <span class="number">0xe9b5dba5</span>, <span class="number">0x3956c25b</span>, <span class="number">0x59f111f1</span>, <span class="number">0x923f82a4</span>, <span class="number">0xab1c5ed5</span>,</div><div class="line">        <span class="number">0xd807aa98</span>, <span class="number">0x12835b01</span>, <span class="number">0x243185be</span>, <span class="number">0x550c7dc3</span>, <span class="number">0x72be5d74</span>, <span class="number">0x80deb1fe</span>, <span class="number">0x9bdc06a7</span>, <span class="number">0xc19bf174</span>,</div><div class="line">        <span class="number">0xe49b69c1</span>, <span class="number">0xefbe4786</span>, <span class="number">0x0fc19dc6</span>, <span class="number">0x240ca1cc</span>, <span class="number">0x2de92c6f</span>, <span class="number">0x4a7484aa</span>, <span class="number">0x5cb0a9dc</span>, <span class="number">0x76f988da</span>,</div><div class="line">        <span class="number">0x983e5152</span>, <span class="number">0xa831c66d</span>, <span class="number">0xb00327c8</span>, <span class="number">0xbf597fc7</span>, <span class="number">0xc6e00bf3</span>, <span class="number">0xd5a79147</span>, <span class="number">0x06ca6351</span>, <span class="number">0x14292967</span>,</div><div class="line">        <span class="number">0x27b70a85</span>, <span class="number">0x2e1b2138</span>, <span class="number">0x4d2c6dfc</span>, <span class="number">0x53380d13</span>, <span class="number">0x650a7354</span>, <span class="number">0x766a0abb</span>, <span class="number">0x81c2c92e</span>, <span class="number">0x92722c85</span>,</div><div class="line">        <span class="number">0xa2bfe8a1</span>, <span class="number">0xa81a664b</span>, <span class="number">0xc24b8b70</span>, <span class="number">0xc76c51a3</span>, <span class="number">0xd192e819</span>, <span class="number">0xd6990624</span>, <span class="number">0xf40e3585</span>, <span class="number">0x106aa070</span>,</div><div class="line">        <span class="number">0x19a4c116</span>, <span class="number">0x1e376c08</span>, <span class="number">0x2748774c</span>, <span class="number">0x34b0bcb5</span>, <span class="number">0x391c0cb3</span>, <span class="number">0x4ed8aa4a</span>, <span class="number">0x5b9cca4f</span>, <span class="number">0x682e6ff3</span>,</div><div class="line">        <span class="number">0x748f82ee</span>, <span class="number">0x78a5636f</span>, <span class="number">0x84c87814</span>, <span class="number">0x8cc70208</span>, <span class="number">0x90befffa</span>, <span class="number">0xa4506ceb</span>, <span class="number">0xbef9a3f7</span>, <span class="number">0xc67178f2</span>,</div><div class="line">         &#125;;</div><div class="line"></div><div class="line">        uint H0 = <span class="number">0x6a09e667</span>u, H1 = <span class="number">0xbb67ae85</span>u, H2 = <span class="number">0x3c6ef372</span>u, H3 = <span class="number">0xa54ff53a</span>u;</div><div class="line">        uint H4 = <span class="number">0x510e527f</span>u, H5 = <span class="number">0x9b05688c</span>u, H6 = <span class="number">0x1f83d9ab</span>u, H7 = <span class="number">0x5be0cd19</span>u;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">SHA256_ROTL</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123; <span class="keyword">return</span> (((a &gt;&gt; (<span class="number">32</span> - b)) &amp; (<span class="number">0x7fffffff</span> &gt;&gt; (<span class="number">31</span> - b))) | (a &lt;&lt; b)); &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">SHA256_SR</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123; <span class="keyword">return</span> ((a &gt;&gt; b) &amp; (<span class="number">0x7fffffff</span> &gt;&gt; (b - <span class="number">1</span>)));  &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">SHA256_Ch</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> z)</span> </span>&#123; <span class="keyword">return</span> ((x&amp;y)^((~x)&amp;z));  &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">SHA256_Maj</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> z)</span> </span>&#123; <span class="keyword">return</span> ((x&amp;y)^(x&amp;z)^(y&amp;z));  &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">SHA256_E0</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">return</span> (SHA256_ROTL(x, <span class="number">30</span>) ^ SHA256_ROTL(x, <span class="number">19</span>) ^ SHA256_ROTL(x, <span class="number">10</span>)); &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">SHA256_E1</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">return</span> (SHA256_ROTL(x, <span class="number">26</span>) ^ SHA256_ROTL(x, <span class="number">21</span>) ^ SHA256_ROTL(x, <span class="number">7</span>));  &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">SHA256_O0</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">return</span> (SHA256_ROTL(x, <span class="number">25</span>) ^ SHA256_ROTL(x, <span class="number">14</span>) ^ SHA256_SR(x, <span class="number">3</span>));  &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">SHA256_O1</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">return</span> (SHA256_ROTL(x, <span class="number">15</span>) ^ SHA256_ROTL(x, <span class="number">13</span>) ^ SHA256_SR(x, <span class="number">10</span>));      &#125;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">FillDate</span><span class="params">(<span class="keyword">byte</span>[] input, <span class="keyword">int</span> datelength, <span class="keyword">byte</span>[] output,<span class="keyword">int</span> encodenumber)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> zerobit = (<span class="number">448</span> - (datelength * <span class="number">8</span> + <span class="number">1</span>) % <span class="number">512</span>) - <span class="number">7</span>;</div><div class="line">            <span class="keyword">int</span> i,datelengthbitnumber= datelength * <span class="number">8</span>;</div><div class="line">                <span class="keyword">if</span> (zerobit &lt; <span class="number">0</span>)</div><div class="line">                    zerobit = <span class="number">512</span> + zerobit;</div><div class="line">                <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; datelength; i++)</div><div class="line">                &#123;</div><div class="line">                    output[i] = input[i];</div><div class="line">                &#125;</div><div class="line">                output[i++] = (<span class="keyword">byte</span>)<span class="number">128</span>;</div><div class="line">                <span class="keyword">int</span> tmpi = i;</div><div class="line">                <span class="keyword">for</span> (; i &lt; zerobit / <span class="number">8</span>; i++)</div><div class="line">                    output[i] = (<span class="keyword">byte</span>)<span class="number">0</span>;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; ; k++)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> (datelengthbitnumber == <span class="number">0</span>)</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                output[<span class="number">63</span> + <span class="number">64</span> * encodenumber-k] =(<span class="keyword">byte</span>) (datelengthbitnumber &amp; <span class="number">0xFF</span>);</div><div class="line">                datelengthbitnumber &gt;&gt;= <span class="number">8</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">GetMbyte</span><span class="params">(<span class="keyword">byte</span>[] resource,<span class="keyword">byte</span>[] M,<span class="keyword">int</span> number,<span class="keyword">int</span> i)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">64</span>; j++)</div><div class="line">                M[j] = resource[j+i*<span class="number">64</span>];</div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Getmint</span><span class="params">(<span class="keyword">byte</span>[] resource, uint[] M, <span class="keyword">int</span> number)</span></span></div><div class="line">        &#123;</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">16</span>; j++)</div><div class="line">                &#123;</div><div class="line">                    M[ j] = (uint)(resource[ j * <span class="number">4</span>]&lt;&lt;<span class="number">24</span> | resource[j * <span class="number">4</span>+<span class="number">1</span>] &lt;&lt; <span class="number">16</span> |resource[  j * <span class="number">4</span>+<span class="number">2</span>] &lt;&lt; <span class="number">8</span> | resource[ j * <span class="number">4</span>+<span class="number">3</span>]);</div><div class="line">                &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initialW</span><span class="params">(uint[] resource, uint[] M, <span class="keyword">int</span> number)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> j;</div><div class="line">                <span class="keyword">for</span> ( j = <span class="number">0</span>; j &lt; <span class="number">16</span>; j++)</div><div class="line">                &#123;</div><div class="line">                    M[ j] = resource[j];</div><div class="line"></div><div class="line">                &#125;</div><div class="line">                <span class="keyword">for</span> (; j &lt; <span class="number">64</span>; j++)</div><div class="line">                &#123;</div><div class="line">                    <span class="keyword">int</span> a = SHA256_O1((<span class="keyword">int</span>)M[j - <span class="number">2</span>]);</div><div class="line">                    <span class="keyword">int</span> c = (<span class="keyword">int</span>)M[ j - <span class="number">7</span>];</div><div class="line">                    <span class="keyword">int</span> b = SHA256_O0((<span class="keyword">int</span>)M[ j - <span class="number">15</span>]);</div><div class="line">                    <span class="keyword">int</span> d = (<span class="keyword">int</span>)M[ j - <span class="number">16</span>];</div><div class="line">                    M[ j] =(uint)( SHA256_O1((<span class="keyword">int</span>)M[ j - <span class="number">2</span>]) + M[ j - <span class="number">7</span>] + SHA256_O0((<span class="keyword">int</span>)M[j - <span class="number">15</span>]) + M[j-<span class="number">16</span>]);</div><div class="line">                &#125;</div><div class="line">            printW(M);</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initialregister</span><span class="params">()</span></span></div><div class="line">        &#123;</div><div class="line">            A = H0; B = H1; C = H2; D = H3; E = H4; F = H5; G = H6; H = H7;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">static</span> bool <span class="title">IntToByteArray</span><span class="params">(uint m,  <span class="keyword">byte</span>[] arry)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (arry == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">            <span class="keyword">if</span> (arry.Length &lt; <span class="number">4</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line"></div><div class="line">            arry[<span class="number">0</span>] = (<span class="keyword">byte</span>)(m &amp; <span class="number">0xFF</span>);</div><div class="line">            arry[<span class="number">1</span>] = (<span class="keyword">byte</span>)((m &amp; <span class="number">0xFF00</span>) &gt;&gt; <span class="number">8</span>);</div><div class="line">            arry[<span class="number">2</span>] = (<span class="keyword">byte</span>)((m &amp; <span class="number">0xFF0000</span>) &gt;&gt; <span class="number">16</span>);</div><div class="line">            arry[<span class="number">3</span>] = (<span class="keyword">byte</span>)((m &gt;&gt; <span class="number">24</span>) &amp; <span class="number">0xFF</span>);</div><div class="line"></div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">endcode</span><span class="params">(uint[] M,<span class="keyword">int</span> number)</span></span></div><div class="line">        &#123;</div><div class="line"></div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">64</span>; i++)</div><div class="line">                &#123;</div><div class="line">                    T1 =(uint) (H + SHA256_E1((<span class="keyword">int</span>)E) + SHA256_Ch((<span class="keyword">int</span>)E, (<span class="keyword">int</span>)F, (<span class="keyword">int</span>)G) + K[i] + M[i]);</div><div class="line">                    T2 = (uint)(SHA256_E0((<span class="keyword">int</span>)A) + SHA256_Maj((<span class="keyword">int</span>)A, (<span class="keyword">int</span>)B, (<span class="keyword">int</span>)C));</div><div class="line">                    H = G; G = F; F = E; E = D + T1; D = C; C = B; B = A; A = T1 + T2;</div><div class="line">                    Console.WriteLine(<span class="string">"t=&#123;0&#125; A:&#123;1&#125;  B:&#123;2&#125;  C:&#123;3&#125; D:&#123;4&#125; E:&#123;5&#125; F:&#123;6&#125; G:&#123;7&#125; H:&#123;8&#125;"</span>,i.ToString(), addZero(A), addZero(B),addZero(C), addZero(D),</div><div class="line">                &#125;</div><div class="line">                H0 += A; H1 += B; H2 += C; H3 += D; H4 += E; H5 += F; H6 += G; H7 += H;</div><div class="line">                Console.WriteLine(<span class="string">"\n\n"</span>);</div><div class="line">                Console.WriteLine(<span class="string">"T H0:&#123;0&#125;  H1:&#123;1&#125;  H2:&#123;2&#125; H3:&#123;3&#125; H4:&#123;4&#125; H5:&#123;5&#125; H6:&#123;6&#125; H7:&#123;7&#125;"</span>,</div><div class="line">                addZero(H0), addZero(H1), addZero(H2), addZero(H3), addZero(H4), addZero(H5), addZero(H6), addZero(H7));</div><div class="line">                Console.WriteLine(<span class="string">"\n\n"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changHsbit</span><span class="params">()</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">byte</span>[] tmp = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">4</span>];</div><div class="line">            IntToByteArray(H0,tmp);</div><div class="line">            H0 = (uint)(tmp[<span class="number">3</span>] &lt;&lt; <span class="number">24</span> | tmp[<span class="number">2</span>] &lt;&lt; <span class="number">16</span> | tmp[<span class="number">1</span>] &lt;&lt; <span class="number">8</span> | tmp[<span class="number">0</span>]);</div><div class="line">            IntToByteArray(H1, tmp);</div><div class="line">            H1 = (uint)(tmp[<span class="number">3</span>] &lt;&lt; <span class="number">24</span> | tmp[<span class="number">2</span>] &lt;&lt; <span class="number">16</span> | tmp[<span class="number">1</span>] &lt;&lt; <span class="number">8</span> | tmp[<span class="number">0</span>]);</div><div class="line">            IntToByteArray(H2, tmp);</div><div class="line">            H2 = (uint)(tmp[<span class="number">3</span>] &lt;&lt; <span class="number">24</span> | tmp[<span class="number">2</span>] &lt;&lt; <span class="number">16</span> | tmp[<span class="number">1</span>] &lt;&lt; <span class="number">8</span> | tmp[<span class="number">0</span>]);</div><div class="line">            IntToByteArray(H3, tmp);</div><div class="line">            H3 = (uint)(tmp[<span class="number">3</span>] &lt;&lt; <span class="number">24</span> | tmp[<span class="number">2</span>] &lt;&lt; <span class="number">16</span> | tmp[<span class="number">1</span>] &lt;&lt; <span class="number">8</span> | tmp[<span class="number">0</span>]);</div><div class="line">            IntToByteArray(H4, tmp);</div><div class="line">            H4 = (uint)(tmp[<span class="number">3</span>] &lt;&lt; <span class="number">24</span> | tmp[<span class="number">2</span>] &lt;&lt; <span class="number">16</span> | tmp[<span class="number">1</span>] &lt;&lt; <span class="number">8</span> | tmp[<span class="number">0</span>]);</div><div class="line">            IntToByteArray(H5, tmp);</div><div class="line">            H5 = (uint)(tmp[<span class="number">3</span>] &lt;&lt; <span class="number">24</span> | tmp[<span class="number">2</span>] &lt;&lt; <span class="number">16</span> | tmp[<span class="number">1</span>] &lt;&lt; <span class="number">8</span> | tmp[<span class="number">0</span>]);</div><div class="line">            IntToByteArray(H6, tmp);</div><div class="line">            H6 = (uint)(tmp[<span class="number">3</span>] &lt;&lt; <span class="number">24</span> | tmp[<span class="number">2</span>] &lt;&lt; <span class="number">16</span> | tmp[<span class="number">1</span>] &lt;&lt; <span class="number">8</span> | tmp[<span class="number">0</span>]);</div><div class="line">            IntToByteArray(H7, tmp);</div><div class="line">            H7 = (uint)(tmp[<span class="number">3</span>] &lt;&lt; <span class="number">24</span> | tmp[<span class="number">2</span>] &lt;&lt; <span class="number">16</span> | tmp[<span class="number">1</span>] &lt;&lt; <span class="number">8</span> | tmp[<span class="number">0</span>]);</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> string <span class="title">addZero</span><span class="params">(uint W)</span></span></div><div class="line">        &#123;</div><div class="line">            string tmp1 = <span class="string">""</span>, tmp2;</div><div class="line">            <span class="keyword">int</span> len;</div><div class="line">            <span class="keyword">if</span> (W &lt; <span class="number">0x10000000</span>)</div><div class="line">            &#123;</div><div class="line">                tmp2 = W.ToString(<span class="string">"x"</span>);</div><div class="line">                len = tmp2.Length;</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">8</span> - len; j++)</div><div class="line">                    tmp1 += <span class="string">'0'</span>;</div><div class="line">                tmp1 += W.ToString(<span class="string">"x"</span>);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="keyword">return</span> W.ToString(<span class="string">"x"</span>);</div><div class="line">            <span class="keyword">return</span> tmp1;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printW</span><span class="params">(uint [] W)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">64</span>; i++)</div><div class="line">            &#123;</div><div class="line"></div><div class="line">                    Console.WriteLine(<span class="string">" W[&#123;0&#125;]:   0x&#123;1&#125;"</span>, i.ToString(), addZero(W[i]));</div><div class="line"></div><div class="line">            &#125;</div><div class="line">            Console.WriteLine(<span class="string">"\n\n"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printencode</span><span class="params">()</span></span></div><div class="line">        &#123;</div><div class="line">            changHsbit();</div><div class="line">            Console.WriteLine(<span class="string">"SHA-256 encode: &#123;0&#125;  &#123;1&#125;  &#123;2&#125; &#123;3&#125; &#123;4&#125; &#123;5&#125; &#123;6&#125; &#123;7&#125;"</span>,</div><div class="line">                addZero(H0), addZero(H1), addZero(H2), addZero(H3), addZero(H4), addZero(H5), addZero(H6), addZero(H7));</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure></p>
+<p>　　　加密类的实现<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">using System;</div><div class="line">using System.Collections.Generic;</div><div class="line">using System.Linq;</div><div class="line">using System.Text;</div><div class="line">using System.Threading.Tasks;</div><div class="line"></div><div class="line">namespace SHA_256</div><div class="line">&#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">encode</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">private</span> uint A, B, C, D, E, F, G, H,T1, T2;</div><div class="line">        <span class="keyword">private</span> uint[] K = <span class="keyword">new</span> uint[<span class="number">64</span>] &#123;</div><div class="line">        <span class="number">0x428a2f98</span>, <span class="number">0x71374491</span>, <span class="number">0xb5c0fbcf</span>, <span class="number">0xe9b5dba5</span>, <span class="number">0x3956c25b</span>, <span class="number">0x59f111f1</span>, <span class="number">0x923f82a4</span>, <span class="number">0xab1c5ed5</span>,</div><div class="line">        <span class="number">0xd807aa98</span>, <span class="number">0x12835b01</span>, <span class="number">0x243185be</span>, <span class="number">0x550c7dc3</span>, <span class="number">0x72be5d74</span>, <span class="number">0x80deb1fe</span>, <span class="number">0x9bdc06a7</span>, <span class="number">0xc19bf174</span>,</div><div class="line">        <span class="number">0xe49b69c1</span>, <span class="number">0xefbe4786</span>, <span class="number">0x0fc19dc6</span>, <span class="number">0x240ca1cc</span>, <span class="number">0x2de92c6f</span>, <span class="number">0x4a7484aa</span>, <span class="number">0x5cb0a9dc</span>, <span class="number">0x76f988da</span>,</div><div class="line">        <span class="number">0x983e5152</span>, <span class="number">0xa831c66d</span>, <span class="number">0xb00327c8</span>, <span class="number">0xbf597fc7</span>, <span class="number">0xc6e00bf3</span>, <span class="number">0xd5a79147</span>, <span class="number">0x06ca6351</span>, <span class="number">0x14292967</span>,</div><div class="line">        <span class="number">0x27b70a85</span>, <span class="number">0x2e1b2138</span>, <span class="number">0x4d2c6dfc</span>, <span class="number">0x53380d13</span>, <span class="number">0x650a7354</span>, <span class="number">0x766a0abb</span>, <span class="number">0x81c2c92e</span>, <span class="number">0x92722c85</span>,</div><div class="line">        <span class="number">0xa2bfe8a1</span>, <span class="number">0xa81a664b</span>, <span class="number">0xc24b8b70</span>, <span class="number">0xc76c51a3</span>, <span class="number">0xd192e819</span>, <span class="number">0xd6990624</span>, <span class="number">0xf40e3585</span>, <span class="number">0x106aa070</span>,</div><div class="line">        <span class="number">0x19a4c116</span>, <span class="number">0x1e376c08</span>, <span class="number">0x2748774c</span>, <span class="number">0x34b0bcb5</span>, <span class="number">0x391c0cb3</span>, <span class="number">0x4ed8aa4a</span>, <span class="number">0x5b9cca4f</span>, <span class="number">0x682e6ff3</span>,</div><div class="line">        <span class="number">0x748f82ee</span>, <span class="number">0x78a5636f</span>, <span class="number">0x84c87814</span>, <span class="number">0x8cc70208</span>, <span class="number">0x90befffa</span>, <span class="number">0xa4506ceb</span>, <span class="number">0xbef9a3f7</span>, <span class="number">0xc67178f2</span>,</div><div class="line">         &#125;;</div><div class="line"></div><div class="line">        uint H0 = <span class="number">0x6a09e667</span>u, H1 = <span class="number">0xbb67ae85</span>u, H2 = <span class="number">0x3c6ef372</span>u, H3 = <span class="number">0xa54ff53a</span>u;</div><div class="line">        uint H4 = <span class="number">0x510e527f</span>u, H5 = <span class="number">0x9b05688c</span>u, H6 = <span class="number">0x1f83d9ab</span>u, H7 = <span class="number">0x5be0cd19</span>u;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">SHA256_ROTL</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123; <span class="keyword">return</span> (((a &gt;&gt; (<span class="number">32</span> - b)) &amp; (<span class="number">0x7fffffff</span> &gt;&gt; (<span class="number">31</span> - b))) | (a &lt;&lt; b)); &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">SHA256_SR</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123; <span class="keyword">return</span> ((a &gt;&gt; b) &amp; (<span class="number">0x7fffffff</span> &gt;&gt; (b - <span class="number">1</span>)));  &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">SHA256_Ch</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> z)</span> </span>&#123; <span class="keyword">return</span> ((x&amp;y)^((~x)&amp;z));  &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">SHA256_Maj</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> z)</span> </span>&#123; <span class="keyword">return</span> ((x&amp;y)^(x&amp;z)^(y&amp;z));  &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">SHA256_E0</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">return</span> (SHA256_ROTL(x, <span class="number">30</span>) ^ SHA256_ROTL(x, <span class="number">19</span>) ^ SHA256_ROTL(x, <span class="number">10</span>)); &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">SHA256_E1</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">return</span> (SHA256_ROTL(x, <span class="number">26</span>) ^ SHA256_ROTL(x, <span class="number">21</span>) ^ SHA256_ROTL(x, <span class="number">7</span>));  &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">SHA256_O0</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">return</span> (SHA256_ROTL(x, <span class="number">25</span>) ^ SHA256_ROTL(x, <span class="number">14</span>) ^ SHA256_SR(x, <span class="number">3</span>));  &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">SHA256_O1</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">return</span> (SHA256_ROTL(x, <span class="number">15</span>) ^ SHA256_ROTL(x, <span class="number">13</span>) ^ SHA256_SR(x, <span class="number">10</span>));      &#125;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">FillDate</span><span class="params">(<span class="keyword">byte</span>[] input, <span class="keyword">int</span> datelength, <span class="keyword">byte</span>[] output,<span class="keyword">int</span> encodenumber)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> zerobit = (<span class="number">448</span> - (datelength * <span class="number">8</span> + <span class="number">1</span>) % <span class="number">512</span>) - <span class="number">7</span>;</div><div class="line">            <span class="keyword">int</span> i,datelengthbitnumber= datelength * <span class="number">8</span>;</div><div class="line">                <span class="keyword">if</span> (zerobit &lt; <span class="number">0</span>)</div><div class="line">                    zerobit = <span class="number">512</span> + zerobit;</div><div class="line">                <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; datelength; i++)</div><div class="line">                &#123;</div><div class="line">                    output[i] = input[i];</div><div class="line">                &#125;</div><div class="line">                output[i++] = (<span class="keyword">byte</span>)<span class="number">128</span>;</div><div class="line">                <span class="keyword">int</span> tmpi = i;</div><div class="line">                <span class="keyword">for</span> (; i &lt; zerobit / <span class="number">8</span>; i++)</div><div class="line">                    output[i] = (<span class="keyword">byte</span>)<span class="number">0</span>;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; ; k++)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> (datelengthbitnumber == <span class="number">0</span>)</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                output[<span class="number">63</span> + <span class="number">64</span> * encodenumber-k] =(<span class="keyword">byte</span>) (datelengthbitnumber &amp; <span class="number">0xFF</span>);</div><div class="line">                datelengthbitnumber &gt;&gt;= <span class="number">8</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">GetMbyte</span><span class="params">(<span class="keyword">byte</span>[] resource,<span class="keyword">byte</span>[] M,<span class="keyword">int</span> number,<span class="keyword">int</span> i)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">64</span>; j++)</div><div class="line">                M[j] = resource[j+i*<span class="number">64</span>];</div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Getmint</span><span class="params">(<span class="keyword">byte</span>[] resource, uint[] M, <span class="keyword">int</span> number)</span></span></div><div class="line">        &#123;</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">16</span>; j++)</div><div class="line">                &#123;</div><div class="line">                    M[ j] = (uint)(resource[ j * <span class="number">4</span>]&lt;&lt;<span class="number">24</span> | resource[j * <span class="number">4</span>+<span class="number">1</span>] &lt;&lt; <span class="number">16</span> |resource[  j * <span class="number">4</span>+<span class="number">2</span>] &lt;&lt; <span class="number">8</span> | resource[ j * <span class="number">4</span>+<span class="number">3</span>]);</div><div class="line">                &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initialW</span><span class="params">(uint[] resource, uint[] M, <span class="keyword">int</span> number)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> j;</div><div class="line">                <span class="keyword">for</span> ( j = <span class="number">0</span>; j &lt; <span class="number">16</span>; j++)</div><div class="line">                &#123;</div><div class="line">                    M[ j] = resource[j];</div><div class="line"></div><div class="line">                &#125;</div><div class="line">                <span class="keyword">for</span> (; j &lt; <span class="number">64</span>; j++)</div><div class="line">                &#123;</div><div class="line">                    <span class="keyword">int</span> a = SHA256_O1((<span class="keyword">int</span>)M[j - <span class="number">2</span>]);</div><div class="line">                    <span class="keyword">int</span> c = (<span class="keyword">int</span>)M[ j - <span class="number">7</span>];</div><div class="line">                    <span class="keyword">int</span> b = SHA256_O0((<span class="keyword">int</span>)M[ j - <span class="number">15</span>]);</div><div class="line">                    <span class="keyword">int</span> d = (<span class="keyword">int</span>)M[ j - <span class="number">16</span>];</div><div class="line">                    M[ j] =(uint)( SHA256_O1((<span class="keyword">int</span>)M[ j - <span class="number">2</span>]) + M[ j - <span class="number">7</span>] + SHA256_O0((<span class="keyword">int</span>)M[j - <span class="number">15</span>]) + M[j-<span class="number">16</span>]);</div><div class="line">                &#125;</div><div class="line">            printW(M);</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initialregister</span><span class="params">()</span></span></div><div class="line">        &#123;</div><div class="line">            A = H0; B = H1; C = H2; D = H3; E = H4; F = H5; G = H6; H = H7;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">static</span> bool <span class="title">IntToByteArray</span><span class="params">(uint m,  <span class="keyword">byte</span>[] arry)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (arry == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">            <span class="keyword">if</span> (arry.Length &lt; <span class="number">4</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line"></div><div class="line">            arry[<span class="number">0</span>] = (<span class="keyword">byte</span>)(m &amp; <span class="number">0xFF</span>);</div><div class="line">            arry[<span class="number">1</span>] = (<span class="keyword">byte</span>)((m &amp; <span class="number">0xFF00</span>) &gt;&gt; <span class="number">8</span>);</div><div class="line">            arry[<span class="number">2</span>] = (<span class="keyword">byte</span>)((m &amp; <span class="number">0xFF0000</span>) &gt;&gt; <span class="number">16</span>);</div><div class="line">            arry[<span class="number">3</span>] = (<span class="keyword">byte</span>)((m &gt;&gt; <span class="number">24</span>) &amp; <span class="number">0xFF</span>);</div><div class="line"></div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">endcode</span><span class="params">(uint[] M,<span class="keyword">int</span> number)</span></span></div><div class="line">        &#123;</div><div class="line"></div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">64</span>; i++)</div><div class="line">                &#123;</div><div class="line">                    T1 =(uint) (H + SHA256_E1((<span class="keyword">int</span>)E) + SHA256_Ch((<span class="keyword">int</span>)E, (<span class="keyword">int</span>)F, (<span class="keyword">int</span>)G) + K[i] + M[i]);</div><div class="line">                    T2 = (uint)(SHA256_E0((<span class="keyword">int</span>)A) + SHA256_Maj((<span class="keyword">int</span>)A, (<span class="keyword">int</span>)B, (<span class="keyword">int</span>)C));</div><div class="line">                    H = G; G = F; F = E; E = D + T1; D = C; C = B; B = A; A = T1 + T2;</div><div class="line">                    Console.WriteLine(<span class="string">"t=&#123;0&#125; A:&#123;1&#125;  B:&#123;2&#125;  C:&#123;3&#125; D:&#123;4&#125; E:&#123;5&#125; F:&#123;6&#125; G:&#123;7&#125; H:&#123;8&#125;"</span>,i.ToString(), addZero(A), addZero(B),addZero(C), addZero(D),</div><div class="line">                &#125;</div><div class="line">                H0 += A; H1 += B; H2 += C; H3 += D; H4 += E; H5 += F; H6 += G; H7 += H;</div><div class="line">                Console.WriteLine(<span class="string">"\n\n"</span>);</div><div class="line">                Console.WriteLine(<span class="string">"T H0:&#123;0&#125;  H1:&#123;1&#125;  H2:&#123;2&#125; H3:&#123;3&#125; H4:&#123;4&#125; H5:&#123;5&#125; H6:&#123;6&#125; H7:&#123;7&#125;"</span>,</div><div class="line">                addZero(H0), addZero(H1), addZero(H2), addZero(H3), addZero(H4), addZero(H5), addZero(H6), addZero(H7));</div><div class="line">                Console.WriteLine(<span class="string">"\n\n"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changHsbit</span><span class="params">()</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">byte</span>[] tmp = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">4</span>];</div><div class="line">            IntToByteArray(H0,tmp);</div><div class="line">            H0 = (uint)(tmp[<span class="number">3</span>] &lt;&lt; <span class="number">24</span> | tmp[<span class="number">2</span>] &lt;&lt; <span class="number">16</span> | tmp[<span class="number">1</span>] &lt;&lt; <span class="number">8</span> | tmp[<span class="number">0</span>]);</div><div class="line">            IntToByteArray(H1, tmp);</div><div class="line">            H1 = (uint)(tmp[<span class="number">3</span>] &lt;&lt; <span class="number">24</span> | tmp[<span class="number">2</span>] &lt;&lt; <span class="number">16</span> | tmp[<span class="number">1</span>] &lt;&lt; <span class="number">8</span> | tmp[<span class="number">0</span>]);</div><div class="line">            IntToByteArray(H2, tmp);</div><div class="line">            H2 = (uint)(tmp[<span class="number">3</span>] &lt;&lt; <span class="number">24</span> | tmp[<span class="number">2</span>] &lt;&lt; <span class="number">16</span> | tmp[<span class="number">1</span>] &lt;&lt; <span class="number">8</span> | tmp[<span class="number">0</span>]);</div><div class="line">            IntToByteArray(H3, tmp);</div><div class="line">            H3 = (uint)(tmp[<span class="number">3</span>] &lt;&lt; <span class="number">24</span> | tmp[<span class="number">2</span>] &lt;&lt; <span class="number">16</span> | tmp[<span class="number">1</span>] &lt;&lt; <span class="number">8</span> | tmp[<span class="number">0</span>]);</div><div class="line">            IntToByteArray(H4, tmp);</div><div class="line">            H4 = (uint)(tmp[<span class="number">3</span>] &lt;&lt; <span class="number">24</span> | tmp[<span class="number">2</span>] &lt;&lt; <span class="number">16</span> | tmp[<span class="number">1</span>] &lt;&lt; <span class="number">8</span> | tmp[<span class="number">0</span>]);</div><div class="line">            IntToByteArray(H5, tmp);</div><div class="line">            H5 = (uint)(tmp[<span class="number">3</span>] &lt;&lt; <span class="number">24</span> | tmp[<span class="number">2</span>] &lt;&lt; <span class="number">16</span> | tmp[<span class="number">1</span>] &lt;&lt; <span class="number">8</span> | tmp[<span class="number">0</span>]);</div><div class="line">            IntToByteArray(H6, tmp);</div><div class="line">            H6 = (uint)(tmp[<span class="number">3</span>] &lt;&lt; <span class="number">24</span> | tmp[<span class="number">2</span>] &lt;&lt; <span class="number">16</span> | tmp[<span class="number">1</span>] &lt;&lt; <span class="number">8</span> | tmp[<span class="number">0</span>]);</div><div class="line">            IntToByteArray(H7, tmp);</div><div class="line">            H7 = (uint)(tmp[<span class="number">3</span>] &lt;&lt; <span class="number">24</span> | tmp[<span class="number">2</span>] &lt;&lt; <span class="number">16</span> | tmp[<span class="number">1</span>] &lt;&lt; <span class="number">8</span> | tmp[<span class="number">0</span>]);</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> string <span class="title">addZero</span><span class="params">(uint W)</span></span></div><div class="line">        &#123;</div><div class="line">            string tmp1 = <span class="string">""</span>, tmp2;</div><div class="line">            <span class="keyword">int</span> len;</div><div class="line">            <span class="keyword">if</span> (W &lt; <span class="number">0x10000000</span>)</div><div class="line">            &#123;</div><div class="line">                tmp2 = W.ToString(<span class="string">"x"</span>);</div><div class="line">                len = tmp2.Length;</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">8</span> - len; j++)</div><div class="line">                    tmp1 += <span class="string">'0'</span>;</div><div class="line">                tmp1 += W.ToString(<span class="string">"x"</span>);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="keyword">return</span> W.ToString(<span class="string">"x"</span>);</div><div class="line">            <span class="keyword">return</span> tmp1;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printW</span><span class="params">(uint [] W)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">64</span>; i++)</div><div class="line">            &#123;</div><div class="line"></div><div class="line">                    Console.WriteLine(<span class="string">" W[&#123;0&#125;]:   0x&#123;1&#125;"</span>, i.ToString(), addZero(W[i]));</div><div class="line"></div><div class="line">            &#125;</div><div class="line">            Console.WriteLine(<span class="string">"\n\n"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printencode</span><span class="params">()</span></span></div><div class="line">        &#123;</div><div class="line">            changHsbit();</div><div class="line">            Console.WriteLine(<span class="string">"SHA-256 encode: &#123;0&#125;  &#123;1&#125;  &#123;2&#125; &#123;3&#125; &#123;4&#125; &#123;5&#125; &#123;6&#125; &#123;7&#125;"</span>,</div><div class="line">                addZero(H0), addZero(H1), addZero(H2), addZero(H3), addZero(H4), addZero(H5), addZero(H6), addZero(H7));</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure></p>
 <p>　　　主函数 调用</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">using System;</div><div class="line">using System.Collections.Generic;</div><div class="line">using System.Linq;</div><div class="line">using System.Text;</div><div class="line">using System.Threading.Tasks;</div><div class="line">using System.Text;</div><div class="line">using SHA_256;</div><div class="line"></div><div class="line">namespace SHA_256</div><div class="line">&#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Program</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span><span class="params">(string[] args)</span></span></div><div class="line">        &#123;</div><div class="line">            Encoding enc = <span class="keyword">new</span> UTF8Encoding(<span class="keyword">true</span>, <span class="keyword">true</span>);</div><div class="line">            <span class="comment">//C#默认unicode编码，上面的类可以把其转换为多字节编码</span></div><div class="line">            encode MYSHA = <span class="keyword">new</span> encode();</div><div class="line">            Console.WriteLine(<span class="string">"input you data encode sha-256:"</span>);</div><div class="line">            string str = Console.ReadLine();</div><div class="line">            <span class="keyword">byte</span>[] bte = enc.GetBytes(str);</div><div class="line">            <span class="keyword">int</span> encodedatelength = bte.Length;</div><div class="line">            <span class="keyword">int</span> encodenumber = <span class="number">0</span>;</div><div class="line">            <span class="keyword">byte</span>[] MM;</div><div class="line">            <span class="keyword">if</span> (encodedatelength &gt;= <span class="number">56</span>)</div><div class="line">            &#123;</div><div class="line">                encodenumber = encodedatelength / <span class="number">56</span>;</div><div class="line">            &#125;</div><div class="line">            MM = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">64</span> * (encodenumber + <span class="number">1</span>)];</div><div class="line">            MYSHA.FillDate(bte, encodedatelength, MM, encodenumber);  <span class="comment">// ok</span></div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; encodenumber + <span class="number">1</span>; i++)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">byte</span>[] M = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">64</span>];</div><div class="line">                MYSHA.GetMbyte(MM, M, encodenumber + <span class="number">1</span>,i);   <span class="comment">//ok</span></div><div class="line">                uint[] m = <span class="keyword">new</span> uint[<span class="number">16</span>];</div><div class="line">                MYSHA.Getmint(M, m, encodenumber + <span class="number">1</span>);    <span class="comment">//ok</span></div><div class="line">                uint[] W = <span class="keyword">new</span> uint[<span class="number">64</span>];</div><div class="line">                MYSHA.initialW(m, W, encodenumber + <span class="number">1</span>);</div><div class="line">                MYSHA.initialregister();</div><div class="line">                MYSHA.endcode(W, encodenumber + <span class="number">1</span>);</div><div class="line">            &#125;</div><div class="line">          MYSHA.printencode();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">using System;</div><div class="line">using System.Collections.Generic;</div><div class="line">using System.Linq;</div><div class="line">using System.Text;</div><div class="line">using System.Threading.Tasks;</div><div class="line">using System.Text;</div><div class="line">using SHA_256;</div><div class="line"></div><div class="line">namespace SHA_256</div><div class="line">&#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Program</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span><span class="params">(string[] args)</span></span></div><div class="line">        &#123;</div><div class="line">            Encoding enc = <span class="keyword">new</span> UTF8Encoding(<span class="keyword">true</span>, <span class="keyword">true</span>);</div><div class="line">            <span class="comment">//C#默认unicode编码，上面的类可以把其转换为多字节编码</span></div><div class="line">            encode MYSHA = <span class="keyword">new</span> encode();</div><div class="line">            Console.WriteLine(<span class="string">"input you data encode sha-256:"</span>);</div><div class="line">            string str = Console.ReadLine();</div><div class="line">            <span class="keyword">byte</span>[] bte = enc.GetBytes(str);</div><div class="line">            <span class="keyword">int</span> encodedatelength = bte.Length;</div><div class="line">            <span class="keyword">int</span> encodenumber = <span class="number">0</span>;</div><div class="line">            <span class="keyword">byte</span>[] MM;</div><div class="line">            <span class="keyword">if</span> (encodedatelength &gt;= <span class="number">56</span>)</div><div class="line">            &#123;</div><div class="line">                encodenumber = encodedatelength / <span class="number">56</span>;</div><div class="line">            &#125;</div><div class="line">            MM = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">64</span> * (encodenumber + <span class="number">1</span>)];</div><div class="line">            MYSHA.FillDate(bte, encodedatelength, MM, encodenumber);  <span class="comment">// ok</span></div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; encodenumber + <span class="number">1</span>; i++)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">byte</span>[] M = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">64</span>];</div><div class="line">                MYSHA.GetMbyte(MM, M, encodenumber + <span class="number">1</span>,i);   <span class="comment">//ok</span></div><div class="line">                uint[] m = <span class="keyword">new</span> uint[<span class="number">16</span>];</div><div class="line">                MYSHA.Getmint(M, m, encodenumber + <span class="number">1</span>);    <span class="comment">//ok</span></div><div class="line">                uint[] W = <span class="keyword">new</span> uint[<span class="number">64</span>];</div><div class="line">                MYSHA.initialW(m, W, encodenumber + <span class="number">1</span>);</div><div class="line">                MYSHA.initialregister();</div><div class="line">                MYSHA.endcode(W, encodenumber + <span class="number">1</span>);</div><div class="line">            &#125;</div><div class="line">          MYSHA.printencode();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>。。。。</p>
 
-                <hr>
-                
+  </section>
 
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/2016/11/13/2016/11/13/" data-toggle="tooltip" data-placement="top"
-                           title="CVE-2012-003">&larr; Previous Post</a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/2016/10/31/2016/10/31/" data-toggle="tooltip" data-placement="top"
-                           title="10月->月末总结">Next Post &rarr;</a>
-                    </li>
-                    
-                </ul>
-
-                
-
-                
-
-            </div>
-
-            <div class="hidden-xs col-sm-3 toc-col">
-                <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01莫名其妙的学校作业"><span class="toc-text">0x01莫名其妙的学校作业</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02代码实现"><span class="toc-text">0x02代码实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x03自食其力"><span class="toc-text">0x03自食其力</span></a></li></ol>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-                <section>
-                    <!-- no hr -->
-                    <h5 class="text-center">
-                        <a href="/tags/">FEATURED TAGS</a>
-                    </h5>
-                    <div class="tags">
-                        
-                        <a class="tag" href="/tags/#Program"
-                           title="Program">Program</a>
-                        
-                    </div>
-                </section>
-                
-
-                <!-- Friends Blog -->
-                
-                <div style="margin-top: 20px;">
-                    <h5 class="text-center">FRIENDS</h5>
-                    <ul class="list-inline text-center">
-                        
-                        <li><a href="http://over-rainbow.cn">Gay_hxs</a></li>
-                        
-                    </ul>
-                </div>
-                
-            </div>
-        </div>
-
-    </div>
 </article>
 
-
-
-
-
-
-<!-- Footer -->
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <br>
-                <ul class="list-inline text-center">
+<section class="read-more">
+           
+    
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">最近的文章</span>
+                <h2 class="post-list__post-title post-title"><a href="/2016/11/13/2016/11/13/" title="CVE-2012-003">CVE-2012-003</a></h2>
+                <p class="excerpt">
                 
-                
-                
-
-                
-                    <li>
-                        <a target="_blank" href="http://weibo.com/6016118396">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                
-                    <li>
-                        <a target="_blank"  href="https://github.com/yan-1-20">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; Yan_1_20 2017
-                    <br>
-                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">当前访问量: <span id="busuanzi_value_site_pv"></span> 次</span>
-                    <br>
-                    Theme by <a href="https://yan-1-20.github.io/">Yan_1_20</a>
+                CVE-2012-003 Microsoft Winodws Media Player Wimm.dll Heap Overflow0x1 序　　　　因为这个CVE是跟着泉哥的书复现学习的，所以具体的细节我就不多说，本来就按这泉哥的思路走的，也没必要把他的操作模仿一次。我只想记录我自己对这个CVE的
+                &hellip;
                 </p>
-
+                <div class="post-list__meta"><time datetime="2016-11-12T16:00:00.000Z" class="post-list__meta--date date">2016-11-13</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/MS-Heap-Overflow/">MS-Heap-Overflow</a>
+</span><a class="btn-border-small" href="/2016/11/13/2016/11/13/">继续阅读</a></div>
+                           
             </div>
-        </div>
-    </div>
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">更早的文章</span>
+                <h2 class="post-list__post-title post-title"><a href="/2016/10/31/2016/10/31/" title="10月-&gt;月末总结">10月-&gt;月末总结</a></h2>
+                <p class="excerpt">
+                
+                10月-&amp;gt;月末总结　0x01-&amp;gt;感悟　　　　　这个月是复现cve的第一个月，跟着看了学习了不少知识，不得不说看着大牛的文章学到了很多，分为几个方面，一是调试器的使用，学到了很多新的用法，这是一起没有接触到的，二是这些新鲜的实战利用手法，这是只看二进制基础不可及的，三是对汇编编写、pyth
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2016-10-30T16:00:00.000Z" class="post-list__meta--date date">2016-10-31</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/summary/">summary</a>
+</span><a class="btn-border-small" href="/2016/10/31/2016/10/31/">继续阅读</a></div>
+                       
+            </div>
+        
+     
+   
+   
+  
+</section>
+
+  
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        &copy; 2018 Yan_1_20 - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+       
+    </span>
+    <span class="footer__copyright">
+             - 基于 <a href="http://hexo.io">Hexo</a> 搭建，使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">new-vno</a> 主题，由<a href="https://monniya.com ">@Monniya</a> 修改自 <a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
+         </span>
+       
+    
+    
 </footer>
 
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
+        </div>
+    </div>
 
-<!-- Custom Theme JavaScript -->
-<script src="/js/blog.js"></script>
-
-<!-- async load function -->
+     
 <script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-78918255-1', 'auto');
+	ga('send', 'pageview');
 </script>
 
-<!-- jquery.tagcloud.js -->
-<script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("http://yan-1-20.github.io/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
-</script>
-
-<!--fastClick.js -->
-<script>
-    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
-<!-- Google Analytics -->
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?9cdad07c755fa23f6aced510c6760e87";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 
 
 
-<!-- Baidu Tongji -->
-
-
-<!-- swiftype -->
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install','null','2.0.0');
-</script>
-
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<!--wechat title img-->
-<img class="wechat-title-img" src="//avatars3.githubusercontent.com/u/19972411?v=3&amp;s=466">
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    
 </body>
-
 </html>
