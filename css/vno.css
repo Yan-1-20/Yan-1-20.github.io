@@ -6367,7 +6367,7 @@ i.fa.fa-spinner.fa-spin {
 .cover-orange {
   background-color: rgba(174,80,4,0.1);
   background-image: -webkit-linear-gradient(-410deg, rgba(174,80,4,0.2) 20%, rgba(74,34,2,0.2));
-  background-image: linear-gradient(140deg, rgba(174,80,4,0.2) 20%, rgba(74,34,2,0.3));
+  background-image: linear-gradient(140deg, rgba(174,80,4,0.5) 20%, rgba(74,34,2,0.4));
 }
 .cover-slate {
   background-color: rgba(61,66,96,0.1);
