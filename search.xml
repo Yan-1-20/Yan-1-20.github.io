@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Hexo 使用来必力添加评论功能]]></title>
+    <url>%2F2018%2F04%2F22%2F2018%2F04%2F22%2F</url>
+    <content type="text"><![CDATA[以前用的多说，现在换成了来必力。来必力官网 直接注册，可能需要梯子，韩国朋友的东西。 然后就是安装了 安装的时候，需要填你的博客的网址，和你给它的昵称 然后会得到下面的安装代码 用上面的代码对 hexo theme 文件进行修改 把你上面的代码全部复制到这个文件里去，如果没有这个文件新建一个即可。/theme/yourtheme/layout/_partial/comments.ejs 修改/theme/yourtheme/layout/_partial/archive.ejs的内容为如下（没有这个文件自己创建一个） 123if (theme.livere.on) &#123; partial(&apos;comments/livere&apos;)&#125; 在 theme 的_config.yml 里加上如下内容 1234livere: on: true livere_uid: your uid 其中 your uid 里在上面最初来必力给你生成的代码里 data-uid的内容 就可以愉快的使用来必力了。]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[归途来路，无问西东]]></title>
     <url>%2F2018%2F03%2F09%2F2018%2F03%2F09%2F</url>
     <content type="text"><![CDATA[博客停刚刚一年了，从去年3月30号更新了一篇CVE的分析之后就没有更新过了，从今天开始应该会断断续续的更新一些东西。 这一年来，感觉经历的太多，大三下开始的实习，到今天也快一年了。实习期间技术方面确实也学了一些东西，长了不少见识，实习期间的核心姿势因为签了保密协议，所以不予公开。但是相关的一些边缘自我研究的资料后面空了会放到博客上来。 继续更新博客的原因，是因为把原来的实习辞掉了。现在有一点时间可以做点闲事。加油！]]></content>
