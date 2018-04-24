@@ -43,13 +43,27 @@
 <body class="home-template no-js">
     <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
     <script src="/js/main.js"></script>
+
     <span class="mobile btn-mobile-menu">
         <i class="fa fa-list btn-mobile-menu__icon"></i>
         <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
     </span>
 
+
+    
+
+<span class="local-search local-search-plugin" style="position:absolute;right:250px;top:5px">
+  <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+  <i class="icon" aria-hidden="true">✈</i>
+
+  <div id="local-search-result" class="local-search-result-cls"></div>
+
+</span>
+
     
 <header class="panel-cover panel-cover--collapsed">
+
+
 
   <div class="panel-main">
     <div class="panel-main__inner panel-inverted">
@@ -128,6 +142,9 @@
     <div class="panel-cover--overlay cover-purple"></div>
 
   </div>
+
+
+
 </header>
 
 
@@ -262,7 +279,7 @@
 
 
     <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    
-    
+
+
 </body>
 </html>
