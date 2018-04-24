@@ -5802,7 +5802,7 @@ pre .javascript .function {
 .local-search {
   position: relative;
   text-align: left;
-  margin-bottom: 10px;
+  margin-bottom: 1px;
 }
 .local-search-input-cls {
   width: 200px;
@@ -5811,7 +5811,7 @@ pre .javascript .function {
   border-radius: 4px;
   border: 1px solid #ccc;
   color: #666;
-  font-size: 14px;
+  font-size: 5px;
 }
 .local-search-close {
   content: 'x';
@@ -5821,17 +5821,17 @@ pre .javascript .function {
   background: #fff;
   color: #888;
   border-radius: 100%;
-  line-height: 20px;
+  line-height: 10px;
   text-align: center;
   font-size: 16px;
   font-family: consolas;
   border: 1px solid #ccc;
   display: block;
   width: 20px;
-  height: 20px;
+  height: 10px;
   cursor: pointer;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   transform: rotateZ(0);
   transition: all 0.3s;
 }
@@ -5850,7 +5850,7 @@ pre .javascript .function {
 }
 .local-search-result-cls .local-search-empty {
   color: #888;
-  line-height: 44px;
+  line-height: 10px;
   text-align: center;
   display: block;
   font-size: 16px;
