@@ -5,6 +5,7 @@
 }
 .local-search-input-cls {
   width: 200px;
+  height: 3px;
   margin: 10px 0;
   padding: 8px 12px;
   border-radius: 4px;
