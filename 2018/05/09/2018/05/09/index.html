@@ -167,7 +167,7 @@
 
   <section class="post">
     <p> <a href="https://www.barretlee.com/blog/2017/06/04/hexo-search-insite/" target="_blank" rel="external">这里是借鉴的这个大佬的解决方案</a>.</p>
-<p> 但是这个解决方案，具体的实施还是摸索了一下，并不是直接就拿来用。</p>
+<p> 但是这个解决方案，具体的实施还是摸索了一下，并不是直接就能拿来用。而且我针对大佬的这个方案还是修改过的，不然有点别问题(比如样式)</p>
 <p>新建一个名为search.ejs 的文件在 yourthemes/layout/partial/</p>
 <p>内容如下:<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;span <span class="class"><span class="keyword">class</span></span>=<span class="string">"local-search local-search-plugin"</span> style=<span class="string">"&lt;%- wrapStyle %&gt;"</span>&gt;</div><div class="line">  &lt;input type="search" placeholder="搜索" id="local-search-input" class="local-search-input-cls" style="&lt;%- inputStyle %&gt;"&gt;</div><div class="line">  &lt;i class="icon" aria-hidden="true"&gt;✈&lt;/i&gt;</div><div class="line"></div><div class="line">  &lt;div id="local-search-result" class="local-search-result-cls"&gt;&lt;/div&gt;</div><div class="line"></div><div class="line">&lt;/span&gt;</div></pre></td></tr></table></figure></p>
 <p> 如下图所示:</p>
