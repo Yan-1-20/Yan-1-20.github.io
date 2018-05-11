@@ -121,6 +121,16 @@ var searchFunc = function (path, search_id, content_id) {
 
 
 
+
+
+
+
+  if ($('.local-search').size()) {
+      searchFunc("/search.xml", 'local-search-input', 'local-search-result');
+  }
+
+
+
 $(document).ready(function() {
 
   $('body').removeClass('no-js');
@@ -198,9 +208,9 @@ $(document).ready(function() {
 
 
 
-  if ($('.local-search').size()) {
-      searchFunc("/search.xml", 'local-search-input', 'local-search-result');
-  }
+
+
+
 
 
 
