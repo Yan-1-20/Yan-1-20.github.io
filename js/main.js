@@ -1,7 +1,7 @@
 
 var searchFunc = function (path, search_id, content_id) {
   'use strict';
-  var BTN = "<i id='local-search-close' Color='red' >|退出搜索|</i>";
+  var BTN = "<myi id='local-search-close'  >⊗</myi>";
   $.ajax({
     url: path,
     dataType: "xml",
