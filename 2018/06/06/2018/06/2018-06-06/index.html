@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     
-    <title>Yan_1_20</title>
+    <title>Retdec 能反mips 源码的IDA插件了解一下 | Yan_1_20</title>
     <meta name="renderer" content="webkit">
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -15,11 +15,11 @@
     <meta name="description" content="pop,pop,ret">
 
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Yan_1_20">
+    <meta name="twitter:title" content="Retdec 能反mips 源码的IDA插件了解一下 | Yan_1_20">
     <meta name="twitter:description" content="pop,pop,ret">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Yan_1_20">
+    <meta property="og:title" content="Retdec 能反mips 源码的IDA插件了解一下 | Yan_1_20">
     <meta property="og:description" content="pop,pop,ret">
 
     
@@ -35,7 +35,7 @@
     <meta name="generator" content="hexo"/>
     
 
-    <link rel="canonical" href="http://yan-1-20.github.io"/>
+    <link rel="canonical" href="http://yan-1-20.github.io/2018/06/06/2018/06/2018-06-06/"/>
 
                  
 </head>
@@ -150,118 +150,101 @@
 
     <div class="content-wrapper">
         <div class="content-wrapper__inner">
-            <div class="main-post-list">
+            <article class="post-container post-container--single">
 
-
-
-
-
-  <ol class="post-list">
-  
-    
-    <li>
-      <h2 class="post-list__post-title post-title"><a href="/2018/06/06/2018/06/2018-06-06/" title="link to post.title">Retdec 能反mips 源码的IDA插件了解一下</a></h2>
-      <p class="excerpt">
-    
-      路由器固件分析，一直苦于IDA F5插件不支持 mips，多方寻找后发现了Retdec（不支持ida 7.x 系列）
-官网地址：Retdec官网
-IDA插件gayhub：Retdec idaplugin
-Retdec gayhub:Retdec
-通过阅读github 知道 插件有两种方式使用： 一种是使用API Key ，让远程服务器进行反码，然后返回给本地 一种是本地编译好Retdec
-看文档说
-    &hellip;
-      </p>
-      <div class="post-list__meta"><time datetime="2018-06-05T16:00:00.000Z" class="post-list__meta--date date">2018-06-06</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2018-06-05T16:00:00.000Z" class="post-list__meta--date date">2018-06-06</time> &#8226;
+      <span class="post-meta__tags tags">于 
   <a class="tag-link" href="/tags/路由器/">路由器</a>
-</span><a class="btn-border-small" href="/2018/06/06/2018/06/2018-06-06/">继续阅读</a></div>
-      <hr class="post-list__divider" />
-    </li>
-  
+ </span>
+      <span class="page-pv">
+       阅读 <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span>
+
+
+    </div>
+    <h1 class="post-title">Retdec 能反mips 源码的IDA插件了解一下</h1>
+
+
+
+  </header>
+
+  <section class="post">
+    <p>路由器固件分析，一直苦于IDA F5插件不支持 mips，多方寻找后发现了Retdec（不支持ida 7.x 系列）</p>
+<p>官网地址：<a href="https://retdec.com/idaplugin/" target="_blank" rel="external">Retdec官网</a></p>
+<p>IDA插件gayhub：<a href="https://github.com/avast-tl/retdec-idaplugin" target="_blank" rel="external">Retdec idaplugin</a></p>
+<p>Retdec gayhub:<a href="https://github.com/avast-tl/retdec" target="_blank" rel="external">Retdec</a></p>
+<p>通过阅读github 知道 插件有两种方式使用：<br><br> 一种是使用API Key ，让远程服务器进行反码，然后返回给本地<br><br> 一种是本地编译好Retdec<br></p>
+<p>看文档说这个工具很吃内存,我就选择了简单无脑的第一种方式。其实是我根据他的github ，编译一直 没有通过 yaracpp 报错，希望编译好的朋友教教我。  <br><br>接下来说说简单无脑的第一种方式：<br><br>在上面的 IDA插件gayhub 里面下载你操作系统版本的插件，我以我的win 为列<br></p>
+<p><img src="/image/2018/06/06/01.jpg" alt=""></p>
+<p>解压插件安装包之后 目录如下： <br><br><img src="/image/2018/06/06/02.jpg" alt=""></p>
+<p>retdec.plw 是IDA 插件， user_guide 里面介绍了这个插件的用法</p>
+<p>插件安装使用</p>
+<p>把 retdec.plw 文件复制到IDA plugins 文件下 <br></p>
+<p><img src="/image/2018/06/06/03.jpg" alt=""></p>
+<p>IDA内加载一个示范mips程序，打开plugins 选择 Retargetable Decompiler  我这边显示的快捷键是 Ctrl+D <br></p>
+<p><img src="/image/2018/06/06/04.jpg" alt=""></p>
+<p>然后会弹出如下对话框，选择如下 远程API模式，输入 API key 点击ok 就能使用了 <br></p>
+<p><img src="/image/2018/06/06/05.jpg" alt=""></p>
+<p>选中一个带 strcpy的函数 使用快捷键 Ctrl+D  完成 反源码 <br></p>
+<p><img src="/image/2018/06/06/06.jpg" alt=""></p>
+<p>API key的获取 是通过在官网 注册一个账号，注册后登录账号点击 Account能看到自己的API key <br></p>
+<p><img src="/image/2018/06/06/07.jpg" alt=""></p>
+
+  </section>
+
+</article>
+
+<section class="read-more">
+           
     
-    <li>
-      <h2 class="post-list__post-title post-title"><a href="/2018/05/09/2018/05/09/" title="link to post.title">Hexo 添加本地搜索</a></h2>
-      <p class="excerpt">
-    
-       这里是借鉴的这个大佬的解决方案.
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">更早的文章</span>
+                <h2 class="post-list__post-title post-title"><a href="/2018/05/09/2018/05/09/" title="Hexo 添加本地搜索">Hexo 添加本地搜索</a></h2>
+                <p class="excerpt">
+                
+                 这里是借鉴的这个大佬的解决方案.
  但是这个解决方案，具体的实施还是摸索了一下，并不是直接就能拿来用。而且我针对大佬的这个方案还是修改过的，不然有点别问题(比如样式)
 新建一个名为search.ejs 的文件在 yourthemes/layout/partial/
-内容如下: 12345678&amp;lt;span class=&quot;local-search local-search-plugin&quot; st
-    &hellip;
-      </p>
-      <div class="post-list__meta"><time datetime="2018-05-08T16:00:00.000Z" class="post-list__meta--date date">2018-05-09</time> &#8226; <span class="post-list__meta--tags tags">于 
+内容如下: 12345678&amp;l
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2018-05-08T16:00:00.000Z" class="post-list__meta--date date">2018-05-09</time> &#8226; <span class="post-list__meta--tags tags">于 
   <a class="tag-link" href="/tags/Hexo/">Hexo</a>
 </span><a class="btn-border-small" href="/2018/05/09/2018/05/09/">继续阅读</a></div>
-      <hr class="post-list__divider" />
-    </li>
+                       
+            </div>
+        
+     
+   
+   
   
-    
-    <li>
-      <h2 class="post-list__post-title post-title"><a href="/2018/04/22/2018/04/22/" title="link to post.title">Hexo 使用来必力添加评论功能</a></h2>
-      <p class="excerpt">
-    
-      以前用的多说，现在换成了来必力。来必力官网
-直接注册，可能需要梯子，韩国朋友的东西。
-然后就是安装了
+</section>
 
-安装的时候，需要填你的博客的网址，和你给它的昵称
-然后会得到下面的安装代码
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zNTkzNC8xMjQ3MA==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
 
-用上面的代码对 hexo theme 文件进行修改
+       if (typeof LivereTower === 'function') { return; }
 
-把你上面的代码全部复制到这个文件里去，如果没有这个文件新建一个即可。/theme/yourtheme/layout/_partial/comments.ejs
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
 
-
-
-    &hellip;
-      </p>
-      <div class="post-list__meta"><time datetime="2018-04-21T16:00:00.000Z" class="post-list__meta--date date">2018-04-22</time> &#8226; <span class="post-list__meta--tags tags">于 
-  <a class="tag-link" href="/tags/Hexo/">Hexo</a>
-</span><a class="btn-border-small" href="/2018/04/22/2018/04/22/">继续阅读</a></div>
-      <hr class="post-list__divider" />
-    </li>
-  
-    
-    <li>
-      <h2 class="post-list__post-title post-title"><a href="/2018/03/09/2018/03/09/" title="link to post.title">归途来路，无问西东</a></h2>
-      <p class="excerpt">
-    
-      　　博客停刚刚一年了，从去年3月30号更新了一篇CVE的分析之后就没有更新过了，从今天开始应该会断断续续的更新一些东西。　　这一年来，感觉经历的太多，大三下开始的实习，到今天也快一年了。实习期间技术方面确实也学了一些东西，长了不少见识，实习期间的核心姿势因为签了保密协议，所以不予公开。但是相关的一些边缘自我研究的资料后面空了会放到博客上来。　　继续更新博客的原因，是因为把原来的实习辞掉了。现在有一
-    &hellip;
-      </p>
-      <div class="post-list__meta"><time datetime="2018-03-08T16:00:00.000Z" class="post-list__meta--date date">2018-03-09</time> &#8226; <span class="post-list__meta--tags tags">于 
-  <a class="tag-link" href="/tags/月升/">月升</a>
-</span><a class="btn-border-small" href="/2018/03/09/2018/03/09/">继续阅读</a></div>
-      <hr class="post-list__divider" />
-    </li>
-  
-
-  </ol>
-
-
-
-
-
-
- <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 5 : 50) },
-        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
-        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
-        messageStyle: "none"
-    });
-
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
 </script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
 </div>
+<!-- City版安装代码已完成 -->
+
+
 
             <footer class="footer">
     <span class="footer__copyright">
