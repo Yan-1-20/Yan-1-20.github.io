@@ -136,7 +136,7 @@ $(document).ready(function() {
     if (currentWidth < 960) {
 
       $('.panel-cover').css('max-width',currentWidth);
-      $('.panel-cover').animate({'max-width': '465px', 'width': '21%'}, 400, swing = 'swing', function() {} );
+      $('.panel-cover').animate({'max-width': '480px', 'width': '26%'}, 400, swing = 'swing', function() {} );
 
       $('.panel-cover').addClass('panel-cover--collapsed');
       $('.content-wrapper').addClass('animated slideInRight');
@@ -144,7 +144,7 @@ $(document).ready(function() {
 
 
       $('.panel-cover').css('max-width',currentWidth);
-      $('.panel-cover').animate({'max-width': '465px', 'width': '21%'}, 400, swing = 'swing', function() {} );
+      $('.panel-cover').animate({'max-width': '480px', 'width': '26%'}, 400, swing = 'swing', function() {} );
       $('.panel-cover').addClass('panel-cover--collapsed');
       $('.content-wrapper').addClass('animated slideInRight');
 
@@ -172,7 +172,7 @@ $(document).ready(function() {
 
   $('.btn-mobile-menu__icon').click(function() {
 
-  $('.panel-cover').animate({'max-width': '465px', 'width': '21%'}, 400, swing = 'swing', function() {} );
+  $('.panel-cover').animate({'max-width': '480px', 'width': '26%'}, 400, swing = 'swing', function() {} );
 
     if ($('.navigation-wrapper').css('display') == "block") {
       $('.navigation-wrapper').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
@@ -188,7 +188,7 @@ $(document).ready(function() {
 
   $('.navigation-wrapper .blog-button').click(function() {
 
-    $('.panel-cover').animate({'max-width': '465px', 'width': '21%'}, 400, swing = 'swing', function() {} );
+    $('.panel-cover').animate({'max-width': '480px', 'width': '26%'}, 400, swing = 'swing', function() {} );
 
 
     if ($('.navigation-wrapper').css('display') == "block") {
