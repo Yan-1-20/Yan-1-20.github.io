@@ -1,177 +1,130 @@
 <!DOCTYPE html>
-<html lang="z">
-<head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    
-    <title>Retdec 能反mips 源码的IDA插件了解一下 | Yan_1_20</title>
-    <meta name="renderer" content="webkit">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Yan_1_20">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Retdec 能反mips 源码的IDA插件了解一下"/>
+  <meta property="og:description" content="pop pop ret" />
+  <meta property="og:site_name" content="Yan_1_20"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://yan-1-20.github.ioundefined"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Yan_1_20" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
 
-    <meta name="description" content="pop,pop,ret">
+  <!-- Site Title -->
+  <title>Yan_1_20</title>
 
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Retdec 能反mips 源码的IDA插件了解一下 | Yan_1_20">
-    <meta name="twitter:description" content="pop,pop,ret">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.dark.css">
 
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="Retdec 能反mips 源码的IDA插件了解一下 | Yan_1_20">
-    <meta property="og:description" content="pop,pop,ret">
+  <!-- Google Analytics -->
+  
 
-    
-    <meta name="author" content="Yan_1_20">
-    
-    <link rel="stylesheet" href="/css/vno.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-
-    
-    <link rel="icon" href="/image/avatar-small.png">
-    
-
-    <meta name="generator" content="hexo"/>
-    
-
-    <link rel="canonical" href="http://yan-1-20.github.io/2018/06/06/2018/06/2018-06-06/"/>
-
-                 
 </head>
 
-<body class="home-template no-js">
-    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-    <script src="/js/main.js"></script>
-
-    <span class="mobile btn-mobile-menu">
-        <i class="fa fa-list btn-mobile-menu__icon"></i>
-        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
-    </span>
+  <body>
+    <!-- Page Header -->
 
 
-    
-
-<span class="local-search local-search-plugin" style="position:absolute;right:250px;top:42px">
-  <input  results="s" type="search" placeholder="" id="local-search-input" class="local-search-input-cls" style="">
-  <i class="icon" aria-hidden="true">🔍</i>
-
-  <div id="local-search-result" class="local-search-result-cls"></div>
-
-</span>
-
-    
-<header class="panel-cover panel-cover--collapsed">
-
-
-
-  <div class="panel-main">
-    <div class="panel-main__inner panel-inverted">
-    <div class="panel-main__content">
-
-
-
-        <a href="/" title="前往 Yan_1_20 的主页"><img src="/image/avatar.jpg" width="80" alt="Yan_1_20 logo" class="panel-cover__logo logo" /></a>
-        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for Yan_1_20">Yan_1_20</a></h1>
-        
-        <hr class="panel-cover__divider" />
-        <p class="panel-cover__description">pop pop ret</p>
-        <hr class="panel-cover__divider panel-cover__divider--secondary" />
-
-        <div class="navigation-wrapper">
-          <div>
-          <nav class="cover-navigation cover-navigation--primary">
-            <ul class="navigation">
-              <li class="navigation__item"><a href="/#blog" title="访问博客" class="blog-button">文章</a></li>
-            
-              <li class="navigation__item"><a href="/photoalbum/CrackMe.html">相册</a></li>
-            
-              <li class="navigation__item"><a href="/about">关于我</a></li>
-            
-            </ul>
-          </nav>
-          </div>
-          <div>
-          <nav class="cover-navigation navigation--social">
-  <ul class="navigation">
-
-  <!-- Weibo-->
-  
-  <li class="navigation__item">
-    <a href="https://weibo.com/6016118396" title="我的微博" target="_blank">
-      <i class='social fa fa-weibo'></i>
-      <span class="label">Weibo</span>
-    </a>
-  </li> 
-
-
-  <!-- Github -->
-  
-  <li class="navigation__item">
-    <a href="https://github.com/Yan-1-20" title="查看我的GitHub主页" target="_blank">
-      <i class='social fa fa-github'></i>
-      <span class="label">Github</span>
-    </a>
-  </li>
-
-
-<!-- Stack Overflow -->
-        
-
-  <!-- Google Plus -->
-  
-
-<!-- Facebook -->
-
-  
-<!-- Twitter -->
-
-  
-
-
-
-  </ul>
-</nav>
-
-          </div>
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Retdec 能反mips 源码的IDA插件了解一下</p>
+          <p class="subtitle"></p>
         </div>
-
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/tags/index.html">
+                  
+                  tags
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/<your-github-username>">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:<your-email-address>">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
       </div>
-
     </div>
-    <div class="panel-cover--overlay cover-purple"></div>
-
   </div>
-
-
-
 </header>
 
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Yan_1_20</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-06-06</span>
+            <span class="time">00:12:36</span>
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
 
-    <div class="content-wrapper">
-        <div class="content-wrapper__inner">
-            <article class="post-container post-container--single">
-
-  <header class="post-header">
-    <div class="post-meta">
-      <time datetime="2018-06-05T16:00:00.000Z" class="post-list__meta--date date">2018-06-06</time> &#8226;
-      <span class="post-meta__tags tags">于 
-  <a class="tag-link" href="/tags/路由器/">路由器</a>
- </span>
-      <span class="page-pv">
-       阅读 <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
-      </span>
+<a class="tag" href="/tags/路由器/">#路由器</a>
 
 
-    </div>
-    <h1 class="post-title">Retdec 能反mips 源码的IDA插件了解一下</h1>
-
-
-
-  </header>
-
-  <section class="post">
-    <p>路由器固件分析，一直苦于IDA F5插件不支持 mips，多方寻找后发现了Retdec（不支持ida 7.x 系列）</p>
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>路由器固件分析，一直苦于IDA F5插件不支持 mips，多方寻找后发现了Retdec（不支持ida 7.x 系列）</p>
 <p>官网地址：<a href="https://retdec.com/idaplugin/" target="_blank" rel="external">Retdec官网</a></p>
 <p>IDA插件gayhub：<a href="https://github.com/avast-tl/retdec-idaplugin" target="_blank" rel="external">Retdec idaplugin</a></p>
 <p>Retdec gayhub:<a href="https://github.com/avast-tl/retdec" target="_blank" rel="external">Retdec</a></p>
@@ -192,93 +145,42 @@
 <p>API key的获取 是通过在官网 注册一个账号，注册后登录账号点击 Account能看到自己的API key <br></p>
 <p><img src="/image/2018/06/06/07.jpg" alt=""></p>
 
-  </section>
-
+        </div>
+      </div>
+    </div>
+  </div>
 </article>
 
-<section class="read-more">
-           
-    
-        
-        
-               
-            <div class="read-more-item">
-                <span class="read-more-item-dim">更早的文章</span>
-                <h2 class="post-list__post-title post-title"><a href="/2018/05/09/2018/05/09/" title="Hexo 添加本地搜索">Hexo 添加本地搜索</a></h2>
-                <p class="excerpt">
-                
-                 这里是借鉴的这个大佬的解决方案.
- 但是这个解决方案，具体的实施还是摸索了一下，并不是直接就能拿来用。而且我针对大佬的这个方案还是修改过的，不然有点别问题(比如样式)
-新建一个名为search.ejs 的文件在 yourthemes/layout/partial/
-内容如下: 12345678&amp;l
-                &hellip;
-                </p>
-                <div class="post-list__meta"><time datetime="2018-05-08T16:00:00.000Z" class="post-list__meta--date date">2018-05-09</time> &#8226; <span class="post-list__meta--tags tags">于 
-  <a class="tag-link" href="/tags/Hexo/">Hexo</a>
-</span><a class="btn-border-small" href="/2018/05/09/2018/05/09/">继续阅读</a></div>
-                       
-            </div>
-        
-     
-   
-   
-  
-</section>
-
-  <!-- 来必力City版安装代码 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zNTkzNC8xMjQ3MA==">
-<script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-</script>
-<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
-</div>
-<!-- City版安装代码已完成 -->
 
 
-
-            <footer class="footer">
-    <span class="footer__copyright">
-        &copy; 2018 Yan_1_20 - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
-       
-    </span>
-    <span class="footer__copyright">
-             - 基于 <a href="http://hexo.io">Hexo</a> 搭建，使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">new-vno</a> 主题，由<a href="https://monniya.com ">@Monniya</a> 修改自 <a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
-         </span>
-       
-    
-    
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
 </footer>
 
 
-        </div>
-    </div>
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
 
-     
-    
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?yan120";
-            var s = document.getElementsByTagName("script")[0]; 
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
-
-
-
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-</body>
+  </body>
 </html>
+
