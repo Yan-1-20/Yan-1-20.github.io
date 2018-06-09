@@ -1,130 +1,177 @@
 <!DOCTYPE html>
-<html>
-  <!-- Html Head Tag-->
-  <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="Yan_1_20">
-  <!-- Open Graph Data -->
-  <meta property="og:title" content="C#实现SHA-256--光棍节前的代码"/>
-  <meta property="og:description" content="pop pop ret" />
-  <meta property="og:site_name" content="Yan_1_20"/>
-  <meta property="og:type" content="article" />
-  <meta property="og:image" content="http://yan-1-20.github.ioundefined"/>
-  
-    <link rel="alternate" href="/atom.xml" title="Yan_1_20" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
+<html lang="z">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>C#实现SHA-256--光棍节前的代码 | Yan_1_20</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <!-- Site Title -->
-  <title>Yan_1_20</title>
+    <meta name="description" content="pop,pop,ret">
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <!-- Custom CSS -->
-  
-  <link rel="stylesheet" href="/css/style.dark.css">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="C#实现SHA-256--光棍节前的代码 | Yan_1_20">
+    <meta name="twitter:description" content="pop,pop,ret">
 
-  <!-- Google Analytics -->
-  
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="C#实现SHA-256--光棍节前的代码 | Yan_1_20">
+    <meta property="og:description" content="pop,pop,ret">
 
+    
+    <meta name="author" content="Yan_1_20">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+    <link rel="icon" href="/image/avatar-small.png">
+    
+
+    <meta name="generator" content="hexo"/>
+    
+
+    <link rel="canonical" href="http://yan-1-20.github.io/2016/11/10/2016/11/10/"/>
+
+                 
 </head>
 
-  <body>
-    <!-- Page Header -->
+<body class="home-template no-js">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
 
 
-<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="page-title with-background-image">
-          <p class="title">C#实现SHA-256--光棍节前的代码</p>
-          <p class="subtitle"></p>
-        </div>
-        <div class="site-menu with-background-image">
-          <ul>
-            
-              <li>
-                <a href="/">
-                  
-                  Home
-                  
-                </a>
-              </li>
-            
-              <li>
-                <a href="/tags/index.html">
-                  
-                  tags
-                  
-                </a>
-              </li>
-            
-              <li>
-                <a href="/archives">
-                  
-                  Archives
-                  
-                </a>
-              </li>
-            
-              <li>
-                <a href="https://github.com/<your-github-username>">
-                  
-                  Github
-                  
-                </a>
-              </li>
-            
-              <li>
-                <a href="mailto:<your-email-address>">
-                  
-                  Email
-                  
-                </a>
-              </li>
-            
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
+    
 
-<article>
-  <div class="container typo">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="post-info text-muted">
-          
-            <!-- Author -->
-            <span class="author info">By Yan_1_20</span>
-          
-          <!-- Date -->
-          <span class="date-time info">On
-            <span class="date">2016-11-10</span>
-            <span class="time">00:12:36</span>
-          </span>
-          
-        </div>
-        <!-- Tags -->
+<span class="local-search local-search-plugin" style="position:absolute;right:250px;top:42px">
+  <input  results="s" type="search" placeholder="" id="local-search-input" class="local-search-input-cls" style="">
+  <i class="icon" aria-hidden="true"></i>
+
+  <div id="local-search-result" class="local-search-result-cls"></div>
+
+</span>
+
+    
+<header class="panel-cover panel-cover--collapsed">
+
+
+
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+
+
+        <a href="/" title="前往 Yan_1_20 的主页"><img src="/image/avatar.jpg" width="80" alt="Yan_1_20 logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for Yan_1_20">Yan_1_20</a></h1>
         
-          <div class="post-tags text-muted">
-            Tags: 
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">pop pop ret</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
 
-<a class="tag" href="/tags/Program/">#Program</a>
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="访问博客" class="blog-button">文章</a></li>
+            
+              <li class="navigation__item"><a href="/photoalbum/CrackMe.html">相册</a></li>
+            
+              <li class="navigation__item"><a href="/about">关于我</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
 
+  <!-- Weibo-->
+  
+  <li class="navigation__item">
+    <a href="https://weibo.com/6016118396" title="我的微博" target="_blank">
+      <i class='social fa fa-weibo'></i>
+      <span class="label">Weibo</span>
+    </a>
+  </li> 
+
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/Yan-1-20" title="查看我的GitHub主页" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  
+
+
+
+  </ul>
+</nav>
 
           </div>
-        
-        <!-- Post Main Content -->
-        <div class="post-content">
-          <h1 id="0x01莫名其妙的学校作业"><a href="#0x01莫名其妙的学校作业" class="headerlink" title="0x01莫名其妙的学校作业"></a>0x01莫名其妙的学校作业</h1><p>　　　　这个代码，并不是本人想写的，是的，莫名其妙的作业，类似于小毕业设计的东西。。。。代码写完还有3000字的报告。。。。。。莫名奇妙。</p>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="panel-cover--overlay cover-purple"></div>
+
+  </div>
+
+
+
+</header>
+
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2016-11-09T16:00:00.000Z" class="post-list__meta--date date">2016-11-10</time> &#8226;
+      <span class="post-meta__tags tags">于 
+  <a class="tag-link" href="/tags/Program/">Program</a>
+ </span>
+      <span class="page-pv">
+       阅读 <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span>
+
+
+    </div>
+    <h1 class="post-title">C#实现SHA-256--光棍节前的代码</h1>
+
+
+
+  </header>
+
+  <section class="post">
+    <h1 id="0x01莫名其妙的学校作业"><a href="#0x01莫名其妙的学校作业" class="headerlink" title="0x01莫名其妙的学校作业"></a>0x01莫名其妙的学校作业</h1><p>　　　　这个代码，并不是本人想写的，是的，莫名其妙的作业，类似于小毕业设计的东西。。。。代码写完还有3000字的报告。。。。。。莫名奇妙。</p>
 <h1 id="0x02代码实现"><a href="#0x02代码实现" class="headerlink" title="0x02代码实现"></a>0x02代码实现</h1><p>　　　　这个加密算法，我当时想的简单，不就是SHA-256嘛，网上代码肯定一大堆，我随便一搜一份就行，悲伤那么大，网上的全身调用库函数实现的，唯一一篇可以参考的c语言实现的，莫名的他下标访问越界的不是一点半点，直接用负数索引元素。但是除去访问越界。他的代码是炒鸡牛逼的，50行就实现了整个SHA-256，代码风格及其牛逼（很难读懂）。</p>
 <h1 id="0x03自食其力"><a href="#0x03自食其力" class="headerlink" title="0x03自食其力"></a>0x03自食其力</h1><p>　　　　没办法，找不到代码参考就只能自己写咯，参考密码学标准FIPS180-2</p>
 <blockquote>
@@ -136,42 +183,104 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">using System;</div><div class="line">using System.Collections.Generic;</div><div class="line">using System.Linq;</div><div class="line">using System.Text;</div><div class="line">using System.Threading.Tasks;</div><div class="line">using System.Text;</div><div class="line">using SHA_256;</div><div class="line"></div><div class="line">namespace SHA_256</div><div class="line">&#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Program</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span><span class="params">(string[] args)</span></span></div><div class="line">        &#123;</div><div class="line">            Encoding enc = <span class="keyword">new</span> UTF8Encoding(<span class="keyword">true</span>, <span class="keyword">true</span>);</div><div class="line">            <span class="comment">//C#默认unicode编码，上面的类可以把其转换为多字节编码</span></div><div class="line">            encode MYSHA = <span class="keyword">new</span> encode();</div><div class="line">            Console.WriteLine(<span class="string">"input you data encode sha-256:"</span>);</div><div class="line">            string str = Console.ReadLine();</div><div class="line">            <span class="keyword">byte</span>[] bte = enc.GetBytes(str);</div><div class="line">            <span class="keyword">int</span> encodedatelength = bte.Length;</div><div class="line">            <span class="keyword">int</span> encodenumber = <span class="number">0</span>;</div><div class="line">            <span class="keyword">byte</span>[] MM;</div><div class="line">            <span class="keyword">if</span> (encodedatelength &gt;= <span class="number">56</span>)</div><div class="line">            &#123;</div><div class="line">                encodenumber = encodedatelength / <span class="number">56</span>;</div><div class="line">            &#125;</div><div class="line">            MM = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">64</span> * (encodenumber + <span class="number">1</span>)];</div><div class="line">            MYSHA.FillDate(bte, encodedatelength, MM, encodenumber);  <span class="comment">// ok</span></div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; encodenumber + <span class="number">1</span>; i++)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">byte</span>[] M = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">64</span>];</div><div class="line">                MYSHA.GetMbyte(MM, M, encodenumber + <span class="number">1</span>,i);   <span class="comment">//ok</span></div><div class="line">                uint[] m = <span class="keyword">new</span> uint[<span class="number">16</span>];</div><div class="line">                MYSHA.Getmint(M, m, encodenumber + <span class="number">1</span>);    <span class="comment">//ok</span></div><div class="line">                uint[] W = <span class="keyword">new</span> uint[<span class="number">64</span>];</div><div class="line">                MYSHA.initialW(m, W, encodenumber + <span class="number">1</span>);</div><div class="line">                MYSHA.initialregister();</div><div class="line">                MYSHA.endcode(W, encodenumber + <span class="number">1</span>);</div><div class="line">            &#125;</div><div class="line">          MYSHA.printencode();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>。。。。</p>
 
-        </div>
-      </div>
-    </div>
-  </div>
+  </section>
+
 </article>
 
+<section class="read-more">
+           
+    
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">最近的文章</span>
+                <h2 class="post-list__post-title post-title"><a href="/2016/11/13/2016/11/13/" title="CVE-2012-003">CVE-2012-003</a></h2>
+                <p class="excerpt">
+                
+                CVE-2012-003 Microsoft Winodws Media Player Wimm.dll Heap Overflow0x1 序　　　　因为这个CVE是跟着泉哥的书复现学习的，所以具体的细节我就不多说，本来就按这泉哥的思路走的，也没必要把他的操作模仿一次。我只想记录我自己对这个CVE的
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2016-11-12T16:00:00.000Z" class="post-list__meta--date date">2016-11-13</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/MS-Heap-Overflow/">MS-Heap-Overflow</a>
+</span><a class="btn-border-small" href="/2016/11/13/2016/11/13/">继续阅读</a></div>
+                           
+            </div>
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">更早的文章</span>
+                <h2 class="post-list__post-title post-title"><a href="/2016/10/31/2016/10/31/" title="10月-&gt;月末总结">10月-&gt;月末总结</a></h2>
+                <p class="excerpt">
+                
+                10月-&amp;gt;月末总结　0x01-&amp;gt;感悟　　　　　这个月是复现cve的第一个月，跟着看了学习了不少知识，不得不说看着大牛的文章学到了很多，分为几个方面，一是调试器的使用，学到了很多新的用法，这是一起没有接触到的，二是这些新鲜的实战利用手法，这是只看二进制基础不可及的，三是对汇编编写、pyth
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2016-10-30T16:00:00.000Z" class="post-list__meta--date date">2016-10-31</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/summary/">summary</a>
+</span><a class="btn-border-small" href="/2016/10/31/2016/10/31/">继续阅读</a></div>
+                       
+            </div>
+        
+     
+   
+   
+  
+</section>
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zNTkzNC8xMjQ3MA==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
 
 
-    <!-- Footer -->
-<footer>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <p class="copyright text-muted">
-          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
-          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
-        <p class="copyright text-muted">
-          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
-        </p>
-      </div>
-    </div>
-  </div>
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        &copy; 2018 Yan_1_20 - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+       
+    </span>
+    <span class="footer__copyright">
+             - 基于 <a href="http://hexo.io">Hexo</a> 搭建，使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">new-vno</a> 主题，由<a href="https://monniya.com ">@Monniya</a> 修改自 <a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
+         </span>
+       
+    
+    
 </footer>
 
 
-    <!-- After Footer Scripts -->
-<script src="/js/highlight.pack.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function(event) {
-    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
-    codeBlocks.forEach(function(block, index) {
-      hljs.highlightBlock(block);
-    });
-  });
-</script>
+        </div>
+    </div>
 
-  </body>
+     
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?yan120";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
 </html>
-
