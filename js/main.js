@@ -157,14 +157,15 @@ $(document).ready(function() {
     $('.panel-cover').animate({}, 400, swing = 'swing', function() {} );
   }
 
-  if (window.location.pathname.substring(0, 5) == "/tag/") {
-
+  if (window.location.pathname == "/tags/") {
 
     $('.panel-cover').addClass('panel-cover--collapsed');
       $('.panel-cover').animate({}, 400, swing = 'swing', function() {} );
+    alert(1);
   }
 
-  if (window.location.pathname.substring(0, 6) == "/page/") {
+  if (window.location.pathname== "/page/") {
+
     $('.panel-cover').addClass('panel-cover--collapsed');
       $('.panel-cover').animate({}, 400, swing = 'swing', function() {} );
   }
