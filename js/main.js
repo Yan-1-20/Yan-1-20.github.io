@@ -164,7 +164,7 @@ $(document).ready(function() {
     alert(1);
   }
 
-  if (window.location.pathname== "/page/") {
+  if (window.location.pathname.substr(0,6)== "/page/") {
 
     $('.panel-cover').addClass('panel-cover--collapsed');
       $('.panel-cover').animate({}, 400, swing = 'swing', function() {} );

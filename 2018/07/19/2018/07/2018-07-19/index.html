@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="z">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>CVE-2018-5146 复现的准备工作——ogg格式解析工具ogginfo项目编译 | Yan_1_20</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="pop,pop,ret">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="CVE-2018-5146 复现的准备工作——ogg格式解析工具ogginfo项目编译 | Yan_1_20">
+    <meta name="twitter:description" content="pop,pop,ret">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="CVE-2018-5146 复现的准备工作——ogg格式解析工具ogginfo项目编译 | Yan_1_20">
+    <meta property="og:description" content="pop,pop,ret">
+
+    
+    <meta name="author" content="Yan_1_20">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+    <link rel="icon" href="/image/avatar-small.png">
+    
+
+    <meta name="generator" content="hexo"/>
+    
+
+    <link rel="canonical" href="http://yan-1-20.github.io/2018/07/19/2018/07/2018-07-19/"/>
+
+                 
+</head>
+
+<body class="home-template no-js">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+
+    
+    
+<header class="panel-cover panel-cover--collapsed">
+
+
+
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+
+
+        <a href="/" title="前往 Yan_1_20 的主页"><img src="/image/avatar.jpg" width="80" alt="Yan_1_20 logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for Yan_1_20">Yan_1_20</a></h1>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">pop pop ret</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="访问博客" class="blog-button">文章</a></li>
+            
+              <li class="navigation__item"><a href="/photoalbum/CrackMe.html">相册</a></li>
+            
+              <li class="navigation__item"><a href="/log">打卡</a></li>
+            
+              <li class="navigation__item"><a href="/about">关于</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+  <li class="navigation__item">
+    <a href="https://weibo.com/6016118396" title="我的微博" target="_blank">
+      <i class='social fa fa-weibo'></i>
+      <span class="label">Weibo</span>
+    </a>
+  </li> 
+
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/Yan-1-20" title="查看我的GitHub主页" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  
+
+
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="panel-cover--overlay cover-purple"></div>
+
+  </div>
+
+
+
+</header>
+
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2018-07-18T16:00:00.000Z" class="post-list__meta--date date">2018-07-19</time> &#8226;
+      <span class="post-meta__tags tags">于 
+  <a class="tag-link" href="/tags/vulnerability/">vulnerability</a>
+
+ </span>
+      <span class="page-pv">
+       阅读 <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span>
+
+
+    </div>
+    <h1 class="post-title">CVE-2018-5146 复现的准备工作——ogg格式解析工具ogginfo项目编译</h1>
+
+
+
+  </header>
+
+  <section class="post">
+    <h2 id="0x00项目下载"><a href="#0x00项目下载" class="headerlink" title="0x00项目下载"></a>0x00项目下载</h2><p><a href="https://xiph.org/downloads/#third_party" target="_blank" rel="external">ogg项目地址</a></p>
+<p><a href="https://github.com/xiph/vorbis-tools" target="_blank" rel="external">libogg tools github项目地址</a></p>
+<p>ogg项目里选择libogg和libvorbis下载,这是编译ogginfo需要的库:<br><img src="/image/2018/07/19/01.jpg" alt=""></p>
+<p>libogg tools github项目 一定要用github的版本，不要在ogg项目里下载。<br>直接clone</p>
+<blockquote>
+<p>git clone <a href="https://github.com/xiph/vorbis-tools" target="_blank" rel="external">https://github.com/xiph/vorbis-tools</a></p>
+</blockquote>
+<p>下好这个三个包之后，按照顺序依次编译，因为依次依赖。</p>
+<h2 id="0x01-编译-libogg"><a href="#0x01-编译-libogg" class="headerlink" title="0x01 编译 libogg"></a>0x01 编译 libogg</h2><p>解压libogg之后进入如下目录</p>
+<p><img src="/image/2018/07/19/02.jpg" alt=""></p>
+<p>分别选择 libogg_dynamic.sln和libogg_static.sln 进行编译<br>编译的结果如下</p>
+<p><img src="/image/2018/07/19/03.jpg" alt=""></p>
+<h2 id="0x02-编译-libvorbis"><a href="#0x02-编译-libvorbis" class="headerlink" title="0x02 编译 libvorbis"></a>0x02 编译 libvorbis</h2><p>解压libvorbis之后进入如下目录</p>
+<p><img src="/image/2018/07/19/04.jpg" alt=""></p>
+<p>我们仍然要对dynamic.sln和static.sln 进行编译</p>
+<h3 id="0x02-00首先编译-static-sln"><a href="#0x02-00首先编译-static-sln" class="headerlink" title="0x02_00首先编译 static.sln"></a>0x02_00首先编译 static.sln</h3><p>但是直接编译会报错</p>
+<p><img src="/image/2018/07/19/05.jpg" alt=""></p>
+<p>则需要补头文件 ogg/ogg.h 是上一个项目libogg里面的</p>
+<p><img src="/image/2018/07/19/06.jpg" alt=""></p>
+<p>把里面的 ogg 文件整个放到 libvorbis项目的如下目录</p>
+<p><img src="/image/2018/07/19/07.jpg" alt=""></p>
+<p>接着还要修改 libvorbis项目关于 ogg头文件的引用<br>对libvorbisfile项目-&gt;属性</p>
+<p><img src="/image/2018/07/19/08.jpg" alt=""></p>
+<p>接着 C/C++ -&gt;常规-&gt;附加包含目录-&gt;编辑</p>
+<p><img src="/image/2018/07/19/09.jpg" alt=""></p>
+<p>修改为如下内容</p>
+<p><img src="/image/2018/07/19/10.jpg" alt=""></p>
+<p>然后 确定-&gt;应用 开始编译</p>
+<p>dynamic.sln和static.sln 进行编译</p>
+<p>编译完成</p>
+<h3 id="0x02-01接下来编译-dynamic-sln"><a href="#0x02-01接下来编译-dynamic-sln" class="headerlink" title="0x02_01接下来编译 dynamic.sln"></a>0x02_01接下来编译 dynamic.sln</h3><p>还是和static.sln 一样修改 ogg头文件的引用</p>
+<p>然后开始编译 ，失败显示缺 libogg_static.lib</p>
+<p><img src="/image/2018/07/19/11.jpg" alt=""></p>
+<p>补 libogg_static.lib，把 libogg 项目里编译好的libogg_static.lib<br>复制到 libvorbis项目里 libvorbis和libvorbisfile文件夹下</p>
+<p><img src="/image/2018/07/19/12.jpg" alt=""><br><img src="/image/2018/07/19/13.jpg" alt=""><br><img src="/image/2018/07/19/14.jpg" alt=""></p>
+<p>开始编译，编译成功</p>
+<h2 id="0x03-编译-ogginfo"><a href="#0x03-编译-ogginfo" class="headerlink" title="0x03 编译 ogginfo"></a>0x03 编译 ogginfo</h2><p>解压vorbis-tools-master之后进入如下目录,加载vorbis-tools.sln<br><img src="/image/2018/07/19/15.jpg" alt=""></p>
+<p>设置ogginfo 为启动项，然后开始编译</p>
+<p><img src="/image/2018/07/19/16.jpg" alt=""></p>
+<p>编译失败</p>
+<p><img src="/image/2018/07/19/17.jpg" alt=""></p>
+<p>则和上面一样先补包</p>
+<p><img src="/image/2018/07/19/18.jpg" alt=""></p>
+<p>改对库文件的引用目录，发现对vorbis库也有引用，则也一并补了，并修改其引用目录</p>
+<p><img src="/image/2018/07/19/19.jpg" alt=""><br><img src="/image/2018/07/19/20.jpg" alt=""><br><img src="/image/2018/07/19/21.jpg" alt=""></p>
+<p>接着编译报错</p>
+<p><img src="/image/2018/07/19/22.jpg" alt=""></p>
+<p>把我们之前编译的好的libogg.lib 移动到ogginfo项目下来</p>
+<p><img src="/image/2018/07/19/23.jpg" alt=""></p>
+<p>继续编译 报错</p>
+<p><img src="/image/2018/07/19/24.jpg" alt=""></p>
+<p>把我们之前编译的好的libogg.lib 移动到ogginfo项目下来</p>
+<p><img src="/image/2018/07/19/25.jpg" alt=""></p>
+<p><img src="/image/2018/07/19/26.jpg" alt=""></p>
+<p>编译! 报错 缺两个dll<br><img src="/image/2018/07/19/27.jpg" alt=""><br><img src="/image/2018/07/19/28.jpg" alt=""></p>
+<p>接着把这两个dll 拷贝过来</p>
+<p><img src="/image/2018/07/19/29.jpg" alt=""><br><img src="/image/2018/07/19/30.jpg" alt=""><br><img src="/image/2018/07/19/31.jpg" alt=""></p>
+<p>编译 成功</p>
+<p><img src="/image/2018/07/19/32.jpg" alt=""></p>
+
+  </section>
+
+</article>
+
+<section class="read-more">
+           
+    
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">更早的文章</span>
+                <h2 class="post-list__post-title post-title"><a href="/2018/07/14/2018/07/2018-07-14/" title="地球online更新版本--新的一章">地球online更新版本--新的一章</a></h2>
+                <p class="excerpt">
+                
+                  
+　　呐，今天大概规划了自己的工作后的目标，为了记录我追寻这些目标的过程，我开启打卡模块。而我追寻的目标为研究漏洞相关，主要包括:
+
+挖洞(目前的眼界暂定了web洞和二进制洞，web主要是php代码审计。二进制包括pdf,浏览器，路由器，linux内核，windows内核，android驱动，w
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2018-07-13T16:00:00.000Z" class="post-list__meta--date date">2018-07-14</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/summary/">summary</a>
+
+</span><a class="btn-border-small" href="/2018/07/14/2018/07/2018-07-14/">继续阅读</a></div>
+                       
+            </div>
+        
+     
+   
+   
+  
+</section>
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zNTkzNC8xMjQ3MA==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        &copy; 2018 Yan_1_20 - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+
+    </span>
+    <span class="footer__copyright">
+             - 基于 <a href="http://hexo.io">Hexo</a> 搭建，使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">new-vno</a> 主题，由<a href="https://monniya.com ">@Monniya</a> 修改自 <a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
+         </span>
+
+
+  
+</footer>
+
+        </div>
+    </div>
+
+     
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?yan120";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
