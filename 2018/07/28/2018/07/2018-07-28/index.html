@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     
-    <title>Yan_1_20</title>
+    <title>IE Browser js Fuzzer opensource | Yan_1_20</title>
     <meta name="renderer" content="webkit">
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -15,11 +15,11 @@
     <meta name="description" content="pop,pop,ret">
 
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Yan_1_20">
+    <meta name="twitter:title" content="IE Browser js Fuzzer opensource | Yan_1_20">
     <meta name="twitter:description" content="pop,pop,ret">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Yan_1_20">
+    <meta property="og:title" content="IE Browser js Fuzzer opensource | Yan_1_20">
     <meta property="og:description" content="pop,pop,ret">
 
     
@@ -35,7 +35,7 @@
     <meta name="generator" content="hexo"/>
     
 
-    <link rel="canonical" href="http://yan-1-20.github.io/log/index.html"/>
+    <link rel="canonical" href="http://yan-1-20.github.io/2018/07/28/2018/07/2018-07-28/"/>
 
                  
 </head>
@@ -146,72 +146,77 @@
             <article class="post-container post-container--single">
 
   <header class="post-header">
-    <h1 class="post-title"></h1>
+    <div class="post-meta">
+      <time datetime="2018-07-27T16:00:00.000Z" class="post-list__meta--date date">2018-07-28</time> &#8226;
+      <span class="post-meta__tags tags">于 
+  <a class="tag-link" href="/tags/Fuzzing/">Fuzzing</a>
+
+ </span>
+      <span class="page-pv">
+       阅读 <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span>
+
+
+    </div>
+    <h1 class="post-title">IE Browser js Fuzzer opensource</h1>
+
+
+
   </header>
 
   <section class="post">
-    <ul>
-<li><font color="tomato" size="4">未打卡</font></li>
-<li><font color="LightSkyBlue" size="4">打卡</font>
-
-</li>
-</ul>
-<h1 id="July"><a href="#July" class="headerlink" title="July"></a>July</h1><ul>
-<li><font color="tomato" size="4">2018-07-25</font><ul>
-<li>　未打卡(私事)</li>
-</ul>
-</li>
-<li><font color="tomato" size="4">2018-07-24</font><ul>
-<li>　未打卡(私事)</li>
-</ul>
-</li>
-<li><font color="tomato" size="4">2018-07-23</font><ul>
-<li>　未打卡(私事)</li>
-</ul>
-</li>
-<li><font color="tomato" size="4">2018-07-22</font><ul>
-<li>　未打卡(私事)</li>
-</ul>
-</li>
-<li><font color="tomato" size="4">2018-07-21</font><ul>
-<li>　未打卡(私事)</li>
-</ul>
-</li>
-<li><font color="tomato" size="4">2018-07-20</font><ul>
-<li>　未打卡(私事)</li>
-</ul>
-</li>
-<li><font color="LightSkyBlue" size="4">2018-07-19</font><ul>
-<li>　完成了ogginfo 项目的编译，写一篇博文</li>
-</ul>
-</li>
-<li><p><font color="LightSkyBlue" size="4">2018-07-18</font></p>
-<ul>
-<li>　[1]研究了一下winafl fuzz 带GUI程序的问题，发现暂时真找不到退出GUI程序方法，<br>可能真的只能Fuzz DLL,然后接下来可能会试试AFL的上手和深入学习winAFL吧<br>[2]开始了CVE-2018-5146复现的准备工作，准备复现的poc.<br>对ogg项目尝试编译 [3]读了安全客的一篇<a href="https://www.anquanke.com/post/id/151898" target="_blank" rel="external">使用IDApython进行漏洞挖掘的文章</a>，觉<br>得挺有意思的，想深入学习一下这个IDApython 来进行自动化漏洞代码分析.</li>
-</ul>
-</li>
-<li><p><font color="tomato" size="4">2018-07-17</font></p>
-<ul>
-<li>　未打卡，昨天熬夜晚上太累，加上工作繁忙</li>
-</ul>
-</li>
-<li><p><font color="LightSkyBlue" size="4">2018-07-16</font></p>
-<ul>
-<li>　完成了winafl的使用方法研究，和编写了winAfl的dll 测试用例</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><font color="tomato" size="4">2018-07-15</font><ul>
-<li>　今天就水了水吧，给未来3个月定了一个计划加油，希望自己坚持打卡！</li>
-</ul>
-</li>
-</ul>
+    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这是个半成品项目，js样本生成引擎是我自己写的一个demo,没有参考任何开源js生成引擎，<br>这个demo是由我实习的时候想添加给公司项目的一个功能——变量传递、联动进一步演变来的。所以<br>这个js样本生成引擎其实主要功能就是完成了当初我想实现未能实现的功能，变量传递、联动。然<br>后添加了一些简单的语法，所以生成的代码样式单一（肯定不能跑出crash）。嗯，那这个项目有什<br>么用呢？我想这个项目虽然不能跑出洞，但是它也基本具备了一个fuzzer具备的功能：样本生成引<br>擎、崩溃检测程序、Crash记录、多进程fuzz。我想如果有需要学习fuzz的朋友可以通过它来学习<br>认识fuzz.虽然它很简陋。</p>
+<h2 id="变量传递"><a href="#变量传递" class="headerlink" title="变量传递"></a>变量传递</h2><p>变量传递，我是通过栈数据结构实现的，同一个作用域内的所有变量，由某一个链表存储，而这个链<br>表地址存储在一个某一层栈中，上一层栈里存储着作用域更低的一个链表地址，这个链表里同样有着<br>属于同一作用域的一些变量。当要退出某作用域时，只需要像汇编里的 pop 一样，把对应栈里的链<br>表内容释放即可。</p>
+<h2 id="崩溃检测"><a href="#崩溃检测" class="headerlink" title="崩溃检测"></a>崩溃检测</h2><p>崩溃检测，是由createprocess 函数设置为Debug模式来进行获取程序执行的异常码，类似OD能捕<br>获到各种异常一样。当捕获到栈溢出、访问地址无效、除零异常 等等时就可以判断有一个crash。</p>
+<h2 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h2><p>IE 需要设置IE为单进程模式才能进行多进程跑。 网上的教程很多</p>
+<blockquote>
+<p>regedit运行注册表编辑器，依次展开到HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main分支，在右侧窗口中查找并双击“TabProcGrowth”（如果没有，请新建一个DWORD32值，并将其命名为TabProcGrowth），在弹出的对话框中输入“0”或者“1”。</p>
+</blockquote>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>把 编译好的 jsfuzz_2018和check_crash_LI 放到 编译好的Crash<em>afl</em> 下 然后运行Crash<em>afl</em>.exe<br>(Crash<em>afl</em> 只是一个高仿afl的UI程序和afl 没有任何关系)</p>
+<p><img src="/image/2018/07/28/01.jpg" alt=""></p>
+<p>运行效果如下：</p>
+<p><img src="/image/2018/07/28/02.jpg" alt=""></p>
+<h2 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h2><blockquote>
+<p><a href="https://github.com/Yan-1-20/IE_JS_Fuzz_demo" target="_blank" rel="external">https://github.com/Yan-1-20/IE_JS_Fuzz_demo</a></p>
+</blockquote>
 
   </section>
+
 </article>
 
-<!-- 来必力City版安装代码 -->
+<section class="read-more">
+           
+    
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">更早的文章</span>
+                <h2 class="post-list__post-title post-title"><a href="/2018/07/19/2018/07/2018-07-19/" title="CVE-2018-5146 复现的准备工作——ogg格式解析工具ogginfo项目编译">CVE-2018-5146 复现的准备工作——ogg格式解析工具ogginfo项目编译</a></h2>
+                <p class="excerpt">
+                
+                0x00项目下载ogg项目地址
+libogg tools github项目地址
+ogg项目里选择libogg和libvorbis下载,这是编译ogginfo需要的库:
+libogg tools github项目 一定要用github的版本，不要在ogg项目里下载。直接clone
+
+git clone
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2018-07-18T16:00:00.000Z" class="post-list__meta--date date">2018-07-19</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/vulnerability/">vulnerability</a>
+
+</span><a class="btn-border-small" href="/2018/07/19/2018/07/2018-07-19/">继续阅读</a></div>
+                       
+            </div>
+        
+     
+   
+   
+  
+</section>
+
+  <!-- 来必力City版安装代码 -->
 <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTkzNC8xMjQ3MA==">
 <script type="text/javascript">
    (function(d, s) {
@@ -229,6 +234,7 @@
 <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
 </div>
 <!-- City版安装代码已完成 -->
+
 
 
             <footer class="footer">

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[IE Browser js Fuzzer opensource]]></title>
+    <url>%2F2018%2F07%2F28%2F2018%2F07%2F2018-07-28%2F</url>
+    <content type="text"><![CDATA[前言这是个半成品项目，js样本生成引擎是我自己写的一个demo,没有参考任何开源js生成引擎，这个demo是由我实习的时候想添加给公司项目的一个功能——变量传递、联动进一步演变来的。所以这个js样本生成引擎其实主要功能就是完成了当初我想实现未能实现的功能，变量传递、联动。然后添加了一些简单的语法，所以生成的代码样式单一（肯定不能跑出crash）。嗯，那这个项目有什么用呢？我想这个项目虽然不能跑出洞，但是它也基本具备了一个fuzzer具备的功能：样本生成引擎、崩溃检测程序、Crash记录、多进程fuzz。我想如果有需要学习fuzz的朋友可以通过它来学习认识fuzz.虽然它很简陋。 变量传递变量传递，我是通过栈数据结构实现的，同一个作用域内的所有变量，由某一个链表存储，而这个链表地址存储在一个某一层栈中，上一层栈里存储着作用域更低的一个链表地址，这个链表里同样有着属于同一作用域的一些变量。当要退出某作用域时，只需要像汇编里的 pop 一样，把对应栈里的链表内容释放即可。 崩溃检测崩溃检测，是由createprocess 函数设置为Debug模式来进行获取程序执行的异常码，类似OD能捕获到各种异常一样。当捕获到栈溢出、访问地址无效、除零异常 等等时就可以判断有一个crash。 多进程IE 需要设置IE为单进程模式才能进行多进程跑。 网上的教程很多 regedit运行注册表编辑器，依次展开到HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main分支，在右侧窗口中查找并双击“TabProcGrowth”（如果没有，请新建一个DWORD32值，并将其命名为TabProcGrowth），在弹出的对话框中输入“0”或者“1”。 使用把 编译好的 jsfuzz_2018和check_crash_LI 放到 编译好的Crashafl 下 然后运行Crashafl.exe(Crashafl 只是一个高仿afl的UI程序和afl 没有任何关系) 运行效果如下： 项目地址 https://github.com/Yan-1-20/IE_JS_Fuzz_demo]]></content>
+      <tags>
+        <tag>Fuzzing</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[CVE-2018-5146 复现的准备工作——ogg格式解析工具ogginfo项目编译]]></title>
     <url>%2F2018%2F07%2F19%2F2018%2F07%2F2018-07-19%2F</url>
     <content type="text"><![CDATA[0x00项目下载ogg项目地址 libogg tools github项目地址 ogg项目里选择libogg和libvorbis下载,这是编译ogginfo需要的库: libogg tools github项目 一定要用github的版本，不要在ogg项目里下载。直接clone git clone https://github.com/xiph/vorbis-tools 下好这个三个包之后，按照顺序依次编译，因为依次依赖。 0x01 编译 libogg解压libogg之后进入如下目录 分别选择 libogg_dynamic.sln和libogg_static.sln 进行编译编译的结果如下 0x02 编译 libvorbis解压libvorbis之后进入如下目录 我们仍然要对dynamic.sln和static.sln 进行编译 0x02_00首先编译 static.sln但是直接编译会报错 则需要补头文件 ogg/ogg.h 是上一个项目libogg里面的 把里面的 ogg 文件整个放到 libvorbis项目的如下目录 接着还要修改 libvorbis项目关于 ogg头文件的引用对libvorbisfile项目-&gt;属性 接着 C/C++ -&gt;常规-&gt;附加包含目录-&gt;编辑 修改为如下内容 然后 确定-&gt;应用 开始编译 dynamic.sln和static.sln 进行编译 编译完成 0x02_01接下来编译 dynamic.sln还是和static.sln 一样修改 ogg头文件的引用 然后开始编译 ，失败显示缺 libogg_static.lib 补 libogg_static.lib，把 libogg 项目里编译好的libogg_static.lib复制到 libvorbis项目里 libvorbis和libvorbisfile文件夹下 开始编译，编译成功 0x03 编译 ogginfo解压vorbis-tools-master之后进入如下目录,加载vorbis-tools.sln 设置ogginfo 为启动项，然后开始编译 编译失败 则和上面一样先补包 改对库文件的引用目录，发现对vorbis库也有引用，则也一并补了，并修改其引用目录 接着编译报错 把我们之前编译的好的libogg.lib 移动到ogginfo项目下来 继续编译 报错 把我们之前编译的好的libogg.lib 移动到ogginfo项目下来 编译! 报错 缺两个dll 接着把这两个dll 拷贝过来 编译 成功]]></content>
       <tags>
         <tag>vulnerability</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[地球online更新版本--新的一章]]></title>
-    <url>%2F2018%2F07%2F14%2F2018%2F07%2F2018-07-14%2F</url>
-    <content type="text"><![CDATA[呐，今天大概规划了自己的工作后的目标，为了记录我追寻这些目标的过程，我开启打卡模块。而我追寻的目标为研究漏洞相关，主要包括: 挖洞(目前的眼界暂定了web洞和二进制洞，web主要是php代码审计。二进制包括pdf,浏览器，路由器，linux内核，windows内核，android驱动，windows驱动，linux驱动，andoroid framework。另外以太坊合约洞也想进行尝试一番嘿嘿，但是没时间啊。) 写漏洞利用(主要是辅助二进制漏洞挖掘写漏洞利用) 暂时就这样吧。 上面的目标其实涵盖的面很广很多，而且内容难度较大甚至说是现阶段的我根本难以触摸的， 但是没有办法路即使远也还是要走。自己的既然辞掉了360选择了成都放弃了北京，那没有外界 环境的引导就只能自己给自己打气了！另外，鼓吹一波，成都除了360以外还有一个牛逼的漏洞 团队–云图信安！，由衷的感谢云神给我提供的实习机会，和给我在技术思想上的指导。哎，只 怪自己年轻不懂事啊。 接下来的会沿着上面定下的目标按计划走。现在定下的目标是: 学习使用和阅读一些主流开源Fuzz框架，学习他们的fuzz思想(一个季度) 先上手路由器的漏洞挖掘(一个季度) 定期进行漏洞利用的研究，定期复现Nday(一周写一篇二进制Nday复现的文章) 学习web php代码审计漏洞挖掘（一个季度）]]></content>
-      <tags>
-        <tag>summary</tag>
       </tags>
   </entry>
   <entry>
