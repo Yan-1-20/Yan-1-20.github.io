@@ -154,6 +154,14 @@
 <li><font color="tomato" size="4">未打卡</font></li>
 <li><font color="LightSkyBlue" size="4">打卡</font>
 
+
+
+</li>
+</ul>
+<h1 id="August"><a href="#August" class="headerlink" title="August"></a>August</h1><ul>
+<li><font color="LightSkyBlue" size="4">2018-08-01</font><ul>
+<li>　8月第一天，基于昨天的成果，对afl的设置进行修改，改了<br>asan的部分，然后添加了主从模式，即一个变异的主进程和多个<br>随机运行的从进程，随机运行的从进程会把随机得到的新路径样本<br>给变异的主进程进行变异，从而提高主进程变异的速度，以及提高<br>cpu的利用率。很nice的得到了很多崩溃，然后我查看了一下崩溃<br>原因，暂时的崩溃是和分配内存有关，既是 我命中了一个关于分配<br>内存大小的 元数据。嗯，周末应该会好好写下博客，这个真的值得<br>写下了。</li>
+</ul>
 </li>
 </ul>
 <h1 id="July"><a href="#July" class="headerlink" title="July"></a>July</h1><ul>
