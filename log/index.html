@@ -161,11 +161,11 @@
 <h1 id="August"><a href="#August" class="headerlink" title="August"></a>August</h1><ul>
 <li><p><font color="LightSkyBlue" size="4">2018-08-22</font></p>
 <ul>
-<li><p>差不多断了18天的打卡，但是期间事情一直放下，运气还比较<br>好，挖到第一个二进制漏洞，heap-overflow.然后第一次提交了<br>cve漏洞,厂商已经认同了漏洞，并进行修复，接着就是等cve编号<br>了。这18天里解决了很多问题，也深入了不少。</p>
+<li><p>差不多断了18天的打卡，但是期间事情一直没放下，运气还比较<br>好，挖到第一个二进制漏洞，heap-overflow.然后第一次提交了<br>cve漏洞,厂商已经认同了漏洞，并进行修复，接着就是等cve编号<br>了。这18天里解决了很多问题，也深入了不少。</p>
 <ul>
 <li>解决了fuzz的时候磁盘空间一直增加问题，这是目标文件会<br>生成很多临时文件，建议到根目录下用du -h –max-depth=1<br>查看是那个文件夹在不断增长（一般是tmp）,然后写脚本去清理</li>
 <li>解决了样本最小化的tmin的辅助脚本开发。</li>
-<li><p>解决了asan 返回null视为崩溃的问题。即是设置asan的选项</p>
+<li><p>解决了asan 返回null视为崩溃的问题。即是设置asan的选项<br>然后又添加了内存越界访问检测，和内存泄漏检测</p>
 <blockquote>
 <p>export ASAN_OPTIONS=abort_on_error=1:detect_leaks=0:symbolize=0:allocator_may_return_null=1</p>
 </blockquote>
@@ -175,11 +175,20 @@
 <p>sudo apt-get install build-essential module-assistant<br>sudo apt-get install gcc-multilib g++-multilib<br>sudo dpkg –add-architecture i386<br>sudo apt-get update<br>sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386</p>
 </blockquote>
 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>解决了crash 很多需要自己去一个个审查的情况，改了一<br>个脚本，可以根据通过asan的输出来过滤重要的crash</p>
+</li>
+<li><p>解决了明明加了 -g  但是asan崩溃时，没有符号，但是可以<br>下符号断点的问题，主要原因是gcc版本过低，gcc-4.8有这个<br>问题（asan是gcc-4.8才并入gcc的），升级到gcc4.9就可以了<br>ubuntu升级gcc的方法：</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/qingrenufo/article/details/78661513" target="_blank" rel="external">https://blog.csdn.net/qingrenufo/article/details/78661513</a></p>
+</blockquote>
+</li>
 <li><p>正常尝试解决afl运行时很吃磁盘的情况，目前打算把tmp<br>挂载为内存，用内存文件系统来减少磁盘的压力。</p>
-</li>
-</ul>
-</li>
-</ul>
 </li>
 </ul>
 <ul>
