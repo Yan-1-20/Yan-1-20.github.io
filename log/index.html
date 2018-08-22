@@ -159,8 +159,32 @@
 </li>
 </ul>
 <h1 id="August"><a href="#August" class="headerlink" title="August"></a>August</h1><ul>
+<li><p><font color="LightSkyBlue" size="4">2018-08-22</font></p>
+<ul>
+<li><p>差不多断了18天的打卡，但是期间事情一直放下，运气还比较<br>好，挖到第一个二进制漏洞，heap-overflow.然后第一次提交了<br>cve漏洞,厂商已经认同了漏洞，并进行修复，接着就是等cve编号<br>了。这18天里解决了很多问题，也深入了不少。</p>
+<ul>
+<li>解决了fuzz的时候磁盘空间一直增加问题，这是目标文件会<br>生成很多临时文件，建议到根目录下用du -h –max-depth=1<br>查看是那个文件夹在不断增长（一般是tmp）,然后写脚本去清理</li>
+<li>解决了样本最小化的tmin的辅助脚本开发。</li>
+<li><p>解决了asan 返回null视为崩溃的问题。即是设置asan的选项</p>
+<blockquote>
+<p>export ASAN_OPTIONS=abort_on_error=1:detect_leaks=0:symbolize=0:allocator_may_return_null=1</p>
+</blockquote>
+</li>
+<li><p>解决了推荐使用32位asan ，但是又想在64位上运行的问题，<br>使用CFLAGS=”-m32” 编译32位目标程序即可,但是需要添加<br>32位的编译库和运行库。</p>
+<blockquote>
+<p>sudo apt-get install build-essential module-assistant<br>sudo apt-get install gcc-multilib g++-multilib<br>sudo dpkg –add-architecture i386<br>sudo apt-get update<br>sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386</p>
+</blockquote>
+</li>
+<li><p>正常尝试解决afl运行时很吃磁盘的情况，目前打算把tmp<br>挂载为内存，用内存文件系统来减少磁盘的压力。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
 <li><font color="LightSkyBlue" size="4">2018-08-04</font><ul>
-<li>做了测试，好像单独跑-d 随机跑和单独跑主模式，并不会<br>使磁盘使用快速上升，这样我可以试试先用-d跑出来很多路径<br>之后 再给主模式对随机跑出来这些路径进行深度变异，因为<br>感觉随机跑路径出的比主模式快几倍吧。嗯，然后我打算试<br>试不要asan跑。</li>
+<li>做了测试，好像单独跑-d 随机跑和单独跑主模式，并不会<br>使磁盘使用快速上升，这样我可以试试先用-d跑出来很多路径<br>之后 再给主模式对随机跑出来这些路径进行深度变异，因为<br>感觉随机跑路径出的比主模式快几倍吧。嗯，然后我打算试<br>试不要asan跑。（我无意发现跑fuzz的时候如果fuzz 因为样<br>本执行的时间太长，整个界面卡住的情况下磁盘会马上增加，<br>不知道是不是这样的。）</li>
 </ul>
 </li>
 </ul>
