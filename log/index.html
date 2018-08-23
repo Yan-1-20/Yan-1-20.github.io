@@ -159,7 +159,13 @@
 </li>
 </ul>
 <h1 id="August"><a href="#August" class="headerlink" title="August"></a>August</h1><ul>
-<li><font color="LightSkyBlue" size="4">2018-08-22</font><ul>
+<li><p><font color="LightSkyBlue" size="4">2018-08-23</font></p>
+<ul>
+<li>用内存当文件系统来跑成功了，但是这是基于我的内存比较大<br>16GB的情况，因为生成的临时文件生成速度达到了300G/S,我写的<br>清理脚本 速度控制在0.3s 勉强能保持内存不会被撑满。速度在<br>0.1s的时候则会感觉机器速度有点下降，0.2~0.3s最好。然后开始<br>了afl改造的工作，大概定位到了要改afl的话，样本函数要改的位置</li>
+</ul>
+</li>
+<li><p><font color="LightSkyBlue" size="4">2018-08-22</font></p>
+<ul>
 <li>差不多断了18天的打卡，但是期间事情一直没放下，运气还比较<br>好，挖到第一个二进制漏洞，heap-overflow.然后第一次提交了<br>cve漏洞,厂商已经认同了漏洞，并进行修复，接着就是等cve编号<br>了。这18天里解决了很多问题，也深入了不少。<ul>
 <li>解决了fuzz的时候磁盘空间一直增加问题，这是目标文件会<br>生成很多临时文件，建议到根目录下用du -h –max-depth=1<br>查看是那个文件夹在不断增长（一般是tmp）,然后写脚本去清理</li>
 <li>解决了样本最小化的tmin的辅助脚本开发。</li>
