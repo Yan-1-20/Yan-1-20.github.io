@@ -1,171 +1,251 @@
 <!DOCTYPE html>
-<html lang="z">
+<html>
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    
-    <title>CVE-2017-7269：IIS6.0远程代码执行漏洞逆向分析记录 | Yan_1_20</title>
-    <meta name="renderer" content="webkit">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="utf-8">
+  
+  <title>CVE-2017-7269：IIS6.0远程代码执行漏洞逆向分析记录 | Yan_1_20</title>
 
-    <meta name="description" content="pop,pop,ret">
+  <!-- keywords -->
+  
 
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="CVE-2017-7269：IIS6.0远程代码执行漏洞逆向分析记录 | Yan_1_20">
-    <meta name="twitter:description" content="pop,pop,ret">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言以及准备工作　　关于CVE-2017-7269,网上的大神们的分析的都很有高度，我做为一个小白，拿着这种给了exp的漏洞，我没有想太多，直接windbg和IDA动静结合，调试进行分析，不过，这样可能造成分析有些片面，毕竟是纯逆向进行分析。好了，首先说说。环境Windows Server 2003R2 上开启WebDAV服务的IIS6.0。工具 Windbg,IDA接着修改网上的EXP代码我们现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CVE-2017-7269：IIS6.0远程代码执行漏洞逆向分析记录">
+<meta property="og:url" content="http://yan-1-20.github.io/2017/03/30/2017/03/30/index.html">
+<meta property="og:site_name" content="Yan_1_20">
+<meta property="og:description" content="前言以及准备工作　　关于CVE-2017-7269,网上的大神们的分析的都很有高度，我做为一个小白，拿着这种给了exp的漏洞，我没有想太多，直接windbg和IDA动静结合，调试进行分析，不过，这样可能造成分析有些片面，毕竟是纯逆向进行分析。好了，首先说说。环境Windows Server 2003R2 上开启WebDAV服务的IIS6.0。工具 Windbg,IDA接着修改网上的EXP代码我们现">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2017/03/30/2017-03-30-1.png">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2017/03/30/2017-03-30-2.png">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2017/03/30/2017-03-30-3.png">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2017/03/30/2017-03-30-4.png">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2017/03/30/2017-03-30-5.png">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2017/03/30/2017-03-30-6.png">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2017/03/30/2017-03-30-7.png">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2017/03/30/2017-03-30-8.png">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2017/03/30/2017-03-30-9.png">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2017/03/30/2017-03-30-10.png">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2017/03/30/2017-03-30-11.png">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2017/03/30/2017-03-30-12.png">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2017/03/30/2017-03-30-13.png">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2017/03/30/2017-03-30-14.png">
+<meta property="og:image" content="http://yan-1-20.github.io/image/2017/03/30/2017-03-30-15.png">
+<meta property="og:updated_time" content="2018-09-25T15:17:26.573Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CVE-2017-7269：IIS6.0远程代码执行漏洞逆向分析记录">
+<meta name="twitter:description" content="前言以及准备工作　　关于CVE-2017-7269,网上的大神们的分析的都很有高度，我做为一个小白，拿着这种给了exp的漏洞，我没有想太多，直接windbg和IDA动静结合，调试进行分析，不过，这样可能造成分析有些片面，毕竟是纯逆向进行分析。好了，首先说说。环境Windows Server 2003R2 上开启WebDAV服务的IIS6.0。工具 Windbg,IDA接着修改网上的EXP代码我们现">
+<meta name="twitter:image" content="http://yan-1-20.github.io/image/2017/03/30/2017-03-30-1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Yan_1_20" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://raw.githubusercontent.com/Yan-1-20/blogimage/master/fui.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
 
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="CVE-2017-7269：IIS6.0远程代码执行漏洞逆向分析记录 | Yan_1_20">
-    <meta property="og:description" content="pop,pop,ret">
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 
-    
-    <meta name="author" content="Yan_1_20">
-    
-    <link rel="stylesheet" href="/css/vno.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-
-    
-    <link rel="icon" href="/image/avatar-small.png">
-    
-
-    <meta name="generator" content="hexo"/>
-    
-
-    <link rel="canonical" href="http://yan-1-20.github.io/2017/03/30/2017/03/30/"/>
-
-                 
+  
 </head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://avatars3.githubusercontent.com/u/19972411?s=460&amp;v=4" class="js-avatar">
+			
+		</a>
 
-<body class="home-template no-js">
-    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-    <script src="/js/main.js"></script>
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Yan_1_20</a></h1>
+		</hgroup>
 
-    <span class="mobile btn-mobile-menu">
-        <i class="fa fa-list btn-mobile-menu__icon"></i>
-        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
-    </span>
+		
 
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
 
-    
-    
-<header class="panel-cover panel-cover--collapsed">
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/log">置顶</a></li>
+				        
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">归档</a></li>
+				        
+							<li><a href="/photoalbum/CrackMe.html">相册</a></li>
+				        
+							<li><a href="/about/">关于</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Yan-1-20" title="github">github</a>
+					        
+								<a class="twitter" target="_blank" href="https://twitter.com/asproce" title="twitter">twitter</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/PWN/" style="font-size: 10px;">-PWN</a> <a href="/tags/linux/" style="font-size: 10px;">-linux</a> <a href="/tags/Binary/" style="font-size: 15px;">Binary</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/LIFE/" style="font-size: 10px;">LIFE</a> <a href="/tags/MS-Heap-Overflow/" style="font-size: 10px;">MS-Heap-Overflow</a> <a href="/tags/Program/" style="font-size: 10px;">Program</a> <a href="/tags/RE/" style="font-size: 10px;">RE</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/router/" style="font-size: 10px;">router</a> <a href="/tags/summary/" style="font-size: 10px;">summary</a> <a href="/tags/vulnerability/" style="font-size: 10px;">vulnerability</a> <a href="/tags/windbg/" style="font-size: 20px;">windbg</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.z0z.me">z0z</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://balis0ng.com">balis0ng</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://a1in.cn">a1in</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://www.lucifaer.com">lucifaer</a>
+			        
+			        </div>
+				</section>
+				
 
-
-
-  <div class="panel-main">
-    <div class="panel-main__inner panel-inverted">
-    <div class="panel-main__content">
-
-
-
-        <a href="/" title="前往 Yan_1_20 的主页"><img src="/image/avatar.jpg" width="80" alt="Yan_1_20 logo" class="panel-cover__logo logo" /></a>
-        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for Yan_1_20">Yan_1_20</a></h1>
-        
-        <hr class="panel-cover__divider" />
-        <p class="panel-cover__description">pop pop ret</p>
-        <hr class="panel-cover__divider panel-cover__divider--secondary" />
-
-        <div class="navigation-wrapper">
-          <div>
-          <nav class="cover-navigation cover-navigation--primary">
-            <ul class="navigation">
-              <li class="navigation__item"><a href="/#blog" title="访问博客" class="blog-button">文章</a></li>
-            
-              <li class="navigation__item"><a href="/photoalbum/CrackMe.html">相册</a></li>
-            
-              <li class="navigation__item"><a href="/log">打卡</a></li>
-            
-              <li class="navigation__item"><a href="/about">关于</a></li>
-            
-            </ul>
-          </nav>
-          </div>
-          <div>
-          <nav class="cover-navigation navigation--social">
-  <ul class="navigation">
-
-  <!-- Weibo-->
-  
-  <li class="navigation__item">
-    <a href="https://weibo.com/6016118396" title="我的微博" target="_blank">
-      <i class='social fa fa-weibo'></i>
-      <span class="label">Weibo</span>
-    </a>
-  </li> 
-
-
-  <!-- Github -->
-  
-  <li class="navigation__item">
-    <a href="https://github.com/Yan-1-20" title="查看我的GitHub主页" target="_blank">
-      <i class='social fa fa-github'></i>
-      <span class="label">Github</span>
-    </a>
-  </li>
-
-
-<!-- Stack Overflow -->
-        
-
-  <!-- Google Plus -->
-  
-
-<!-- Facebook -->
-
-  
-<!-- Twitter -->
-
-  
-
-
-
-  </ul>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Yan_1_20</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://avatars3.githubusercontent.com/u/19972411?s=460&amp;v=4" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Yan_1_20</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/log">置顶</a></li>
+		        
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">归档</a></li>
+		        
+					<li><a href="/photoalbum/CrackMe.html">相册</a></li>
+		        
+					<li><a href="/about/">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Yan-1-20" title="github">github</a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/asproce" title="twitter">twitter</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
 </nav>
+      <div class="body-wrap"><article id="post-2017/03/30" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/30/2017/03/30/" class="article-date">
+  	<time datetime="2017-03-29T16:00:00.000Z" itemprop="datePublished">2017-03-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CVE-2017-7269：IIS6.0远程代码执行漏洞逆向分析记录
+      
+    </h1>
+  
 
-          </div>
-        </div>
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Binary/">Binary</a></li></ul>
+	</div>
 
+        
+
+        
+        <div class="clearfix"></div>
       </div>
-
-    </div>
-    <div class="panel-cover--overlay cover-purple"></div>
-
-  </div>
-
-
-
-</header>
-
-
-    <div class="content-wrapper">
-        <div class="content-wrapper__inner">
-            <article class="post-container post-container--single">
-
-  <header class="post-header">
-    <div class="post-meta">
-      <time datetime="2017-03-29T16:00:00.000Z" class="post-list__meta--date date">2017-03-30</time> &#8226;
-      <span class="post-meta__tags tags">于 
-  <a class="tag-link" href="/tags/Binary/">Binary</a>
-
- </span>
-      <span class="page-pv">
-       阅读 <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
-      </span>
-
-
-    </div>
-    <h1 class="post-title">CVE-2017-7269：IIS6.0远程代码执行漏洞逆向分析记录</h1>
-
-
-
-  </header>
-
-  <section class="post">
-    <h2 id="前言以及准备工作"><a href="#前言以及准备工作" class="headerlink" title="前言以及准备工作"></a>前言以及准备工作</h2><p>　　关于CVE-2017-7269,网上的大神们的分析的都很有高度，我做为一个小白，拿着这种给了exp的漏洞，我没有想太多，直接windbg和IDA动静结合，调试进行分析，不过，这样可能造成分析有些片面，毕竟是纯逆向进行分析。<br>好了，首先说说。<br>环境Windows Server 2003R2 上开启WebDAV服务的IIS6.0。<br>工具 Windbg,IDA<br>接着修改网上的EXP代码我们现在不需要完美执行这个EXP,我们需要它崩溃，所以去掉作者添加的shellcode,只保留EXP部分，如下图。<br><img src="/image/2017/03/30/2017-03-30-1.png" alt=""></p>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言以及准备工作"><a href="#前言以及准备工作" class="headerlink" title="前言以及准备工作"></a>前言以及准备工作</h2><p>　　关于CVE-2017-7269,网上的大神们的分析的都很有高度，我做为一个小白，拿着这种给了exp的漏洞，我没有想太多，直接windbg和IDA动静结合，调试进行分析，不过，这样可能造成分析有些片面，毕竟是纯逆向进行分析。<br>好了，首先说说。<br>环境Windows Server 2003R2 上开启WebDAV服务的IIS6.0。<br>工具 Windbg,IDA<br>接着修改网上的EXP代码我们现在不需要完美执行这个EXP,我们需要它崩溃，所以去掉作者添加的shellcode,只保留EXP部分，如下图。<br><img src="/image/2017/03/30/2017-03-30-1.png" alt=""><br><a id="more"></a></p>
 <p>现在进行调试，Windbg直接附加进程，上网查了查IIS的进程名称为W3WP.EXE,好的附加，然后g跑起来。接着把修改后的EXP运行。好了，如下图所示，它崩溃了。<br><img src="/image/2017/03/30/2017-03-30-2.png" alt=""><br>退出Windbg，再次附加W3WP.EXE的时候，发现已经找不到这个进程了，这是IIS应用池机制的问题，解决办法有两个<br>[1]备份虚拟机镜像<br>[2]在IIS信息服务管理器里面把网站下的任意网站右键浏览一下，W3WP.EXE就会重新启动</p>
 <p>接着进行调试,这个漏洞作者是给了漏洞函数的ScStoragePathFromUrl。使用IDA静态分析吧，那么dll是那个呢，作者并没写明dll名称，但是在IIS信息服务管理器开启WebDAV服务的时候可以知道，如下图。Dll名称为httpext.dll<br><img src="/image/2017/03/30/2017-03-30-3.png" alt=""></p>
 <p>我们直接把这个dll,放入IDA,加载其符号表。然后CTRL+P 查找函数，输入函数名ScStoragePathFromUrl。双击进行进行分析。<br><img src="/image/2017/03/30/2017-03-30-4.png" alt=""></p>
@@ -197,114 +277,109 @@
 <p>ps:分析了半天，如果说，它为什么了去了shellcode就会崩，其实崩的地址就是第二次拷贝的数据末尾+0x4,崩的原因是当执行到的第二次拷贝的数据末尾+0x4地址时，它的内容为0x0000，这个硬编码对应汇编代码</p>
 <p><code>add byte ptr [eax],al</code><br>因为eax的值指向地址无效，所以崩溃。<br>其实这个位置本来该是shellcode的起始地址(执行到这里已经关闭DEP可以顺利执行数据代码了)，，因为我们去掉了shellcode,并没有任何数据，以地址访问异常导致崩溃。</p>
 
-  </section>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/22/2018/04/22/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          Hexo 使用来必力添加评论功能
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/12/31/2016/12/31/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">旧年辞，新年逢</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
 
+  
 </article>
 
-<section class="read-more">
-           
-    
-               
-            <div class="read-more-item">
-                <span class="read-more-item-dim">最近的文章</span>
-                <h2 class="post-list__post-title post-title"><a href="/2018/04/22/2018/04/22/" title="Hexo 使用来必力添加评论功能">Hexo 使用来必力添加评论功能</a></h2>
-                <p class="excerpt">
-                
-                以前用的多说，现在换成了来必力。来必力官网
-直接注册，可能需要梯子，韩国朋友的东西。
-然后就是安装了
 
-安装的时候，需要填你的博客的网址，和你给它的昵称
-然后会得到下面的安装代码
+<div class="ds-share share" data-thread-key="2017/03/30" data-title="CVE-2017-7269：IIS6.0远程代码执行漏洞逆向分析记录" data-url="http://yan-1-20.github.io/2017/03/30/2017/03/30/"  data-images="https://avatars3.githubusercontent.com/u/19972411?s=460&amp;v=4" data-content="CVE-2017-7269：IIS6.0远程代码执行漏洞逆向分析记录">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
 
-用上面的代码对 hexo theme 文件进行修改
 
-把你上面的代码全部复制到这个文件里去，如果没有这个文件新建一个即
-                &hellip;
-                </p>
-                <div class="post-list__meta"><time datetime="2018-04-21T16:00:00.000Z" class="post-list__meta--date date">2018-04-22</time> &#8226; <span class="post-list__meta--tags tags">于 
-  <a class="tag-link" href="/tags/Hexo/">Hexo</a>
 
-</span><a class="btn-border-small" href="/2018/04/22/2018/04/22/">继续阅读</a></div>
-                           
-            </div>
-        
-        
-               
-            <div class="read-more-item">
-                <span class="read-more-item-dim">更早的文章</span>
-                <h2 class="post-list__post-title post-title"><a href="/2016/12/31/2016/12/31/" title="旧年辞，新年逢">旧年辞，新年逢</a></h2>
-                <p class="excerpt">
-                
-                旧年辞，新年逢0x01-&amp;gt;2016的总结　　　对于2016年，对我自己来说是变化的一年，无论是思想上的提升，还是有关二进制逆向的提升（-…#）以前的迷茫疑惑彻底没有了，只有脚下这片该走的路。上半年学了半年安卓开发和逆向，下半年开始学windows的CVE复现，刚好泉哥的书又在暑假的时候出版了，
-                &hellip;
-                </p>
-                <div class="post-list__meta"><time datetime="2016-12-30T16:00:00.000Z" class="post-list__meta--date date">2016-12-31</time> &#8226; <span class="post-list__meta--tags tags">于 
-  <a class="tag-link" href="/tags/LIFE/">LIFE</a>
 
-</span><a class="btn-border-small" href="/2016/12/31/2016/12/31/">继续阅读</a></div>
-                       
-            </div>
-        
-     
-   
-   
-  
-</section>
 
-  <!-- 来必力City版安装代码 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zNTkzNC8xMjQ3MA==">
-<script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-</script>
-<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
 </div>
-<!-- City版安装代码已完成 -->
-
-
-
-            <footer class="footer">
-    <span class="footer__copyright">
-        &copy; 2018 Yan_1_20 - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
-
-    </span>
-    <span class="footer__copyright">
-             - 基于 <a href="http://hexo.io">Hexo</a> 搭建，使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">new-vno</a> 主题，由<a href="https://monniya.com ">@Monniya</a> 修改自 <a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
-         </span>
-
-
-  
-</footer>
-
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2018 Yan_1_20
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
         </div>
     </div>
-
-     
+  </div>
+</footer>
+    </div>
     
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?yan120";
-            var s = document.getElementsByTagName("script")[0]; 
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="/js/main.js"></script>
 
 
 
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 
 
+  </div>
 </body>
 </html>

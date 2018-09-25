@@ -1,236 +1,232 @@
-
-var searchFunc = function (path, search_id, content_id) {
-  'use strict';
-  var BTN = "<myi id='local-search-close'  >⊗</myi>";
-  $.ajax({
-    url: path,
-    dataType: "xml",
-    success: function (xmlResponse) {
-      // get the contents from search data
-      var datas = $("entry", xmlResponse).map(function () {
-        return {
-          title: $("title", this).text(),
-          content: $("content", this).text(),
-          url: $("url", this).text()
-        };
-      }).get();
-
-      var $input = document.getElementById(search_id);
-      var $resultContent = document.getElementById(content_id);
-
-      $input.addEventListener('input', function () {
-        var str = '<ul class=\"search-result-list\">';
-        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-        $resultContent.innerHTML = "";
-        if (this.value.trim().length <= 0) {
-          return;
-        }
-        // perform local searching
-        datas.forEach(function (data) {
-          var isMatch = true;
-          var content_index = [];
-          if (!data.title || data.title.trim() === '') {
-            data.title = "Untitled";
-          }
-          var data_title = data.title.trim().toLowerCase();
-          var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
-          var data_url = data.url;
-          var index_title = -1;
-          var index_content = -1;
-          var first_occur = -1;
-          // only match artiles with not empty contents
-          if (data_content !== '') {
-            keywords.forEach(function (keyword, i) {
-              index_title = data_title.indexOf(keyword);
-              index_content = data_content.indexOf(keyword);
-
-              if (index_title < 0 && index_content < 0) {
-                isMatch = false;
-              } else {
-                if (index_content < 0) {
-                  index_content = 0;
-                }
-                if (i == 0) {
-                  first_occur = index_content;
-                }
-                // content_index.push({index_content:index_content, keyword_len:keyword_len});
-              }
-            });
-          } else {
-            isMatch = false;
-          }
-          // show search results
-          if (isMatch) {
-            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
-            var content = data.content.trim().replace(/<[^>]+>/g, "");
-            if (first_occur >= 0) {
-              // cut out 100 characters
-              var start = first_occur - 20;
-              var end = first_occur + 80;
-
-              if (start < 0) {
-                start = 0;
-              }
-
-              if (start == 0) {
-                end = 100;
-              }
-
-              if (end > content.length) {
-                end = content.length;
-              }
-
-              var match_content = content.substr(start, end);
-
-              // highlight all keywords
-              keywords.forEach(function (keyword) {
-                var regS = new RegExp(keyword, "gi");
-                match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
-              });
-
-              str += "<p class=\"search-result\">" + match_content + "...</p>"
-            }
-            str += "</li>";
-          }
-        });
-        str += "</ul>";
-        if (str.indexOf('<li>') === -1) {
-          return $resultContent.innerHTML = BTN + "<ul><span class='local-search-empty'>没有找到内容，更换下搜索词试试吧~<span></ul>";
-        }
-        $resultContent.innerHTML = BTN + str;
-      });
-    }
-  });
-  $(document).on('click', '#local-search-close', function() {
-    $('#local-search-input').val('');
-    $('#local-search-result').html('');
-  });
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-$(document).ready(function() {
-
-  $('body').removeClass('no-js');
-
-  $('a.blog-button').click(function() {
-    if ($('.panel-cover').hasClass('panel-cover--collapsed')) return;
-    currentWidth = $('.panel-cover').width();
-    if (currentWidth < 960) {
-
-      $('.panel-cover').css('max-width',currentWidth);
-      $('.panel-cover').animate({'max-width': '480px', 'width': '26%'}, 400, swing = 'swing', function() {} );
-
-      $('.panel-cover').addClass('panel-cover--collapsed');
-      $('.content-wrapper').addClass('animated slideInRight');
-    } else {
-
-
-      $('.panel-cover').css('max-width',currentWidth);
-      $('.panel-cover').animate({'max-width': '480px', 'width': '26%'}, 400, swing = 'swing', function() {} );
-      $('.panel-cover').addClass('panel-cover--collapsed');
-      $('.content-wrapper').addClass('animated slideInRight');
-
-
-    }
-  });
-
-  if (window.location.hash && window.location.hash == "#blog") {
-    $('.panel-cover').addClass('panel-cover--collapsed');
-    $('.panel-cover').animate({}, 400, swing = 'swing', function() {} );
-  }
-
-  if (window.location.pathname == "/tags/") {
-
-    $('.panel-cover').addClass('panel-cover--collapsed');
-      $('.panel-cover').animate({}, 400, swing = 'swing', function() {} );
-    alert(1);
-  }
-
-  if (window.location.pathname.substr(0,6)== "/page/") {
-
-    $('.panel-cover').addClass('panel-cover--collapsed');
-      $('.panel-cover').animate({}, 400, swing = 'swing', function() {} );
-  }
-
-
-  $('.btn-mobile-menu__icon').click(function() {
-
-  $('.panel-cover').animate({'max-width': '480px', 'width': '26%'}, 400, swing = 'swing', function() {} );
-
-    if ($('.navigation-wrapper').css('display') == "block") {
-      $('.navigation-wrapper').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-        $('.navigation-wrapper').toggleClass('visible animated bounceOutUp');
-      });
-      $('.navigation-wrapper').toggleClass('animated bounceInDown animated bounceOutUp');
-
-    } else {
-      $('.navigation-wrapper').toggleClass('visible animated bounceInDown');
-    }
-    $('.btn-mobile-menu__icon').toggleClass('fa fa-list fa fa-angle-up animated fadeIn');
-  });
-
-  $('.navigation-wrapper .blog-button').click(function() {
-
-    $('.panel-cover').animate({'max-width': '480px', 'width': '26%'}, 400, swing = 'swing', function() {} );
-
-
-    if ($('.navigation-wrapper').css('display') == "block") {
-      $('.navigation-wrapper').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-        $('.navigation-wrapper').toggleClass('visible animated bounceOutUp');
-      });
-
-      $('.navigation-wrapper').toggleClass('animated bounceInDown animated bounceOutUp');
-    }
-    $('.btn-mobile-menu__icon').toggleClass('fa fa-list fa fa-angle-up animated fadeIn');
-  });
-
-
-  $("article.post-container--single a[href^=http]").attr("target", "_blank");
-  $("article.post-container--single a[href^=mailto]").attr("target", "_blank");
-
-
-
-
-
-    if ($('.local-search').size()) {
-        searchFunc("/search.xml", 'local-search-input', 'local-search-result');
-    }
-
-
-
-
-
-
-  $(function(){
-
-		$('.img-click').click(function(){
-            document.getElementById("img-content").src=$(this).attr("data");
-			$('.img-background').fadeIn(200);
-			$('.img-border').fadeIn(400);
-
+require([], function (){
+
+	var isMobileInit = false;
+	var loadMobile = function(){
+		require(['/js/mobile.js'], function(mobile){
+			mobile.init();
+			isMobileInit = true;
 		});
-		$('.img-background').click(function(){
-			$('.img-background').fadeOut(200);
-			$('.img-border').fadeOut(200);
+	}
+	var isPCInit = false;
+	var loadPC = function(){
+		require(['/js/pc.js'], function(pc){
+			pc.init();
+			isPCInit = true;
 		});
+	}
 
+	require(['/js/particles.js'], function(particlesJS) {
+		window.particlesJS('particles-js',
+
+		  {
+		    "particles": {
+		      "number": {
+		        "value": 80,
+		        "density": {
+		          "enable": true,
+		          "value_area": 800
+		        }
+		      },
+		      "color": {
+		        "value": ['#0fc', '#0ff', '#ccc', '#ffa500', '#7b5d5f', '#ff945c', '#cfb7c4']
+		      },
+		      "shape": {
+		        "type": "circle",
+		        "stroke": {
+		          "width": 0,
+		          "color": "#000000"
+		        },
+		        "polygon": {
+		          "nb_sides": 5
+		        },
+		        "image": {
+		          "src": "img/github.svg",
+		          "width": 100,
+		          "height": 100
+		        }
+		      },
+		      "opacity": {
+		        "value": 0.5,
+		        "random": false,
+		        "anim": {
+		          "enable": false,
+		          "speed": 1,
+		          "opacity_min": 0.1,
+		          "sync": false
+		        }
+		      },
+		      "size": {
+		        "value": 5,
+		        "random": true,
+		        "anim": {
+		          "enable": false,
+		          "speed": 40,
+		          "size_min": 0.1,
+		          "sync": false
+		        }
+		      },
+		      "line_linked": {
+		        "enable": true,
+		        "distance": 150,
+		        "color": "#ff945c",
+		        "opacity": 0.4,
+		        "width": 1
+		      },
+		      "move": {
+		        "enable": true,
+		        "speed": 6,
+		        "direction": "none",
+		        "random": false,
+		        "straight": false,
+		        "out_mode": "out",
+		        "attract": {
+		          "enable": false,
+		          "rotateX": 600,
+		          "rotateY": 1200
+		        }
+		      }
+		    },
+		    "interactivity": {
+		      "detect_on": "canvas",
+		      "events": {
+		        "onhover": {
+		          "enable": true,
+		          "mode": "repulse"
+		        },
+		        "onclick": {
+		          "enable": true,
+		          "mode": "push"
+		        },
+		        "resize": true
+		      },
+		      "modes": {
+		        "grab": {
+		          "distance": 400,
+		          "line_linked": {
+		            "opacity": 1
+		          }
+		        },
+		        "bubble": {
+		          "distance": 400,
+		          "size": 40,
+		          "duration": 2,
+		          "opacity": 8,
+		          "speed": 3
+		        },
+		        "repulse": {
+		          "distance": 200
+		        },
+		        "push": {
+		          "particles_nb": 4
+		        },
+		        "remove": {
+		          "particles_nb": 2
+		        }
+		      }
+		    },
+		    "retina_detect": true,
+		    "config_demo": {
+		      "hide_card": false,
+		      "background_color": "#b61924",
+		      "background_image": "",
+		      "background_position": "50% 50%",
+		      "background_repeat": "no-repeat",
+		      "background_size": "cover"
+		    }
+		  }
+
+		);
 	});
+	var browser={
+	    versions:function(){
+	    var u = window.navigator.userAgent;
+	    return {
+	        trident: u.indexOf('Trident') > -1, //IE内核
+	        presto: u.indexOf('Presto') > -1, //opera内核
+	        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+	        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+	        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+	        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+	        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+	        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+	        iPad: u.indexOf('iPad') > -1, //是否为iPad
+	        webApp: u.indexOf('Safari') == -1 ,//是否为web应用程序，没有头部与底部
+	        weixin: u.indexOf('MicroMessenger') == -1 //是否为微信浏览器
+	        };
+	    }()
+	}
+
+	$(window).bind("resize", function(){
+		if(isMobileInit && isPCInit){
+			$(window).unbind("resize");
+			return;
+		}
+		var w = $(window).width();
+		if(w >= 700){
+			loadPC();
+		}else{
+			loadMobile();
+		}
+	});
+
+	if(browser.versions.mobile === true || $(window).width() < 700){
+		loadMobile();
+	}else{
+		loadPC();
+	}
+
+	//是否使用fancybox
+	if(yiliaConfig.fancybox === true){
+		require(['/fancybox/jquery.fancybox.js'], function(pc){
+			var isFancy = $(".isFancy");
+			if(isFancy.length != 0){
+				var imgArr = $(".article-inner img");
+				for(var i=0,len=imgArr.length;i<len;i++){
+					var src = imgArr.eq(i).attr("src");
+					var title = imgArr.eq(i).attr("alt");
+					imgArr.eq(i).replaceWith("<a href='"+src+"' title='"+title+"' rel='fancy-group' class='fancy-ctn fancybox'><img src='"+src+"' title='"+title+"'></a>");
+				}
+				$(".article-inner .fancy-ctn").fancybox();
+			}
+		});
+
+	}
+	//是否开启动画
+	if(yiliaConfig.animate === true){
+
+		require(['/js/jquery.lazyload.js'], function(){
+			//avatar
+			$(".js-avatar").attr("src", $(".js-avatar").attr("lazy-src"));
+			$(".js-avatar")[0].onload = function(){
+				$(".profilepic").addClass("show");
+			}
+		});
+
+		if(yiliaConfig.isHome === true){
+			//content
+			function showArticle(){
+				$(".article").each(function(){
+					if( $(this).offset().top <= $(window).scrollTop()+$(window).height() && !($(this).hasClass('show')) ) {
+						$(this).removeClass("hidden").addClass("show");
+						$(this).addClass("is-hiddened");
+					}else{
+						if(!$(this).hasClass("is-hiddened")){
+							$(this).addClass("hidden");
+						}
+					}
+				});
+			}
+			$(window).on('scroll', function(){
+				showArticle();
+			});
+			showArticle();
+		}
+
+	}
+
+	//是否新窗口打开链接
+	if(yiliaConfig.open_in_new == true){
+		$(".article a[href]").attr("target", "_blank")
+	}
+
 });
