@@ -2022,34 +2022,34 @@ pre .javascript .function {
   left: 2px;
 }
 .tagcloud a.color1 {
-  background: #ff945c;
+  background: #4cae4c;
 }
 .tagcloud a.color1:before {
-  border-right-color: #ff945c;
+  border-right-color: #4cae4c;
 }
 .tagcloud a.color2 {
-  background: #f5c7b7;
+  background: #39b3d7;
 }
 .tagcloud a.color2:before {
-  border-right-color: #f5c7b7;
+  border-right-color: #39b3d7;
 }
 .tagcloud a.color3 {
-  background: #ba8f6c;
+  background: #e23794;
 }
 .tagcloud a.color3:before {
-  border-right-color: #ba8f6c;
+  border-right-color: #e23794;
 }
 .tagcloud a.color4 {
-  background: #cfb7c4;
+  background: #f0ad4e;
 }
 .tagcloud a.color4:before {
-  border-right-color: #cfb7c4;
+  border-right-color: #f0ad4e;
 }
 .tagcloud a.color5 {
-  background: #7b5d5f;
+  background: #b953d0;
 }
 .tagcloud a.color5:before {
-  border-right-color: #7b5d5f;
+  border-right-color: #b953d0;
 }
 .article-tag-list .article-tag-list-item {
   float: left;
