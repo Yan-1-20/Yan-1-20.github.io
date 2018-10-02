@@ -811,9 +811,9 @@ a {
   font-size: 1.8em;
 }
 .archives-wrap .archive-year-wrap a {
-  color: #008000;
+  color: #58e2d2;
   font-weight: bold;
-  padding-left: 48px;
+  padding-left: 24px;
 }
 .archives {
   position: relative;
