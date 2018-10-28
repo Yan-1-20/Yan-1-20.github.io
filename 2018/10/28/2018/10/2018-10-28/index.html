@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20181028232854-2dfc162a-dac6-1.png">
 <meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20181028232944-4c09a790-dac6-1.png">
 <meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20181028233039-6c80b9dc-dac6-1.png">
-<meta property="og:updated_time" content="2018-10-28T15:40:22.943Z">
+<meta property="og:updated_time" content="2018-10-28T15:44:01.147Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Radamsa Fuzz 移植 win平台">
 <meta name="twitter:description" content="0x00 Radamsa Introduction　Radamsa是一个用于稳健性测试的测试用例生成器，也就是一个模糊测试器。它通常用于测试程序如何能够承受格式错误和潜在的恶意输入。它的工作原理是读取有效数据的样本文件，并从中生成有意义的不同输出。 Radamsa的主要卖点是它已经在程序中发现了大量的错误，这些错误实际上很重要，它易于编写脚本且易于启动和运行。Radamsa 类似于google p">
@@ -114,8 +114,6 @@
 				        
 							<li><a href="/photoalbum/CrackMe.html">相册</a></li>
 				        
-							<li><a href="/about/">关于</a></li>
-				        
 						</ul>
 					</nav>
 					<nav class="header-nav">
@@ -187,8 +185,6 @@
 		        
 					<li><a href="/photoalbum/CrackMe.html">相册</a></li>
 		        
-					<li><a href="/about/">关于</a></li>
-		        
 		        <div class="clearfix"></div>
 				</ul>
 			</nav>
@@ -245,7 +241,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="0x00-Radamsa-Introduction"><a href="#0x00-Radamsa-Introduction" class="headerlink" title="0x00 Radamsa Introduction"></a>0x00 Radamsa Introduction</h2><p>　Radamsa是一个用于稳健性测试的测试用例生成器，也就是一个模糊测试器。它通常用于测试程序如何能够承受格式错误和潜在的恶意输入。它的工作原理是读取有效数据的样本文件，并从中生成有意义的不同输出。 Radamsa的主要卖点是它已经在程序中发现了大量的错误，这些错误实际上很重要，它易于编写脚本且易于启动和运行。Radamsa 类似于google project zero 的开源项目的domato,都只是负责样本生成的样本生成引擎，也即是说，你可以自己编写整个fuzz框架，但是样本生成的模块全部交给radamsa 去完成（其实Fuzz框架最难最有学问的就是样本生成引擎的开发）。Radamsa 本是对linux系统开发的项目，在linux下编译的方式非常方便。但是并没有提供windows版本的编译选项。</p>
+        <h2 id="0x00-Radamsa-Introduction"><a href="#0x00-Radamsa-Introduction" class="headerlink" title="0x00 Radamsa Introduction"></a>0x00 Radamsa Introduction</h2><p>　Radamsa是一个用于稳健性测试的测试用例生成器，也就是一个模糊测试器。它通常用于测试程序如何能够承受格式错误和潜在的恶意输入。它的工作原理是读取有效数据的样本文件，并从中生成有意义的不同输出。 Radamsa的主要卖点是它已经在程序中发现了大量的错误，这些错误实际上很重要，它易于编写脚本且易于启动和运行。Radamsa 类似于google project zero 的开源项目的domato,都只是负责样本生成的样本生成引擎，也即是说，你可以自己编写整个fuzz框架，但是样本生成的模块全部交给radamsa 去完成（其实Fuzz框架最难最有学问的就是样本生成引擎的开发）。Radamsa 本是对linux系统开发的项目，在linux下编译的方式非常方便。但是并没有提供windows版本的编译选项。<br><a id="more"></a></p>
 <h2 id="0x01-Radamsa-build-on-linux"><a href="#0x01-Radamsa-build-on-linux" class="headerlink" title="0x01 Radamsa build on linux"></a>0x01 Radamsa build on linux</h2><p> linux下编译Radamsa的方式非常方便 只需要安装一些依赖，就可以开始编译了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install gcc make git wget</div><div class="line">$ git clone https://gitlab.com/akihe/radamsa.git</div><div class="line">$ cd radamsa</div><div class="line">$ make</div></pre></td></tr></table></figure></p>
 <p>  编译好后，在 radamsa/bin 下生成 radamsa  ,尝试 ./radamsa -h</p>
 <p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20181028233508-0cca5d94-dac7-1.png" alt="image.png"></p>

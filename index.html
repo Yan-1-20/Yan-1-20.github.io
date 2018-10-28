@@ -99,8 +99,6 @@
 				        
 							<li><a href="/photoalbum/CrackMe.html">相册</a></li>
 				        
-							<li><a href="/about/">关于</a></li>
-				        
 						</ul>
 					</nav>
 					<nav class="header-nav">
@@ -172,8 +170,6 @@
 		        
 					<li><a href="/photoalbum/CrackMe.html">相册</a></li>
 		        
-					<li><a href="/about/">关于</a></li>
-		        
 		        <div class="clearfix"></div>
 				</ul>
 			</nav>
@@ -222,23 +218,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="0x00-Radamsa-Introduction"><a href="#0x00-Radamsa-Introduction" class="headerlink" title="0x00 Radamsa Introduction"></a>0x00 Radamsa Introduction</h2><p>　Radamsa是一个用于稳健性测试的测试用例生成器，也就是一个模糊测试器。它通常用于测试程序如何能够承受格式错误和潜在的恶意输入。它的工作原理是读取有效数据的样本文件，并从中生成有意义的不同输出。 Radamsa的主要卖点是它已经在程序中发现了大量的错误，这些错误实际上很重要，它易于编写脚本且易于启动和运行。Radamsa 类似于google project zero 的开源项目的domato,都只是负责样本生成的样本生成引擎，也即是说，你可以自己编写整个fuzz框架，但是样本生成的模块全部交给radamsa 去完成（其实Fuzz框架最难最有学问的就是样本生成引擎的开发）。Radamsa 本是对linux系统开发的项目，在linux下编译的方式非常方便。但是并没有提供windows版本的编译选项。</p>
-<h2 id="0x01-Radamsa-build-on-linux"><a href="#0x01-Radamsa-build-on-linux" class="headerlink" title="0x01 Radamsa build on linux"></a>0x01 Radamsa build on linux</h2><p> linux下编译Radamsa的方式非常方便 只需要安装一些依赖，就可以开始编译了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install gcc make git wget</div><div class="line">$ git clone https://gitlab.com/akihe/radamsa.git</div><div class="line">$ cd radamsa</div><div class="line">$ make</div></pre></td></tr></table></figure></p>
-<p>  编译好后，在 radamsa/bin 下生成 radamsa  ,尝试 ./radamsa -h</p>
-<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20181028233508-0cca5d94-dac7-1.png" alt="image.png"></p>
-<h2 id="0x02-Radamsa-build-on-windows"><a href="#0x02-Radamsa-build-on-windows" class="headerlink" title="0x02 Radamsa build on windows"></a>0x02 Radamsa build on windows</h2><p>  下面给一种移植Radamsa到win平台的方式，Cygwin。<br>  Cygwin是许多自由软件的集合，最初由Cygnus Solutions开发，用于各种版本的Microsoft Windows上，运行类UNIX系统。Cygwin的主要目的是通过重新编译，将POSIX系统（例如Linux、BSD，以及其他Unix系统）上的软件移植到Windows上。</p>
-<h4 id="cygwin-install"><a href="#cygwin-install" class="headerlink" title="cygwin  install"></a>cygwin  install</h4><p>  在下面的链接里选择适合版本的Cygwin下载并进行安装。<br>  <a href="https://www.cygwin.com/" target="_blank" rel="external">cygwin download </a><br>  下载完成后，运行setup.exe程序，出现安装画面。直接点“下一步”，出现安装模式的对话框，如下图所示：<br>  选择Install from Internet，这种模式直接从Internet安装，直接下一步；<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20181028225745-d3d4b872-dac1-1.png" alt="image.png"><br>  然后就是设置模拟的linux Root目录路劲之类的，看个人喜好设置。</p>
-<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20181028225943-1a69c278-dac2-1.png" alt="image.png"><br>  然后就是设置连接类型，选择 Direct Connection 继续下一步。<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20181028225959-23e2e974-dac2-1.png" alt="image.png"><br>  接下来就是选择源了，这里使用阿里云镜像 <a href="http://mirrors.aliyun.com/cygwin/" target="_blank" rel="external">http://mirrors.aliyun.com/cygwin/</a>   继续下一步<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20181028230329-a1457238-dac2-1.png" alt="image.png"><br>  现在就可以在源里下载 编译Radamsa 需要的依赖，gcc 、git、 make、 wget<br>  下面以下载gcc为列子<br>  在下载列表里选择 Devel 选项 展开<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20181028230647-170c2778-dac3-1.png" alt="image.png"><br>  找到gcc 系列套件,在前方的Skip 选项点击一下，会显示出这个这个工具能下载的版本。然后直接下一步，下一步，就会把你选择的工具以及确定的版本进行下载安装。</p>
-<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20181028230901-66c70012-dac3-1.png" alt="image.png"><br>   Devel 选项 里能找到gcc 、git、 make 。<br>   而make 工具在 web选项里</p>
-<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20181028231430-2b1dd166-dac4-1.png" alt="image.png"><br> 所有依赖安装完成后 就可以通过Cygwin terminal 查看 gcc –version</p>
-<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20181028231500-3d07f686-dac4-1.png" alt="image.png"></p>
-<h4 id="cygwin-build-Radamsa"><a href="#cygwin-build-Radamsa" class="headerlink" title="cygwin  build Radamsa"></a>cygwin  build Radamsa</h4><p>   cygwin下build Radamsa 就和linux下一样的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install gcc make git wget</div><div class="line">$ git clone https://gitlab.com/akihe/radamsa.git</div><div class="line">$ cd radamsa</div><div class="line">$ make</div></pre></td></tr></table></figure></p>
-<p>   make执行完后 在 radamsa/bin  下生成 radamsa.exe 当然我们还需要Cgywin的依赖库Cgywin1.dll<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20181028232644-e0497bc0-dac5-1.png" alt="image.png"><br>   Cgywin1.dll所在目录为 cygwin64\bin   将其拷贝到 radamsa.exe同一目录下即可</p>
-<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20181028232854-2dfc162a-dac6-1.png" alt="image.png"></p>
-<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20181028232944-4c09a790-dac6-1.png" alt="image.png"><br>现在就可以在cmd下运行 Radamsa.exe 尝试一下了</p>
-<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20181028233039-6c80b9dc-dac6-1.png" alt="image.png"></p>
-<p>hava fun :)</p>
-
+        <h2 id="0x00-Radamsa-Introduction"><a href="#0x00-Radamsa-Introduction" class="headerlink" title="0x00 Radamsa Introduction"></a>0x00 Radamsa Introduction</h2><p>　Radamsa是一个用于稳健性测试的测试用例生成器，也就是一个模糊测试器。它通常用于测试程序如何能够承受格式错误和潜在的恶意输入。它的工作原理是读取有效数据的样本文件，并从中生成有意义的不同输出。 Radamsa的主要卖点是它已经在程序中发现了大量的错误，这些错误实际上很重要，它易于编写脚本且易于启动和运行。Radamsa 类似于google project zero 的开源项目的domato,都只是负责样本生成的样本生成引擎，也即是说，你可以自己编写整个fuzz框架，但是样本生成的模块全部交给radamsa 去完成（其实Fuzz框架最难最有学问的就是样本生成引擎的开发）。Radamsa 本是对linux系统开发的项目，在linux下编译的方式非常方便。但是并没有提供windows版本的编译选项。<br>
       
     </div>
     
@@ -254,6 +234,10 @@
       
       <div class="clearfix"></div>
     </div>
+      
+        <p class="article-more-link">
+          <a  href="/2018/10/28/2018/10/2018-10-28/#more">more >></a>
+        </p>
       
     
   </div>
