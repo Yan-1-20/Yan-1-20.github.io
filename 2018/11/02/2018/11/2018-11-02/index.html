@@ -3,24 +3,34 @@
 <head>
   <meta charset="utf-8">
   
-  <title>旧年辞，新年逢 | Yan_1_20</title>
+  <title>Foxit Reader U3D Parsing Out-Of-Bounds Read Information Disclosure Vulnerability | Yan_1_20</title>
 
   <!-- keywords -->
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="旧年辞，新年逢0x01-&amp;gt;2016的总结　　　对于2016年，对我自己来说是变化的一年，无论是思想上的提升，还是有关二进制逆向的提升（-…#）以前的迷茫疑惑彻底没有了，只有脚下这片该走的路。上半年学了半年安卓开发和逆向，下半年开始学windows的CVE复现，刚好泉哥的书又在暑假的时候出版了，可谓下半年是顺风顺水，这种学习的状态一直持续到11月左右，11月到12月这段时间我给自己放了1个月的">
+  <meta name="description" content="I used fuzz technology and found a vulnerability in Foxit Reader. When Foxit Reader parses
+A U3D sample can cause an out-of-bounds memory access.
+[+]test environment
+  [-]os version: x64 win7 sp1
+  [-">
 <meta property="og:type" content="article">
-<meta property="og:title" content="旧年辞，新年逢">
-<meta property="og:url" content="http://yan-1-20.github.io/2016/12/31/2016/12/31/index.html">
+<meta property="og:title" content="Foxit Reader U3D Parsing Out-Of-Bounds Read Information Disclosure Vulnerability">
+<meta property="og:url" content="http://yan-1-20.github.io/2018/11/02/2018/11/2018-11-02/index.html">
 <meta property="og:site_name" content="Yan_1_20">
-<meta property="og:description" content="旧年辞，新年逢0x01-&amp;gt;2016的总结　　　对于2016年，对我自己来说是变化的一年，无论是思想上的提升，还是有关二进制逆向的提升（-…#）以前的迷茫疑惑彻底没有了，只有脚下这片该走的路。上半年学了半年安卓开发和逆向，下半年开始学windows的CVE复现，刚好泉哥的书又在暑假的时候出版了，可谓下半年是顺风顺水，这种学习的状态一直持续到11月左右，11月到12月这段时间我给自己放了1个月的">
-<meta property="og:image" content="http://yan-1-20.github.io/image/2016-12-31-1.jpg">
-<meta property="og:updated_time" content="2018-09-25T15:17:42.019Z">
+<meta property="og:description" content="I used fuzz technology and found a vulnerability in Foxit Reader. When Foxit Reader parses
+A U3D sample can cause an out-of-bounds memory access.
+[+]test environment
+  [-]os version: x64 win7 sp1
+  [-">
+<meta property="og:updated_time" content="2018-11-02T11:24:20.041Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="旧年辞，新年逢">
-<meta name="twitter:description" content="旧年辞，新年逢0x01-&amp;gt;2016的总结　　　对于2016年，对我自己来说是变化的一年，无论是思想上的提升，还是有关二进制逆向的提升（-…#）以前的迷茫疑惑彻底没有了，只有脚下这片该走的路。上半年学了半年安卓开发和逆向，下半年开始学windows的CVE复现，刚好泉哥的书又在暑假的时候出版了，可谓下半年是顺风顺水，这种学习的状态一直持续到11月左右，11月到12月这段时间我给自己放了1个月的">
-<meta name="twitter:image" content="http://yan-1-20.github.io/image/2016-12-31-1.jpg">
+<meta name="twitter:title" content="Foxit Reader U3D Parsing Out-Of-Bounds Read Information Disclosure Vulnerability">
+<meta name="twitter:description" content="I used fuzz technology and found a vulnerability in Foxit Reader. When Foxit Reader parses
+A U3D sample can cause an out-of-bounds memory access.
+[+]test environment
+  [-]os version: x64 win7 sp1
+  [-">
   
     <link rel="alternative" href="/atom.xml" title="Yan_1_20" type="application/atom+xml">
   
@@ -190,11 +200,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-2016/12/31" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-2018/11/2018-11-02" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/12/31/2016/12/31/" class="article-date">
-  	<time datetime="2016-12-30T16:00:00.000Z" itemprop="datePublished">2016-12-31</time>
+      <a href="/2018/11/02/2018/11/2018-11-02/" class="article-date">
+  	<time datetime="2018-11-01T16:00:00.000Z" itemprop="datePublished">2018-11-02</time>
 </a>
     </div>
   
@@ -207,7 +217,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      旧年辞，新年逢
+      Foxit Reader U3D Parsing Out-Of-Bounds Read Information Disclosure Vulnerability
       
     </h1>
   
@@ -217,7 +227,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LIFE/">LIFE</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fuzz/">fuzz</a></li></ul>
 	</div>
 
         
@@ -229,8 +239,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="旧年辞，新年逢"><a href="#旧年辞，新年逢" class="headerlink" title="旧年辞，新年逢"></a>旧年辞，新年逢</h1><h2 id="0x01-gt-2016的总结"><a href="#0x01-gt-2016的总结" class="headerlink" title="0x01-&gt;2016的总结"></a>0x01-&gt;2016的总结</h2><p>　　　对于2016年，对我自己来说是变化的一年，无论是思想上的提升，还是有关二进制逆向的提升（-…#）以前的迷茫疑惑彻底没有了，只有脚下这片该走的路。上半年学了半年安卓开发和逆向，下半年开始学windows的CVE复现，刚好泉哥的书又在暑假的时候出版了，可谓下半年是顺风顺水，这种学习的状态一直持续到11月左右，11月到12月这段时间我给自己放了1个月的假，这个一个月我不在是埋头苦干，而是在玩，是的，在玩，我因为自己个人的原因，在初中时期有巨大的网瘾，导致了高中的时候（我一生中最重要的阶段）我失去了很多了，我高中毕业后我开始讨厌游戏，因为它我失去了很多。<br><a id="more"></a><br><br><br>　　　那为什么我又要开始玩游戏，首先我不是主动为了游戏去玩游戏，因为我发现，这个时代的年轻已经不像老一辈大多数都有烟瘾，习惯用烟来搭讪用上根烟来拉近关系，他们用的是游戏，虽然游戏害人不假，但是现在是大势所趋，需要用游戏来拉近下和人的关系。<br>　　　同时在这个1个月我也在思考，自己的方式到底正不正确，是不是走在了我自己想走的路上，我惊讶的发现我其实已经越走越远。</p>
-<h2 id="0x02-gt-2017的展望"><a href="#0x02-gt-2017的展望" class="headerlink" title="0x02-&gt;2017的展望"></a>0x02-&gt;2017的展望</h2><p>　　　辛亏有了16年年末这放松的一个月，我可以独立的思考，而不是全身心的投入学习，让我对现状有了一个更加清晰的认识。我想我该走的路，越来越清晰了，新年真好啊。<br>　　　转眼已经是第四个年头了，离大学毕业的第5个年头只剩下一年了，只能无力的说句加油！<br>                <br>　　　　　　　　　　　　　　　(+…#)<br><br>　　　<img src="/image/2016-12-31-1.jpg" alt=""><br>      <br></p>
+        <p>I used fuzz technology and found a vulnerability in Foxit Reader. When Foxit Reader parses</p>
+<p>A U3D sample can cause an out-of-bounds memory access.</p>
+<p>[+]test environment</p>
+<p>  [-]os version: x64 win7 sp1</p>
+<p>  [-]Foxit Reader Version:  9.3.0.10826</p>
+<p>  [-]use page heap</p>
+<p>  [-]use u3d plugin</p>
+<p>  [-]u3d plugin version：9.3.0.10809</p>
+<p>  the windbg output debug info</p>
+<hr>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">This exception may be expected and handled.</div><div class="line"></div><div class="line">eax=f3e7c55a ebx=003dafb8 ecx=00000065 edx=00000000 esi=00000014 edi=00000000</div><div class="line"></div><div class="line">eip=027cb410 esp=003daa48 ebp=003daa4c iopl=0         nv up ei pl zr na pe nc</div><div class="line"></div><div class="line">cs=0023  ss=002b  ds=002b  es=002b  fs=0053  gs=002b             efl=00210246</div><div class="line"></div><div class="line">*** ERROR: Symbol file could not be found.  Defaulted to export symbols for C:\Program Files (x86)\Foxit Software\Foxit Reader\FoxitReader.exe -</div><div class="line"></div><div class="line">FoxitReader!safe_vsnprintf+0x2c4330:</div><div class="line"></div><div class="line">027cb410 f77608          div     eax,dword ptr [esi+8] ds:002b:0000001c=????????</div><div class="line"></div><div class="line">0:000&gt; kp 10</div><div class="line"></div><div class="line">ChildEBP RetAddr  </div><div class="line"></div><div class="line">WARNING: Stack unwind information not available. Following frames may be wrong.</div><div class="line"></div><div class="line">003daa4c 027cb8db FoxitReader!safe_vsnprintf+0x2c4330</div><div class="line"></div><div class="line">003daa60 025a1cfe FoxitReader!safe_vsnprintf+0x2c47fb</div><div class="line"></div><div class="line">003daa74 01679bed FoxitReader!safe_vsnprintf+0x9ac1e</div><div class="line"></div><div class="line">*** ERROR: Symbol file could not be found.  Defaulted to export symbols for C:\Program Files (x86)\Foxit Software\Foxit Reader\plugins\U3DBrowser.fpi -</div><div class="line"></div><div class="line">003daaa0 6d0a53cc FoxitReader!std::basic_ostream&lt;char,std::char_traits&lt;char&gt; &gt;::operator&lt;&lt;+0x87ded</div><div class="line"></div><div class="line">003dafb0 6d0a7391 U3DBrowser+0x53cc</div><div class="line"></div><div class="line">003dafec 0153707e U3DBrowser+0x7391</div><div class="line"></div><div class="line">003db068 0164d72e FoxitReader!std::basic_streambuf&lt;char,std::char_traits&lt;char&gt; &gt;::sputc+0x889de</div><div class="line"></div><div class="line">003db1e8 0164d2f5 FoxitReader!std::basic_ostream&lt;char,std::char_traits&lt;char&gt; &gt;::operator&lt;&lt;+0x5b92e</div><div class="line"></div><div class="line">003db24c 016517fd FoxitReader!std::basic_ostream&lt;char,std::char_traits&lt;char&gt; &gt;::operator&lt;&lt;+0x5b4f5</div><div class="line"></div><div class="line">003db284 01653223 FoxitReader!std::basic_ostream&lt;char,std::char_traits&lt;char&gt; &gt;::operator&lt;&lt;+0x5f9fd</div><div class="line"></div><div class="line">003dcb64 03644d5c FoxitReader!std::basic_ostream&lt;char,std::char_traits&lt;char&gt; &gt;::operator&lt;&lt;+0x61423</div><div class="line"></div><div class="line">003dcc2c 036461f3 FoxitReader!CFXJSE_Arguments::GetValue+0x96decc</div><div class="line"></div><div class="line">003dcc50 03640b6f FoxitReader!CFXJSE_Arguments::GetValue+0x96f363</div><div class="line"></div><div class="line">003dccc4 036413e4 FoxitReader!CFXJSE_Arguments::GetValue+0x969cdf</div><div class="line"></div><div class="line">*** ERROR: Symbol file could not be found.  Defaulted to export symbols for C:\Windows\syswow64\USER32.dll -</div><div class="line"></div><div class="line">003dcce4 75d762fa FoxitReader!CFXJSE_Arguments::GetValue+0x96a554</div><div class="line"></div><div class="line">003dcd10 75d77316 USER32!gapfnScSendMessage+0x332</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -240,18 +259,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/03/30/2017/03/30/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">&lt;</strong>
-      <div class="article-nav-title">
-        
-          CVE-2017-7269：IIS6.0远程代码执行漏洞逆向分析记录
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/11/13/2016/11/13/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">CVE-2012-003</div>
+    <a href="/2018/10/28/2018/10/2018-10-28/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Radamsa Fuzz 移植 win平台</div>
       <strong class="article-nav-caption">&gt;</strong>
     </a>
   
@@ -261,7 +271,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="2016/12/31" data-title="旧年辞，新年逢" data-url="http://yan-1-20.github.io/2016/12/31/2016/12/31/"  data-images="https://avatars3.githubusercontent.com/u/19972411?s=460&amp;v=4" data-content="旧年辞，新年逢">
+<div class="ds-share share" data-thread-key="2018/11/2018-11-02" data-title="Foxit Reader U3D Parsing Out-Of-Bounds Read Information Disclosure Vulnerability" data-url="http://yan-1-20.github.io/2018/11/02/2018/11/2018-11-02/"  data-images="https://avatars3.githubusercontent.com/u/19972411?s=460&amp;v=4" data-content="Foxit Reader U3D Parsing Out-Of-Bounds Read Information Disclosure Vulnerability">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
