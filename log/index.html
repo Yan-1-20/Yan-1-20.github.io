@@ -11,7 +11,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="November
 2018-11-03
-
 好久没打卡了，但不是代表我的进度停止了，只是没更新打卡估计以后可能也是这种形势，不会把每天的日程都更新，只会断断序序的更新一些重要的进度， 先说说9月和10月的成果吧。9月尝试了libfuzz ,但是并没用感受很强，10月开始了pdf 计划，最后在Foxit Reader 里挖了一个洞，Foxit 那边已经来邮件说给致谢了，然后再混一个cve编号，还是美滋">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Asprose">
@@ -19,14 +18,12 @@
 <meta property="og:site_name" content="Asprose">
 <meta property="og:description" content="November
 2018-11-03
-
 好久没打卡了，但不是代表我的进度停止了，只是没更新打卡估计以后可能也是这种形势，不会把每天的日程都更新，只会断断序序的更新一些重要的进度， 先说说9月和10月的成果吧。9月尝试了libfuzz ,但是并没用感受很强，10月开始了pdf 计划，最后在Foxit Reader 里挖了一个洞，Foxit 那边已经来邮件说给致谢了，然后再混一个cve编号，还是美滋">
-<meta property="og:updated_time" content="2018-11-03T15:02:58.365Z">
+<meta property="og:updated_time" content="2018-11-03T15:10:41.078Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Asprose">
 <meta name="twitter:description" content="November
 2018-11-03
-
 好久没打卡了，但不是代表我的进度停止了，只是没更新打卡估计以后可能也是这种形势，不会把每天的日程都更新，只会断断序序的更新一些重要的进度， 先说说9月和10月的成果吧。9月尝试了libfuzz ,但是并没用感受很强，10月开始了pdf 计划，最后在Foxit Reader 里挖了一个洞，Foxit 那边已经来邮件说给致谢了，然后再混一个cve编号，还是美滋">
   
     <link rel="alternative" href="/atom.xml" title="Asprose" type="application/atom+xml">
@@ -229,14 +226,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="November"><a href="#November" class="headerlink" title="November"></a>November</h1><ul>
-<li><p><font color="LightSkyBlue" size="4">2018-11-03</font></p>
-<ul>
+        <hr>
+<h1 id="November"><a href="#November" class="headerlink" title="November"></a>November</h1><ul>
+<li><font color="LightSkyBlue" size="4">2018-11-03</font><ul>
 <li>好久没打卡了，但不是代表我的进度停止了，只是没更新打卡<br>估计以后可能也是这种形势，不会把每天的日程都更新，只会断断<br>序序的更新一些重要的进度， 先说说9月和10月的成果吧。9月尝<br>试了libfuzz ,但是并没用感受很强，10月开始了pdf 计划，最后<br>在Foxit Reader 里挖了一个洞，Foxit 那边已经来邮件说给致谢<br>了，然后再混一个cve编号，还是美滋滋。说说接下来的展望，接下<br>来想开始尝试kernel ,最近一直在搜集kernel的资料(并不代表pdf<br>计划会停下来)。而且漏洞复现 分析 利用这个计划应该也要提上<br>日程了。 加油吧，希望一年后看见一个崭新的自己。</li>
 </ul>
 </li>
-<li><p><font color="LightSkyBlue" size="4">2018-09-04</font></p>
-<ul>
+</ul>
+<hr>
+<h1 id="September"><a href="#September" class="headerlink" title="September"></a>September</h1><ul>
+<li><font color="LightSkyBlue" size="4">2018-09-04</font><ul>
 <li>今天之前提交的两个cve号下来了，恭喜自己拿到人生的第一个<br>和第二个cve编号，然后说说最近的进展吧，最近我一直在苦于<br>优化afl执行的问题。因为我现在的样本速度太慢了。研究了一段<br>时间还是有点进展，那就是afl的持久模式，研究了几天发现持久<br>模式并不适用现在的目标程序，试了试持久模式的afl-clang-fast<br>编译器和对目标程序的优化以及放弃asan而选择 AFL_HARDEN作为<br>内存检测工具后，终于我的速度从不到100 sec变成 900sec了。<br>最近把持久模式的心得写一篇博客吧。</li>
 </ul>
 </li>
@@ -249,6 +248,9 @@
 </li>
 </ul>
 </li>
+</ul>
+<hr>
+<h1 id="August"><a href="#August" class="headerlink" title="August"></a>August</h1><ul>
 <li><p><font color="LightSkyBlue" size="4">2018-08-23</font></p>
 <ul>
 <li>用内存当文件系统来跑成功了，但是这是基于我的内存比较大<br>16GB的情况，因为生成的临时文件生成速度达到了300MB/S,我写的<br>清理脚本 速度控制在0.3s 勉强能保持内存不会被撑满。速度在<br>0.1s的时候则会感觉机器速度有点下降，0.2~0.3s最好。然后开始<br>了afl改造的工作，大概定位到了要改afl的话，样本函数要改的位置</li>
