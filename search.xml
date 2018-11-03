@@ -109,8 +109,8 @@
     <url>%2F2016%2F08%2F22%2F2016%2F8%2F22%2F</url>
     <content type="text"><![CDATA[Mona2是Corelan Team团队开发的一个非常有用的扩展(PS:读过Corelan Team的Exploit 编写系列教程应该不会陌生吧,看雪论坛里面有泉哥他们翻译的中文版),该扩展最初是为Immunity Debugger编写的,现在该扩展也有WinDbg的版本了.下面的安装以win7 64位系统为例演示: 1.安装Python2.7Python2.7下载地址:https://www.python.org/downloads/)2.安装vcredist_x64.exe (VC++运行库).vcredist_x86.exe下载地址: https://www.microsoft.com/en-us/download/details.aspx?id=29 vcredist_x64.exe下载地址:https://www.microsoft.com/en-us/download/details.aspx?id=153363.下载并安装让WinDbg支持python脚本的插件(按照自己的需要安装x86和x64版本的). 下载地址: http://pykd.codeplex.com/releaseszip解压之后得到几个dll 和一个pykd.pyd文件把pykd.pyd文件放入 windb的安装目录下的 winext文件下然后 进入cmd cd /d xxxx（pykd的zip解压文件路径）接着输入 regsvr32 msdia120.dll （注意msdia120.dll是pykd 解压文件内的一个dll它的名字随pykd版本改变而改变 如上面的版本为msdia120.dll） （注意！！在win7等有权限要求的系统，注册的时候要用管理员权限打开cmd,而且要注意windbg符号文件夹是否被创建，写符号文件路径的时候最好也是管理员权限运行） 注册成功后如图 4．下载windbglib.py和mona.py,将其放到windbg.exe所在目录下. 下载地址: https://github.com/corelan 5.配置符号文件路径如下: ① 选择菜单项File-&gt;Symbol File Path ② 输入:1SRV*D:\symbols*http://msdl.microsoft.com/download/symbols上面的 D:\symbols 是自己想要的符号文件夹的路径 ③ 保存工作空间(选择菜单项File-&gt;Save Workspace) /////////说了这么多，我来个比较gay的，假如已经安装了python2.7，和下载windbglib.py和mona.py你直接去: http://pykd.codeplex.com/releases下载版本PYKD 0.2.0.29，选择pykd-0.2.0.29-x86-python-2.7-setup.exe(32位的)这个玩意是一键安装的 (╭￣3￣)╭♡ #在WinDbg下使用mona.py 在WinDbg中运行mona.py非常简单:先用windbg打开一个可执行文件打开 command 窗口 输入命令 .load pykd.pyd ///（加载pykd扩展命令）!py mona 再输入一句 更新语句!py mona update 到此mnoa的安装完成]]></content>
       <tags>
-        <tag>Binary</tag>
         <tag>windbg</tag>
+        <tag>Binary</tag>
       </tags>
   </entry>
   <entry>
