@@ -3,22 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>ubantu和windows10 双系统下问题解决 | Asprose</title>
+  <title>Winafl cmin 报错问题的解决 | Asprose</title>
 
   <!-- keywords -->
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#ubantu和windows10 双系统下问题解决最近装了ubantu，但是双系统的麻烦也来了1.windows和ubantu的时区冲突两个系统时间差了8小时2.unbantu下没有声音">
+  <meta name="description" content="当我想在windows平台下做语料蒸馏(Corpus distillation)的时候却发现了cmin会抛出一个在linux 平台下从来没有见过的错误信息，然后就退出了。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubantu和windows10 双系统下问题解决">
-<meta property="og:url" content="http://yan-1-20.github.io/2016/06/16/2016/6/22/index.html">
+<meta property="og:title" content="Winafl cmin 报错问题的解决">
+<meta property="og:url" content="http://yan-1-20.github.io/2018/11/29/2018/11/29/index.html">
 <meta property="og:site_name" content="Asprose">
-<meta property="og:description" content="#ubantu和windows10 双系统下问题解决最近装了ubantu，但是双系统的麻烦也来了1.windows和ubantu的时区冲突两个系统时间差了8小时2.unbantu下没有声音">
-<meta property="og:updated_time" content="2018-09-25T15:18:22.897Z">
+<meta property="og:description" content="当我想在windows平台下做语料蒸馏(Corpus distillation)的时候却发现了cmin会抛出一个在linux 平台下从来没有见过的错误信息，然后就退出了。">
+<meta property="og:updated_time" content="2018-11-29T08:56:58.662Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ubantu和windows10 双系统下问题解决">
-<meta name="twitter:description" content="#ubantu和windows10 双系统下问题解决最近装了ubantu，但是双系统的麻烦也来了1.windows和ubantu的时区冲突两个系统时间差了8小时2.unbantu下没有声音">
+<meta name="twitter:title" content="Winafl cmin 报错问题的解决">
+<meta name="twitter:description" content="当我想在windows平台下做语料蒸馏(Corpus distillation)的时候却发现了cmin会抛出一个在linux 平台下从来没有见过的错误信息，然后就退出了。">
   
     <link rel="alternative" href="/atom.xml" title="Asprose" type="application/atom+xml">
   
@@ -205,11 +205,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-2016/6/22" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-2018/11/29" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/06/16/2016/6/22/" class="article-date">
-  	<time datetime="2016-06-15T16:00:00.000Z" itemprop="datePublished">2016-06-16</time>
+      <a href="/2018/11/29/2018/11/29/" class="article-date">
+  	<time datetime="2018-11-28T16:00:00.000Z" itemprop="datePublished">2018-11-29</time>
 </a>
     </div>
   
@@ -222,7 +222,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      ubantu和windows10 双系统下问题解决
+      Winafl cmin 报错问题的解决
       
     </h1>
   
@@ -232,7 +232,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">-linux</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fuzz/">fuzz</a></li></ul>
 	</div>
 
         
@@ -244,8 +244,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#ubantu和windows10 双系统下问题解决<br>最近装了ubantu，但是双系统的麻烦也来了<br>1.windows和ubantu的时区冲突两个系统时间差了8小时<br>2.unbantu下没有声音<br><a id="more"></a><br>解决方法<br>1.<br>时区不对怎么办<br>下面的命令可以关闭UTC，<br>代码:<br>sudo timedatectl set-local-rtc 1</p>
-<p>2.<br>耳机没声音怎么办<br>2.运行<br>代码:<br>sudo mousepad /etc/modprobe.d/options<br>在其中加入<br>options snd-hda-intel model=z71v position_fix=1<br>保存，退出。</p>
+        <p>当我想在windows平台下做语料蒸馏(Corpus distillation)的时候却发现了cmin会抛出一个<br>在linux 平台下从来没有见过的错误信息，然后就退出了。</p>
+<a id="more"></a>
+<p>错误信息如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">corpus minimization tool for WinAFL by &lt;0vercl0k@tuxfamily.org&gt;</div><div class="line">Based on WinAFL by &lt;ifratric@google.com&gt;</div><div class="line">Based on AFL by &lt;lcamtuf@google.com&gt;</div><div class="line">[+] CWD changed to C:winaflbin32.</div><div class="line">[*] Testing the target binary...</div><div class="line">[!] Dry-run failed, 2 executions resulted differently:</div><div class="line">Tuples matching? False</div><div class="line">Return codes matching? True</div></pre></td></tr></table></figure></p>
+<p><a href="https://www.anquanke.com/post/id/86905" target="_blank" rel="external">网上已经有一个老哥用他的方法做了解决</a></p>
+<p>他的思路就是把 parse函数的返回值加上输出，把那些没有成功解析的样本去掉。</p>
+<p>可是我在自己的研究中发现，这种方式虽然稳定但是缺会损失大量的样本，因为即使没有成功解析的<br>样本 不代表他没有覆盖的路径。事实也如此，我若不去掉解析失败的样本，我能得到42个唯一的样本<br>，若去掉只有30个样本。</p>
+<p>为了更好的解决问题，我想看看源码，希望能在源码加改进 让其输出，是那个样本导致这个问题</p>
+<p>然后去掉这个出问题的样本就行了。</p>
+<p>源码如下：<br><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Do a dry run with the first file in the set</span></div><div class="line">logging.info(<span class="string">'[*] Testing the target binary...'</span>)</div><div class="line">f = AFLShowMapWorker(args)</div><div class="line">results = map(f, (inputs[<span class="number">0</span>], inputs[<span class="number">0</span>]))</div><div class="line"><span class="keyword">if</span> results[<span class="number">0</span>] != results[<span class="number">1</span>]:</div><div class="line">    logging.error(<span class="string">'[!] Dry-run failed, 2 executions resulted differently:'</span>)</div><div class="line">    logging.error(</div><div class="line">        <span class="string">'  Tuples matching? %r'</span>,</div><div class="line">        results[<span class="number">0</span>].tuples == results[<span class="number">1</span>].tuples</div><div class="line">    )</div><div class="line">    logging.error(</div><div class="line">        <span class="string">'  Return codes matching? %r'</span>,</div><div class="line">        results[<span class="number">0</span>].returncode == results[<span class="number">1</span>].returncode</div><div class="line">    )</div></pre></td></tr></table></figure></p>
+<p>其中的注释写着</p>
+<blockquote>
+<h1 id="Do-a-dry-run-with-the-first-file-in-the-set"><a href="#Do-a-dry-run-with-the-first-file-in-the-set" class="headerlink" title="Do a dry run with the first file in the set"></a>Do a dry run with the first file in the set</h1></blockquote>
+<p>也就是说这个异常是由winafl-cmin 尝试运行第一个文件遇到的执行两次覆盖率不同导致。</p>
+<p>奥，也即使删除第一个文件即可。</p>
+<p>当然如果win下， 所有的样本名称 是 id_xxxxxx 这样的模式，则第一个样本就是id_000000</p>
+<p>所以只需要rename 一遍样本，出现问题删除 id_000000 样本即可</p>
 
       
     </div>
@@ -255,15 +269,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/06/28/2016/6/28/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">&lt;</strong>
-      <div class="article-nav-title">
-        
-          PWN运动的工具准备
-        
-      </div>
-    </a>
   
+    <a href="/2018/10/28/2018/10/2018-10-28/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Radamsa Fuzz 移植 win平台</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
   
 </nav>
 
@@ -271,7 +281,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="2016/6/22" data-title="ubantu和windows10 双系统下问题解决" data-url="http://yan-1-20.github.io/2016/06/16/2016/6/22/"  data-images="https://avatars3.githubusercontent.com/u/19972411?s=460&amp;v=4" data-content="ubantu和windows10 双系统下问题解决">
+<div class="ds-share share" data-thread-key="2018/11/29" data-title="Winafl cmin 报错问题的解决" data-url="http://yan-1-20.github.io/2018/11/29/2018/11/29/"  data-images="https://avatars3.githubusercontent.com/u/19972411?s=460&amp;v=4" data-content="Winafl cmin 报错问题的解决">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
