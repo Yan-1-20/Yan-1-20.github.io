@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[2018年总结]]></title>
+    <url>%2F2019%2F01%2F09%2F2019%2F01%2F09%2F</url>
+    <content type="text"><![CDATA[上一次写这总结都是16年了，时间真快，2017年是充实的实习期，2018年则是动荡，辞了实习，一心去追虚浮，结果一场空，好在悬崖勒马，2018年可谓漂浮不定的上半年和埋头苦干的下半年。花了2017年到2018年，大概一年半的时间，终于知道了自己想要的是什么。路长且阻，真是难啊。不过好在下半年的辛苦耕耘终于有了一点自己的成果，终于有了自己的小圈子，认识了几个大哥。终于在挖洞的路上迈出了自己的第一步，万事开头难自己下半年独立挖洞真是太难了，庆幸没人可以交流的情况下走出了这艰难的一步。2019年希望能继续走下去。]]></content>
+      <tags>
+        <tag>LIFE</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Winafl cmin 报错问题的解决]]></title>
     <url>%2F2018%2F11%2F29%2F2018%2F11%2F29%2F</url>
     <content type="text"><![CDATA[当我想在windows平台下做语料蒸馏(Corpus distillation)的时候却发现了cmin会抛出一个在linux 平台下从来没有见过的错误信息，然后就退出了。 错误信息如下：12345678corpus minimization tool for WinAFL by &lt;0vercl0k@tuxfamily.org&gt;Based on WinAFL by &lt;ifratric@google.com&gt;Based on AFL by &lt;lcamtuf@google.com&gt;[+] CWD changed to C:winaflbin32.[*] Testing the target binary...[!] Dry-run failed, 2 executions resulted differently:Tuples matching? FalseReturn codes matching? True 网上已经有一个老哥用他的方法做了解决 他的思路就是把 parse函数的返回值加上输出，把那些没有成功解析的样本去掉。 可是我在自己的研究中发现，这种方式虽然稳定但是缺会损失大量的样本，因为即使没有成功解析的样本 不代表他没有覆盖的路径。事实也如此，我若不去掉解析失败的样本，我能得到42个唯一的样本，若去掉只有30个样本。 为了更好的解决问题，我想看看源码，希望能在源码加改进 让其输出，是那个样本导致这个问题 然后去掉这个出问题的样本就行了。 源码如下：1234567891011121314# Do a dry run with the first file in the setlogging.info('[*] Testing the target binary...')f = AFLShowMapWorker(args)results = map(f, (inputs[0], inputs[0]))if results[0] != results[1]: logging.error('[!] Dry-run failed, 2 executions resulted differently:') logging.error( ' Tuples matching? %r', results[0].tuples == results[1].tuples ) logging.error( ' Return codes matching? %r', results[0].returncode == results[1].returncode ) 其中的注释写着 Do a dry run with the first file in the set 也就是说这个异常是由winafl-cmin 尝试运行第一个文件遇到的执行两次覆盖率不同导致。 奥，也即使删除第一个文件即可。 当然如果win下， 所有的样本名称 是 id_xxxxxx 这样的模式，则第一个样本就是id_000000 所以只需要rename 一遍样本，出现问题删除 id_000000 样本即可]]></content>
