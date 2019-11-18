@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>修复winafl的输出问题 | Asprose</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="详细的输出文件winafl 输出文件很单一的为 id_000000 ，不像linux有那么详细的信息，但是其实是可以的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="修复winafl的输出问题">
+<meta property="og:url" content="http://yan-1-20.github.io/2019/11/12/2019/11/18/index.html">
+<meta property="og:site_name" content="Asprose">
+<meta property="og:description" content="详细的输出文件winafl 输出文件很单一的为 id_000000 ，不像linux有那么详细的信息，但是其实是可以的。">
+<meta property="og:updated_time" content="2019-11-18T15:19:47.079Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="修复winafl的输出问题">
+<meta name="twitter:description" content="详细的输出文件winafl 输出文件很单一的为 id_000000 ，不像linux有那么详细的信息，但是其实是可以的。">
+  
+    <link rel="alternative" href="/atom.xml" title="Asprose" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://raw.githubusercontent.com/Yan-1-20/blogimage/master/fui.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://avatars3.githubusercontent.com/u/19972411?s=460&amp;v=4" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Asprose</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/log">置顶</a></li>
+				        
+							<li><a href="/archives">归档</a></li>
+				        
+							<li><a href="/photoalbum/CrackMe.html">相册</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Yan-1-20" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="https://weibo.com/u/6016118396" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="twitter" target="_blank" href="https://twitter.com/asproce" title="twitter">twitter</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/PWN/" style="font-size: 10px;">-PWN</a> <a href="/tags/linux/" style="font-size: 10px;">-linux</a> <a href="/tags/Binary/" style="font-size: 15px;">Binary</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/LIFE/" style="font-size: 15px;">LIFE</a> <a href="/tags/MS-Heap-Overflow/" style="font-size: 10px;">MS-Heap-Overflow</a> <a href="/tags/Program/" style="font-size: 10px;">Program</a> <a href="/tags/RE/" style="font-size: 10px;">RE</a> <a href="/tags/fuzz/" style="font-size: 20px;">fuzz</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/router/" style="font-size: 10px;">router</a> <a href="/tags/summary/" style="font-size: 10px;">summary</a> <a href="/tags/vulnerability/" style="font-size: 10px;">vulnerability</a> <a href="/tags/windbg/" style="font-size: 20px;">windbg</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.z0z.me">z0z</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://balis0ng.com">balis0ng</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://a1in.cn">a1in</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://www.lucifaer.com">lucifaer</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://f01965.github.io">f01965</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">Asprose/Yan_1_20 二进制安全研究持续学习中(持续掉发中)......</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Asprose</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://avatars3.githubusercontent.com/u/19972411?s=460&amp;v=4" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Asprose</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/log">置顶</a></li>
+		        
+					<li><a href="/archives">归档</a></li>
+		        
+					<li><a href="/photoalbum/CrackMe.html">相册</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Yan-1-20" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="https://weibo.com/u/6016118396" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/asproce" title="twitter">twitter</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-2019/11/18" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/11/12/2019/11/18/" class="article-date">
+  	<time datetime="2019-11-11T16:00:00.000Z" itemprop="datePublished">2019-11-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      修复winafl的输出问题
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fuzz/">fuzz</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="详细的输出文件"><a href="#详细的输出文件" class="headerlink" title="详细的输出文件"></a>详细的输出文件</h2><p>winafl 输出文件很单一的为 id_000000 ，不像linux有那么详细的信息，但是其实是可以的。</p>
+<a id="more"></a>
+<p>在 config.h里把下面的  #define SIMPLE_FILES 注释掉就可以开启详细信息的输出了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">config.h</div><div class="line">//#define SIMPLE_FILES</div></pre></td></tr></table></figure></p>
+<p>但是这样编译运行的winafl会崩溃。</p>
+<p>afl 对输出文件 一般命名如下</p>
+<blockquote>
+<p>id\:000100\,orig\:id\:000848\,sync\:s1\,src\:000828</p>
+</blockquote>
+<p>但是这个命令在windows 下却不能使用，关键就在 符号 <code>:</code>,win下路径名里不能带<code>:</code></p>
+<p>所以需要把winafl 代码里 <code>:</code> 用 <code>_</code> 代替。</p>
+<p>需要修改的代码主要集中在 afl-fuzz.c里面</p>
+<p>describe_op 函数直接替换为下面的函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">static u8* describe_op(u8 hnb) &#123;</div><div class="line"></div><div class="line">  static u8 ret[256];</div><div class="line"></div><div class="line">  if (syncing_party) &#123;</div><div class="line"></div><div class="line">    sprintf(ret, &quot;sync:%s,src:%06u&quot;, syncing_party, syncing_case);</div><div class="line"></div><div class="line">  &#125; else &#123;</div><div class="line"></div><div class="line">    sprintf(ret, &quot;src:%06u&quot;, current_entry);</div><div class="line"></div><div class="line">    if (splicing_with &gt;= 0)</div><div class="line">      sprintf(ret + strlen(ret), &quot;+%06u&quot;, splicing_with);</div><div class="line"></div><div class="line">    sprintf(ret + strlen(ret), &quot;,op:%s&quot;, stage_short);</div><div class="line"></div><div class="line">    if (stage_cur_byte &gt;= 0) &#123;</div><div class="line"></div><div class="line">      sprintf(ret + strlen(ret), &quot;,pos:%u&quot;, stage_cur_byte);</div><div class="line"></div><div class="line">      if (stage_val_type != STAGE_VAL_NONE)</div><div class="line">        sprintf(ret + strlen(ret), &quot;,val:%s%+d&quot;,</div><div class="line">                (stage_val_type == STAGE_VAL_BE) ? &quot;be:&quot; : &quot;&quot;,</div><div class="line">                stage_cur_val);</div><div class="line"></div><div class="line">    &#125; else sprintf(ret + strlen(ret), &quot;,rep:%u&quot;, stage_cur_val);</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  if (hnb == 2) strcat(ret, &quot;,+cov&quot;);</div><div class="line"></div><div class="line">  return ret;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">#endif /* !SIMPLE_FILES */</div></pre></td></tr></table></figure>
+<p>在函数  save_if_interesting 修改 queue hang crash的输出 格式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) &#123;</div><div class="line"></div><div class="line">---</div><div class="line">before</div><div class="line"></div><div class="line">      fn = alloc_printf(&quot;%s\\queue\\id:%06u,%s&quot;, out_dir, queued_paths,</div><div class="line">                      describe_op(hnb));</div><div class="line">      fn = alloc_printf(&quot;%s\\hangs\\id:%06llu,%s&quot;, out_dir,</div><div class="line">                        unique_hangs, describe_op(0));</div><div class="line">      fn = alloc_printf(&quot;%s\\crashes\\id:%06llu,sig:%02u,%s&quot;, out_dir,</div><div class="line">                        unique_crashes, kill_signal, describe_op(0));                     </div><div class="line">---</div><div class="line">after</div><div class="line">      fn = alloc_printf(&quot;%s\\queue\\id_%06u,%s&quot;, out_dir, queued_paths,</div><div class="line">                      describe_op(hnb));</div><div class="line">      fn = alloc_printf(&quot;%s\\hangs\\id_%06llu,%s&quot;, out_dir,</div><div class="line">                        unique_hangs, describe_op(0));                      </div><div class="line"></div><div class="line">      fn = alloc_printf(&quot;%s\\crashes\\id_%06llu,sig_%02u,%s&quot;, out_dir,</div><div class="line">                        unique_crashes, kill_signal, describe_op(0));</div></pre></td></tr></table></figure></p>
+<p>在 maybe_delete_out_dir 函数里做如下修改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">static void maybe_delete_out_dir(void) &#123;</div><div class="line"></div><div class="line">---</div><div class="line">before</div><div class="line">    u8* nfn = alloc_printf(&quot;%s.%04u-%02u-%02u-%02u:%02u:%02u&quot;, fn,</div><div class="line">                           t-&gt;tm_year + 1900, t-&gt;tm_mon + 1, t-&gt;tm_mday,</div><div class="line">                           t-&gt;tm_hour, t-&gt;tm_min, t-&gt;tm_sec);</div><div class="line"></div><div class="line">    u8* nfn = alloc_printf(&quot;%s.%04u-%02u-%02u-%02u:%02u:%02u&quot;, fn,</div><div class="line">                           t-&gt;tm_year + 1900, t-&gt;tm_mon + 1, t-&gt;tm_mday,</div><div class="line">                           t-&gt;tm_hour, t-&gt;tm_min, t-&gt;tm_sec);</div><div class="line">---</div><div class="line">after</div><div class="line">    u8* nfn = alloc_printf(&quot;%s.%04u-%02u-%02u-%02u_%02u_%02u&quot;, fn,</div><div class="line">                           t-&gt;tm_year + 1900, t-&gt;tm_mon + 1, t-&gt;tm_mday,</div><div class="line">                           t-&gt;tm_hour, t-&gt;tm_min, t-&gt;tm_sec);</div><div class="line"></div><div class="line">    u8* nfn = alloc_printf(&quot;%s.%04u-%02u-%02u-%02u_%02u_%02u&quot;, fn,</div><div class="line">                           t-&gt;tm_year + 1900, t-&gt;tm_mon + 1, t-&gt;tm_mday,</div><div class="line">                           t-&gt;tm_hour, t-&gt;tm_min, t-&gt;tm_sec);</div></pre></td></tr></table></figure></p>
+<p>在函数 pivot_inputs 里做如下修改：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">static void pivot_inputs(void) &#123;</div><div class="line"></div><div class="line">---</div><div class="line">before</div><div class="line"></div><div class="line">#ifndef SIMPLE_FILES</div><div class="line">#  define CASE_PREFIX &quot;id:&quot;</div><div class="line">#else</div><div class="line">#  define CASE_PREFIX &quot;id_&quot;</div><div class="line">#endif /* ^!SIMPLE_FILES */</div><div class="line"></div><div class="line"></div><div class="line">      nfn = alloc_printf(&quot;%s\\queue\\id:%06u,orig:%s&quot;, out_dir, id, use_name);</div><div class="line"></div><div class="line">---</div><div class="line">after</div><div class="line"></div><div class="line">#ifndef SIMPLE_FILES</div><div class="line">#  define CASE_PREFIX &quot;id_&quot;</div><div class="line">#else</div><div class="line">#  define CASE_PREFIX &quot;id_&quot;</div><div class="line">#endif /* ^!SIMPLE_FILES */</div><div class="line"></div><div class="line">      nfn = alloc_printf(&quot;%s\\queue\\id_%06u,orig_%s&quot;, out_dir, id, use_name);</div></pre></td></tr></table></figure>
+<p>做了这些修改，再次编译，就可使用winafl的 详细输出了。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/01/09/2019/01/09/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2018年总结</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="2019/11/18" data-title="修复winafl的输出问题" data-url="http://yan-1-20.github.io/2019/11/12/2019/11/18/"  data-images="https://avatars3.githubusercontent.com/u/19972411?s=460&amp;v=4" data-content="修复winafl的输出问题">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2019 Asprose
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
